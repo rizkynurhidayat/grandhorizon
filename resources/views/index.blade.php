@@ -557,6 +557,6 @@
 
     <!-- section footer end-->
 </body>
-<script src="{{ asset('js') }}/scripts.js"></script>
+<script src="{{ asset('js/scriprts.js') }}"></script>
 
 </html>
