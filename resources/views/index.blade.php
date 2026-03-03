@@ -165,7 +165,7 @@
             </div>
 
             <div class="fasilitas-item">
-                <img src="{{ asset('image') }}image/tabler_credit-card-filled.png" alt="">
+                <img src="{{ asset('image/tabler_bus-filled.png') }}" alt="">
                 <h3>Sarana Transportasi</h3>
                 <p>
                     Stasiun Serang (4,2 km)<br>
@@ -175,7 +175,7 @@
             </div>
 
             <div class="fasilitas-item">
-                <img src="{{ asset('image') }}image/Vector.png" alt="">
+                <img src="{{ asset('image/Vector.png') }}" alt="">
                 <h3>Pasar Tradisional</h3>
                 <p>
                     Pasar Induk (5,2 km)<br>
@@ -185,7 +185,7 @@
             </div>
 
             <div class="fasilitas-item">
-                <img src="{{ asset('image') }}image/Vector.svg" alt="">
+                <img src="{{ asset('image/Vector.svg') }}" alt="">
                 <h3>Pusat Belanja Modern</h3>
                 <p>
                     Mall of Serang (8,2 km)<br>
@@ -195,7 +195,7 @@
             </div>
 
             <div class="fasilitas-item">
-                <img src="{{ asset('image') }}image/ri_hospital-fill.svg" alt="">
+                <img src="{{ asset('image/ri_hospital-fill.svg') }}" alt="">
                 <h3>Rumah Sakit</h3>
                 <p>
                     RSUD Kota Serang (9,7 km)<br>
@@ -205,7 +205,7 @@
             </div>
 
             <div class="fasilitas-item">
-                <img src="{{ asset('image') }}image/icon-park-solid_school.svg" alt="">
+                <img src="{{ asset('image/icon-park-solid_school.svg') }}" alt="">
                 <h3>Sekolah</h3>
                 <p>
                     SMAN 1 Serang (4,3 km)<br>
@@ -215,7 +215,7 @@
             </div>
 
             <div class="fasilitas-item">
-                <img src="{{ asset('image') }}image/ion_school.svg" alt="">
+                <img src="{{ asset('image/ion_school.svg') }}" alt="">
                 <h3>Perguruan Tinggi</h3>
                 <p>
                     D3 Keperawatan UNTIRTA (1,9 km)<br>
@@ -225,7 +225,7 @@
             </div>
 
             <div class="fasilitas-item">
-                <img src="{{ asset('image') }}image/icon-park-solid_correct.svg" alt="">
+                <img src="{{ asset('image/icon-park-solid_correct.svg') }}" alt="">
                 <h3>Lainnya</h3>
                 <p>
                     Waterboom Rancatales (1,2 km)<br>
@@ -257,7 +257,7 @@
 
                 <!-- CARD -->
                 <div class="tipe-card">
-                    <img src="{{ asset('image') }}image/Rectangle 101.png" alt="Tipe Lite">
+                    <img src="{{ asset('image/Rectangle 101.png') }}" alt="Tipe Lite">
                     <div class="tipe-body">
                         <h2>Tipe Horizon Lite</h2>
                         <span class="badge">LT 40m LB 60m</span>
@@ -279,7 +279,7 @@
 
                 <!-- CARD -->
                 <div class="tipe-card">
-                    <img src="{{ asset('image') }}image/Rectangle 101 (1).png" alt="Tipe Smart">
+                    <img src="{{ asset('image/Rectangle 101 (1).png') }}" alt="Tipe Smart">
                     <div class="tipe-body">
                         <h2>Tipe Horizon Smart</h2>
                         <span class="badge">LT 40m LB 60m</span>
@@ -301,7 +301,7 @@
 
                 <!-- CARD -->
                 <div class="tipe-card">
-                    <img src="{{ asset('image') }}image/Rectangle 101 (2).png" alt="Tipe Prime">
+                    <img src="{{ asset('image/Rectangle 101 (2).png') }}" alt="Tipe Prime">
                     <div class="tipe-body">
                         <h2>Tipe Horizon Prime</h2>
                         <span class="badge">LT 40m LB 60m</span>
@@ -323,7 +323,7 @@
 
                 <!-- CARD -->
                 <div class="tipe-card">
-                    <img src="{{ asset('image') }}image/Rectangle 101 (3).png" alt="Tipe Signature">
+                    <img src="{{ asset('image/Rectangle 101 (3).png') }}" alt="Tipe Signature">
                     <div class="tipe-body">
                         <h2>Tipe Horizon Signature</h2>
                         <span class="badge">LT 40m LB 60m</span>
@@ -357,9 +357,9 @@
 
             <div class="slider-wrapper"> <!--go jendela-->
                 <div class="slider-track"> <!--gambar jejeran ke samping-->
-                    <img src="{{ asset('image') }}image/Rectangle 73.png" alt="gambar cctv">
-                    <img src="{{ asset('image') }}image/Rectangle 73 (1).png" alt="gambar ruang tv">
-                    <img src="{{ asset('image') }}image/Rectangle 73 (2).png" alt="gambar taman hijau">
+                    <img src="{{ asset('image/Rectangle 73.png') }}" alt="gambar cctv">
+                    <img src="{{ asset('image/Rectangle 73 (1).png') }}" alt="gambar ruang tv">
+                    <img src="{{ asset('image/Rectangle 73 (2).png') }}" alt="gambar taman hijau">
                 </div>
             </div>
 
@@ -482,39 +482,39 @@
         
         <ul class="footer-benefit">
             <li>
-                <img src="{{ asset('image') }}image/subway_tick (1).png" class="icon-putih">
+                <img src="{{ asset('image/subway_tick (1).png') }}" class="icon-putih">
                 Cicilan ringan
             </li>
             <li>
                 
-                <img src="{{ asset('image') }}image/subway_tick (1).png" class="icon-putih">
+                <img src="{{ asset('image/subway_tick (1).png') }}" class="icon-putih">
                 GRATIS 1 unit AC
             </li>
             <li>
-                <img src="{{ asset('image') }}image/subway_tick (1).png" class="icon-putih">
+                <img src="{{ asset('image/subway_tick (1).png') }}" class="icon-putih">
                 Hadiah menarik lainnya GRATIS
             </li>
             <li>
-                <img src="{{ asset('image') }}image/subway_tick (1).png" class="icon-putih">
+                <img src="{{ asset('image/subway_tick (1).png') }}" class="icon-putih">
                 PPN GRATIS
             </li>
             <li>
-                <img src="{{ asset('image') }}image/subway_tick (1).png" class="icon-putih">
+                <img src="{{ asset('image/subway_tick (1).png') }}" class="icon-putih">
                 KPR GRATIS
             </li>
             <li>
-                <img src="{{ asset('image') }}image/subway_tick (1).png" class="icon-putih">
+                <img src="{{ asset('image/subway_tick (1).png') }}" class="icon-putih">
                 DP GRATIS
             </li>
             <li>
-                <img src="{{ asset('image') }}image/subway_tick (1).png" class="icon-putih">
+                <img src="{{ asset('image/subway_tick (1).png') }}" class="icon-putih">
                 GRATIS biaya surat-surat
             </li>
         </ul>
 
         <!-- Tombol WhatsApp -->
         <a href="https://wa.me/6282146273679" class="footer-button" target="_blank">
-    <img src="{{ asset('image') }}image/wa.png" alt="">
+    <img src="{{ asset('image/wa.png') }}" alt="">
     Hubungi kami sekarang juga
          </a>
 
@@ -523,27 +523,27 @@
         <!-- Kontak & Sosial Media -->
         <ul class="footer-contact">
             <li>
-                <img src="{{ asset('image') }}image/maps.png" alt="">
+                <img src="{{ asset('image/maps.png') }}" alt="">
                 <a href="https://www.google.com/maps/search/?api=1&query=Jl.+Raya+Cilegon,+Serang"  target="_blank">Jl. Raya Cilegon, Serang</a>
             </li>
             <li>
-                <img src="{{ asset('image') }}image/mdi_call.png" alt="">
+                <img src="{{ asset('image/mdi_call.png') }}" alt="">
                 <a href="tel:082146273679">0821-4627-3679</a>
             </li>
             <li>
-                <img src="{{ asset('image') }}image/gmail.png" alt="">
+                <img src="{{ asset('image/gmail.png') }}" alt="">
                 <a href="mailto:Horizon123@gmail.com">Horizon123@gmail.com</a>
             </li>
             <li>
-                <img src="{{ asset('image') }}image/fb.png" alt="">
+                <img src="{{ asset('image/fb.png') }}" alt="">
                 <a href="https://www.facebook.com/grandhorizon">Grand Horizon</a>
             </li>
             <li>
-                <img src="{{ asset('image') }}image/twit.png" alt="">
+                <img src="{{ asset('image/twit.png') }}" alt="">
                 <a href="https://twitter.com/grandhorizon">Grand Horizon</a>
             </li>
             <li>
-                <img src="{{ asset('image') }}image/ig.png" alt="">
+                <img src="{{ asset('image/ig.png') }} " alt="">
                 <a href="https://www.instagram.com/grandhorizon">Grand Horizon</a>
             </li>
         </ul>
