@@ -165,7 +165,7 @@
             </div>
 
             <div class="fasilitas-item">
-                <img src="{{ asset('image/tabler_bus-filled.png') }}" alt="">
+                <img src="{{ asset('image/Vector (4).png') }}" alt="">
                 <h3>Sarana Transportasi</h3>
                 <p>
                     Stasiun Serang (4,2 km)<br>
@@ -557,6 +557,6 @@
 
     <!-- section footer end-->
 </body>
-<script src="{{ asset('js') }}/scripts.js"></script>
+<script src="{{ asset('js/scriprts.js') }}"></script>
 
 </html>
