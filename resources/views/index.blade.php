@@ -60,17 +60,30 @@
 
 
     <!-- hero section -->
-    <section class="hero" id="hero">
-        <div class="hero-content">
-            <h1>GRAND HORIZON</h1>
-            <h3>Perumahan Modern dan Nyaman untuk keluarga</h3>
-            <p>Jl. Raya Cilegon, Drangong, Taktakan Serang, <br> Kota Serang,
-                Banten 42162 <br> REAL ESTATE INDONESIA (REI)</p>
-            <a href=#about>
-                <button class="btn-hero">Lihat Selengkapnya</button>
-            </a>
-        </div>
-    </section>
+   <style>
+    /* Tambahkan style ini supaya gambar background bisa berubah dari Admin */
+    .hero {
+        background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                          url("{{ asset('assets/img/hero/' . ($hero->gambar ?? 'default-hero.jpg')) }}") !important;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+</style>
+
+<section class="hero" id="hero">
+    <div class="hero-content">
+        <h1>{{ $hero->judul ?? 'GRAND HORIZON' }}</h1>
+        
+        <h3>{{ $hero->subjudul ?? 'Perumahan Modern dan Nyaman untuk keluarga' }}</h3>
+        
+        <p>{!! nl2br(e($hero->alamat ?? 'Jl. Raya Cilegon, Drangong, Taktakan Serang, Kota Serang, Banten 42162')) !!}</p>
+        
+        <a href="#about">
+            <button class="btn-hero">{{ $hero->tekstombol ?? 'Lihat Selengkapnya' }}</button>
+        </a>
+    </div>
+</section>
     <!-- hero section end -->
 
     <!-- Selengkapnya grand horizon -->

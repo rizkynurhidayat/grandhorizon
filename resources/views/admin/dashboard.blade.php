@@ -19,7 +19,7 @@
         <h4>Grand Horizon</h4>
         <hr>
         <a href="{{ route('admin.dashboard') }}">🏠 Dashboard</a>
-        <a href="#">🖼️ Hero Section</a>
+        <a href="{{ route('hero.edit') }}">🖼️ Hero Section</a>
         <a href="#">ℹ️ Tentang</a>
         <a href="#">🏢 Tipe Rumah</a>
         <a href="#">🌟 Fasilitas</a>
@@ -35,17 +35,23 @@
     </div>
 
     <div class="content">
-        <h2>Selamat Datang, {{ Auth::user()->name }}!</h2>
-        <p>Gunakan menu di samping untuk mengelola konten website Grand Horizon.</p>
-        
-        <div class="row mt-4">
-            <div class="col-md-4">
-                <div class="card bg-primary text-white p-3">
-                    <h5>Total Tipe Rumah</h5>
-                    <h3>8 Unit</h3>
+        {{-- Bagian ini adalah 'lubang' tempat masuknya isi dari file lain (seperti edit.blade.php) --}}
+        @hasSection('content')
+            @yield('content')
+        @else
+            {{-- Ini tampilan default kalau kamu baru login (Dashboard utama) --}}
+            <h2>Selamat Datang, {{ Auth::user()->name }}!</h2>
+            <p>Gunakan menu di samping untuk mengelola konten website Grand Horizon.</p>
+            
+            <div class="row mt-4">
+                <div class="col-md-4">
+                    <div class="card bg-primary text-white p-3">
+                        <h5>Total Tipe Rumah</h5>
+                        <h3>8 Unit</h3>
+                    </div>
                 </div>
             </div>
-            </div>
+        @endif
     </div>
 
 </body>
