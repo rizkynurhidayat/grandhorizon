@@ -3,11 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HeroSectionController; // Pakai yang ini sesuai file yang kita buat tadi
-use App\Http\Controllers\Admin\TipeRumahController;
+use App\Http\Controllers\TentangController;
 
 // Halaman Depan
 use App\Http\Controllers\HomeController;
-
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 // --- AUTHENTICATION ---
@@ -27,9 +26,8 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     // URL: /admin/hero/edit
     Route::get('/hero/edit', [HeroSectionController::class, 'edit'])->name('hero.edit');
     Route::put('/hero/update', [HeroSectionController::class, 'update'])->name('hero.update');
-
-    // CRUD Tipe Rumah
-    Route::resource('tipe-rumah', TipeRumahController::class);
     
-    // Tambahkan resource lainnya di sini nanti
+    // CRUD Tentang 
+    // URL-nya nanti otomatis jadi: /admin/tentang
+    Route::resource('tentang', TentangController::class);
 });
