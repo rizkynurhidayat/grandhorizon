@@ -257,7 +257,6 @@
     <section id="tipe-rmh" class="tipe-rumah">
         <div class="tipe-container">
 
-            <!-- HEADER -->
             <div class="tipe-header">
                 <h1>Tipe Rumah</h1>
                 <p>
@@ -266,96 +265,104 @@
                 </p>
             </div>
 
-            <!-- GRID -->
             <div class="tipe-grid">
 
-                <!-- CARD -->
+                {{-- --- BAGIAN DINAMIS (DARI DATABASE) --- --}}
+                @foreach($tiperumah as $t)
+                    <div class="tipe-card">
+                        <img src="{{ asset('storage/' . $t->gambar) }}" alt="{{ $t->nama_tipe_rumah }}">
+                        <div class="tipe-body">
+                            <h2>{{ $t->nama_tipe_rumah }}</h2>
+                            <span class="badge">{{ $t->luas_bangunan }}</span>
+
+                            <p class="start">START FROM</p>
+                            <p class="price">{{ $t->harga }}</p>
+
+                            <span class="cicilan">{{ $t->cicilan }}</span>
+
+                            <div class="tipe-info">
+                                {{-- Angka diambil dari DB, teks tetap statis sesuai request --}}
+                                <div>🛏 {{ $t->kamar_tidur }} Bedrooms</div>
+                                <div>🚿 {{ $t->kamar_mandi }} Bathroom</div>
+                                <div>🚗 {{ $t->garasi }} Carport</div>
+                            </div>
+
+                            <button class="btn-unit">{{ $t->tekstombol }}</button>
+                        </div>
+                    </div>
+                @endforeach
+                {{-- --- END BAGIAN DINAMIS --- --}}
+
+
+                {{-- --- BAGIAN STATIS (TETAP DI SINI) --- --}}
                 <div class="tipe-card">
                     <img src="{{ asset('image/Rectangle 101.png') }}" alt="Tipe Lite">
                     <div class="tipe-body">
                         <h2>Tipe Horizon Lite</h2>
                         <span class="badge">LT 40m LB 60m</span>
-
                         <p class="start">START FROM</p>
                         <p class="price">Rp900 Juta – Rp1,2 Miliar</p>
-
                         <span class="cicilan">Cicilan mulai 3,0 JT-an</span>
-
                         <div class="tipe-info">
                             <div>🛏 2 Bedrooms</div>
                             <div>🚿 1 Bathroom</div>
                             <div>🚗 1 Carport</div>
                         </div>
-
                         <button class="btn-unit">CEK KETERSEDIAAN UNIT</button>
                     </div>
                 </div>
 
-                <!-- CARD -->
                 <div class="tipe-card">
                     <img src="{{ asset('image/Rectangle 101 (1).png') }}" alt="Tipe Smart">
                     <div class="tipe-body">
                         <h2>Tipe Horizon Smart</h2>
                         <span class="badge">LT 40m LB 60m</span>
-
                         <p class="start">START FROM</p>
                         <p class="price">Rp1,2 Miliar – 1,8 Miliar</p>
-
                         <span class="cicilan">Cicilan mulai 3,0 JT-an</span>
-
                         <div class="tipe-info">
                             <div>🛏 2 Bedrooms</div>
                             <div>🚿 2 Bathroom</div>
                             <div>🚗 1 Carport</div>
                         </div>
-
                         <button class="btn-unit">CEK KETERSEDIAAN UNIT</button>
                     </div>
                 </div>
 
-                <!-- CARD -->
                 <div class="tipe-card">
                     <img src="{{ asset('image/Rectangle 101 (2).png') }}" alt="Tipe Prime">
                     <div class="tipe-body">
                         <h2>Tipe Horizon Prime</h2>
                         <span class="badge">LT 40m LB 60m</span>
-
                         <p class="start">START FROM</p>
                         <p class="price">Rp1,8 Miliar – Rp2,7 Miliar</p>
-
                         <span class="cicilan">Cicilan mulai 3,0 JT-an</span>
-
                         <div class="tipe-info">
                             <div>🛏 3 Bedrooms</div>
                             <div>🚿 2 Bathroom</div>
                             <div>🚗 1 Carport</div>
                         </div>
-
                         <button class="btn-unit">CEK KETERSEDIAAN UNIT</button>
                     </div>
                 </div>
 
-                <!-- CARD -->
                 <div class="tipe-card">
                     <img src="{{ asset('image/Rectangle 101 (3).png') }}" alt="Tipe Signature">
                     <div class="tipe-body">
                         <h2>Tipe Horizon Signature</h2>
                         <span class="badge">LT 40m LB 60m</span>
-
                         <p class="start">START FROM</p>
                         <p class="price">Rp2,8 Miliar – Rp4 Miliar</p>
-
                         <span class="cicilan">Cicilan mulai 3,0 JT-an</span>
-
                         <div class="tipe-info">
                             <div>🛏 4 Bedrooms</div>
                             <div>🚿 3 Bathroom</div>
                             <div>🚗 2 Carport</div>
                         </div>
-
                         <button class="btn-unit">CEK KETERSEDIAAN UNIT</button>
                     </div>
                 </div>
+                {{-- --- END BAGIAN STATIS --- --}}
 
             </div>
         </div>

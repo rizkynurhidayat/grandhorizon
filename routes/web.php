@@ -5,6 +5,7 @@ use App\Http\Controllers\HeroSectionController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HubungiKamiController;
 use App\Http\Controllers\TentangController;
+use App\Http\Controllers\TipeRumahController;
 use Illuminate\Support\Facades\Route;
 
 // --- HALAMAN DEPAN ---
@@ -24,6 +25,9 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
 
     // Fasilitas Sekitar (CRUD Lengkap)
     Route::resource('fasilitas', \App\Http\Controllers\FasilitasController::class);
+
+    // Tipe rumah
+    Route::resource('tiperumah', TipeRumahController::class);
 
     // Hero Section
     Route::get('/hero/edit', [HeroSectionController::class, 'edit'])->name('hero.edit');
