@@ -25,7 +25,7 @@
         <a href="#">🌟 Fasilitas</a>
         <a href="#">📸 Galeri Perumahan</a>
         <a href="#">💬 Testimoni</a>
-        <a href="#">📧 Pesan Masuk</a>
+        <a href="{{ route('admin.hubungi-kami.index') }}">📧 Pesan Masuk</a>
         <a href="#">📞 Profile & Footer</a>
         <hr>
         <form action="{{ route('logout') }}" method="POST">

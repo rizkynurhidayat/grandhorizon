@@ -14,7 +14,7 @@
     <!-- NAVBAR -->
     <nav class="navbar">
         <a href="#hero">
-        <img src="{{ asset('image/image 7.svg') }}" alt="Logo Grand Horizon" class="logo">
+            <img src="{{ asset('image/image 7.svg') }}" alt="Logo Grand Horizon" class="logo">
         </a>
 
         <ul class="nav-links">
@@ -26,7 +26,7 @@
         </ul>
 
         <a href="#contact">
-        <button class="btn-nav">Hubungi Kami</button>
+            <button class="btn-nav">Hubungi Kami</button>
         </a>
 
         <!-- MENU ICON MOBILE -->
@@ -60,30 +60,31 @@
 
 
     <!-- hero section -->
-   <style>
-    /* Tambahkan style ini supaya gambar background bisa berubah dari Admin */
-    .hero {
-        background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
-                          url("{{ asset('assets/img/hero/' . ($hero->gambar ?? 'default-hero.jpg')) }}") !important;
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-    }
-</style>
+    <style>
+        /* Tambahkan style ini supaya gambar background bisa berubah dari Admin */
+        .hero {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+                url("{{ asset('assets/img/hero/' . ($hero->gambar ?? 'default-hero.jpg')) }}") !important;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+    </style>
 
-<section class="hero" id="hero">
-    <div class="hero-content">
-        <h1>{{ $hero->judul ?? 'GRAND HORIZON' }}</h1>
-        
-        <h3>{{ $hero->subjudul ?? 'Perumahan Modern dan Nyaman untuk keluarga' }}</h3>
-        
-        <p>{!! nl2br(e($hero->alamat ?? 'Jl. Raya Cilegon, Drangong, Taktakan Serang, Kota Serang, Banten 42162')) !!}</p>
-        
-        <a href="#about">
-            <button class="btn-hero">{{ $hero->tekstombol ?? 'Lihat Selengkapnya' }}</button>
-        </a>
-    </div>
-</section>
+    <section class="hero" id="hero">
+        <div class="hero-content">
+            <h1>{{ $hero->judul ?? 'GRAND HORIZON' }}</h1>
+
+            <h3>{{ $hero->subjudul ?? 'Perumahan Modern dan Nyaman untuk keluarga' }}</h3>
+
+            <p>{!! nl2br(e($hero->alamat ?? 'Jl. Raya Cilegon, Drangong, Taktakan Serang, Kota Serang, Banten 42162')) !!}
+            </p>
+
+            <a href="#about">
+                <button class="btn-hero">{{ $hero->tekstombol ?? 'Lihat Selengkapnya' }}</button>
+            </a>
+        </div>
+    </section>
     <!-- hero section end -->
 
     <!-- Selengkapnya grand horizon -->
@@ -442,24 +443,42 @@
     </section>
 
     <!-- Testimoni klien end -->
-    
-    <!-- Hubungi kami -->
+
     <section class="contact" id="contact">
         <h1 class="contact-title">Hubungi Kami</h1>
 
         <div class="contact-box">
-            <form class="contact-form" id="contactForm">
+            @if(session('success_pesan'))
+                <div
+                    style="background-color: #d4edda; color: #155724; padding: 15px; border-radius: 8px; margin-bottom: 20px; text-align: center; border: 1px solid #c3e6cb;">
+                    {{ session('success_pesan') }}
+                </div>
+            @endif
 
-                <input type="text" id="nama" placeholder="Nama" required>
-                <input type="text" id="hp" placeholder="Nomor HP" required>
+            <form class="contact-form" action="{{ route('hubungi-kami.store') }}" method="POST" id="contactForm">
+                @csrf {{-- Wajib ada di dalam form Laravel --}}
+                @if ($errors->any())
+                    <div
+                        style="background: #f8d7da; color: #721c24; padding: 10px; border-radius: 5px; margin-bottom: 10px;">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
 
-                <input type="email" id="email" placeholder="Email" required>
-                <input type="date" id="jadwal" required>
+                {{-- Atribut 'name' disesuaikan dengan database: user, no_hp, email, tanggal, pesan --}}
+                <input type="text" name="user" id="nama" placeholder="Nama" required value="{{ old('user') }}">
+                <input type="text" name="no_hp" id="hp" placeholder="Nomor HP" required value="{{ old('no_hp') }}">
 
-                <textarea id="pesan" placeholder="Pesan yang ingin disampaikan" required></textarea>
+                <input type="email" name="email" id="email" placeholder="Email" required value="{{ old('email') }}">
+                <input type="date" name="tanggal" id="jadwal" required value="{{ old('tanggal') }}">
+
+                <textarea name="pesan" id="pesan" placeholder="Pesan yang ingin disampaikan"
+                    required>{{ old('pesan') }}</textarea>
 
                 <button type="submit">Jadwalkan Kunjungan</button>
-
             </form>
         </div>
     </section>
@@ -484,89 +503,90 @@
     </section>
     <!-- Lokasi grand horizon end-->
 
- <!-- section footer -->
-     <footer class="footer">
- <div class="footer-container">
+    <!-- section footer -->
+    <footer class="footer">
+        <div class="footer-container">
 
-        <!-- Judul -->
-        <h1 class="footer-title">Biaya Pemesanan Mulai 3 Juta</h1>
+            <!-- Judul -->
+            <h1 class="footer-title">Biaya Pemesanan Mulai 3 Juta</h1>
 
-        <!-- Keunggulan -->
-        
-        <ul class="footer-benefit">
-            <li>
-                <img src="{{ asset('image/subway_tick (1).png') }}" class="icon-putih">
-                Cicilan ringan
-            </li>
-            <li>
-                
-                <img src="{{ asset('image/subway_tick (1).png') }}" class="icon-putih">
-                GRATIS 1 unit AC
-            </li>
-            <li>
-                <img src="{{ asset('image/subway_tick (1).png') }}" class="icon-putih">
-                Hadiah menarik lainnya GRATIS
-            </li>
-            <li>
-                <img src="{{ asset('image/subway_tick (1).png') }}" class="icon-putih">
-                PPN GRATIS
-            </li>
-            <li>
-                <img src="{{ asset('image/subway_tick (1).png') }}" class="icon-putih">
-                KPR GRATIS
-            </li>
-            <li>
-                <img src="{{ asset('image/subway_tick (1).png') }}" class="icon-putih">
-                DP GRATIS
-            </li>
-            <li>
-                <img src="{{ asset('image/subway_tick (1).png') }}" class="icon-putih">
-                GRATIS biaya surat-surat
-            </li>
-        </ul>
+            <!-- Keunggulan -->
 
-        <!-- Tombol WhatsApp -->
-        <a href="https://wa.me/6282146273679" class="footer-button" target="_blank">
-    <img src="{{ asset('image/wa.png') }}" alt="">
-    Hubungi kami sekarang juga
-         </a>
+            <ul class="footer-benefit">
+                <li>
+                    <img src="{{ asset('image/subway_tick (1).png') }}" class="icon-putih">
+                    Cicilan ringan
+                </li>
+                <li>
 
-        <hr>
+                    <img src="{{ asset('image/subway_tick (1).png') }}" class="icon-putih">
+                    GRATIS 1 unit AC
+                </li>
+                <li>
+                    <img src="{{ asset('image/subway_tick (1).png') }}" class="icon-putih">
+                    Hadiah menarik lainnya GRATIS
+                </li>
+                <li>
+                    <img src="{{ asset('image/subway_tick (1).png') }}" class="icon-putih">
+                    PPN GRATIS
+                </li>
+                <li>
+                    <img src="{{ asset('image/subway_tick (1).png') }}" class="icon-putih">
+                    KPR GRATIS
+                </li>
+                <li>
+                    <img src="{{ asset('image/subway_tick (1).png') }}" class="icon-putih">
+                    DP GRATIS
+                </li>
+                <li>
+                    <img src="{{ asset('image/subway_tick (1).png') }}" class="icon-putih">
+                    GRATIS biaya surat-surat
+                </li>
+            </ul>
 
-        <!-- Kontak & Sosial Media -->
-        <ul class="footer-contact">
-            <li>
-                <img src="{{ asset('image/maps.png') }}" alt="">
-                <a href="https://www.google.com/maps/search/?api=1&query=Jl.+Raya+Cilegon,+Serang"  target="_blank">Jl. Raya Cilegon, Serang</a>
-            </li>
-            <li>
-                <img src="{{ asset('image/mdi_call.png') }}" alt="">
-                <a href="tel:082146273679">0821-4627-3679</a>
-            </li>
-            <li>
-                <img src="{{ asset('image/gmail.png') }}" alt="">
-                <a href="mailto:Horizon123@gmail.com">Horizon123@gmail.com</a>
-            </li>
-            <li>
-                <img src="{{ asset('image/fb.png') }}" alt="">
-                <a href="https://www.facebook.com/grandhorizon">Grand Horizon</a>
-            </li>
-            <li>
-                <img src="{{ asset('image/twit.png') }}" alt="">
-                <a href="https://twitter.com/grandhorizon">Grand Horizon</a>
-            </li>
-            <li>
-                <img src="{{ asset('image/ig.png') }} " alt="">
-                <a href="https://www.instagram.com/grandhorizon">Grand Horizon</a>
-            </li>
-        </ul>
-    </div>
-</footer>
+            <!-- Tombol WhatsApp -->
+            <a href="https://wa.me/6282146273679" class="footer-button" target="_blank">
+                <img src="{{ asset('image/wa.png') }}" alt="">
+                Hubungi kami sekarang juga
+            </a>
 
- <!-- Copyright -->
-         <div class="footer-copyright">
-            © 2025 GRAND HORIZON
+            <hr>
+
+            <!-- Kontak & Sosial Media -->
+            <ul class="footer-contact">
+                <li>
+                    <img src="{{ asset('image/maps.png') }}" alt="">
+                    <a href="https://www.google.com/maps/search/?api=1&query=Jl.+Raya+Cilegon,+Serang"
+                        target="_blank">Jl. Raya Cilegon, Serang</a>
+                </li>
+                <li>
+                    <img src="{{ asset('image/mdi_call.png') }}" alt="">
+                    <a href="tel:082146273679">0821-4627-3679</a>
+                </li>
+                <li>
+                    <img src="{{ asset('image/gmail.png') }}" alt="">
+                    <a href="mailto:Horizon123@gmail.com">Horizon123@gmail.com</a>
+                </li>
+                <li>
+                    <img src="{{ asset('image/fb.png') }}" alt="">
+                    <a href="https://www.facebook.com/grandhorizon">Grand Horizon</a>
+                </li>
+                <li>
+                    <img src="{{ asset('image/twit.png') }}" alt="">
+                    <a href="https://twitter.com/grandhorizon">Grand Horizon</a>
+                </li>
+                <li>
+                    <img src="{{ asset('image/ig.png') }} " alt="">
+                    <a href="https://www.instagram.com/grandhorizon">Grand Horizon</a>
+                </li>
+            </ul>
         </div>
+    </footer>
+
+    <!-- Copyright -->
+    <div class="footer-copyright">
+        © 2025 GRAND HORIZON
+    </div>
 
     <!-- section footer end-->
 </body>
