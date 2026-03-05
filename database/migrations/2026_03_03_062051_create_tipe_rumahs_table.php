@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nama_tipe_rumah');
             $table->string('luas_bangunan');
-            $table->bigInteger('harga');
+            $table->string('harga');
             $table->string('cicilan');
             $table->integer('kamar_tidur');
             $table->integer('kamar_mandi');

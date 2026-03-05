@@ -35,7 +35,8 @@
             transition: 0.3s;
         }
 
-        .sidebar a:hover {
+        .sidebar a:hover,
+        .sidebar a.active {
             background: #495057;
         }
 
@@ -58,14 +59,23 @@
     <div class="sidebar">
         <h4>Grand Horizon</h4>
         <hr>
-        <a href="{{ route('admin.dashboard') }}">🏠 Dashboard</a>
-        <a href="{{ route('hero.edit') }}">🖼️ Hero Section</a>
-        <a href="{{ route('tentang.edit') }}">ℹ️ Tentang</a>
-        <a href="#">🏢 Tipe Rumah</a>
-        <a href="{{ route('fasilitas.index') }}">🌟 Fasilitas</a>
+        <a href="{{ route('admin.dashboard') }}" class="{{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">🏠
+            Dashboard</a>
+        <a href="{{ route('hero.edit') }}" class="{{ request()->routeIs('hero.*') ? 'active' : '' }}">🖼️ Hero
+            Section</a>
+        <a href="{{ route('tentang.edit') }}" class="{{ request()->routeIs('tentang.*') ? 'active' : '' }}">ℹ️
+            Tentang</a>
+
+        {{-- LINK TIPE RUMAH AKTIF --}}
+        <a href="{{ route('tiperumah.index') }}" class="{{ request()->routeIs('tiperumah.*') ? 'active' : '' }}">🏢 Tipe
+            Rumah</a>
+
+        <a href="{{ route('fasilitas.index') }}" class="{{ request()->routeIs('fasilitas.*') ? 'active' : '' }}">🌟
+            Fasilitas</a>
         <a href="#">📸 Galeri Perumahan</a>
         <a href="#">💬 Testimoni</a>
-        <a href="{{ route('admin.hubungi-kami.index') }}">📧 Pesan Masuk</a>
+        <a href="{{ route('admin.hubungi-kami.index') }}"
+            class="{{ request()->routeIs('admin.hubungi-kami.*') ? 'active' : '' }}">📧 Pesan Masuk</a>
         <hr>
         <form action="{{ route('logout') }}" method="POST">
             @csrf
@@ -84,7 +94,8 @@
                 <div class="col-md-4">
                     <div class="card bg-primary text-white p-3 border-0 shadow-sm">
                         <h5>Total Tipe Rumah</h5>
-                        <h3>8 Unit</h3>
+                        {{-- Data dinamis dari controller --}}
+                        <h3>{{ $tipeRumahCount ?? '0' }} Unit</h3>
                     </div>
                 </div>
             </div>
