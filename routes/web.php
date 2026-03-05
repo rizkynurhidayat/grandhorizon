@@ -27,8 +27,8 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::put('/hero/update', [HeroSectionController::class, 'update'])->name('hero.update');
 
     // Tentang Kami (Sistem Edit Tunggal)
-    Route::get('/tentang/edit', [TentangController::class, 'edit'])->name('tentang.edit');
-    Route::put('/tentang/update', [TentangController::class, 'update'])->name('tentang.update');
+    Route::get('/tentang/edit/', [TentangController::class, 'edit'])->name('tentang.edit');
+    Route::put('/tentang/update/{tentang}', [TentangController::class, 'update'])->name('tentang.update');
 
     // Pesan Masuk
     Route::get('/hubungi-kami', [HubungiKamiController::class, 'index'])->name('admin.hubungi-kami.index');

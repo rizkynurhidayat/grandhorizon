@@ -12,7 +12,7 @@
                     </div>
                 @endif
 
-                <form action="{{ route('tentang.update') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('tentang.update', $tentang) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
 
