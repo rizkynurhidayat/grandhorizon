@@ -94,7 +94,8 @@
         <div class="about-content">
 
             <!-- KIRI -->
-            <div class="about-image" style="background-image: url('{{ asset('storage/' . ($tentang->gambar ?? '')) }}')">
+            <div class="about-image"
+                style="background-image: url('{{ asset('storage/' . ($tentang->gambar ?? '')) }}')">
                 <div class="about-overlay">
                         {{-- <h2>{{ $tentang->subjudul ?? 'Hunian Nyaman dan Strategis' }}</h2>
                     <p {{ $tentang->subjudul ? 'class="about-subjudul "' : '' }}>
@@ -107,6 +108,7 @@
                          </p>
 
                     {{-- <p  {{ $tentang->deskripsi ? 'class="about-description"' : '' }}>
+                    <p {{ $tentang->deskripsi ? 'class="about-description"' : '' }}>
                         Berlokasi strategis dan mudah diakses, perumahan ini dekat dengan berbagai
                         fasilitas umum seperti sekolah, pusat perbelanjaan, rumah sakit,
                         dan akses transportasi.
@@ -123,6 +125,9 @@
                          <button class="btn-selengkapnya">
                              {{ $tentang->tekstombol ?? 'Lihat selengkapnya' }}
                          </button>
+                    <button class="btn-selengkapnya" {{ $tentang->tekstombol ? 'data-text="' . $tentang->tekstombol . '"' : '' }}>
+                        Lihat selengkapnya
+                    </button>
                 </div>
             </div>
 
@@ -212,6 +217,7 @@
         {{-- <h1>Fasilitas Sekitar Grand Horizon</h1>
 
         <div class="fasilitas-grid">
+<<<<<<< HEAD
             <section id="fasilitas-w">
     <h1>Fasilitas Sekitar Grand Horizon</h1> --}}
 
@@ -305,8 +311,100 @@
                 </p>
             </div> --}}
 
+=======
+            @foreach($fasilitas as $f)
+                <div class="fasilitas-item">
+                    <img src="{{ asset('storage/' . $f->gambar) }}" alt="{{ $f->judul }}">
+                    <h3>{{ $f->judul }}</h3>
+                    <p>
+                        {!! nl2br(e($f->deskripsi)) !!}
+                    </p>
+                </div>
+            @endforeach
+>>>>>>> ca64be5e9ad65b844b902bac85d3b9f4180f7825
         </div>
     </section>
+
+    <style>
+        /* Section Container */
+        #fasilitas-w {
+            padding: 60px 20px;
+            text-align: center;
+            background-color: #fff;
+        }
+
+        #fasilitas-w h1 {
+            margin-bottom: 40px;
+            font-weight: bold;
+        }
+
+        /* Grid Container - Trik Garis Otomatis */
+        .fasilitas-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            /* 3 Kolom */
+            gap: 1px;
+            /* Celah 1px antara item tetap diatur, tetapi latar belakang akan disembunyikan */
+            **background-color: #fff;
+            **
+            /* Ubah menjadi putih (#fff) */
+            **border: 1px solid #fff;
+            **
+            /* Ubah juga garis luar agar senada */
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Grid Item */
+        .fasilitas-item {
+            background-color: #fff;
+            /* Wajib putih agar menutupi background grid */
+            padding: 40px 20px;
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .fasilitas-item:hover {
+            background-color: #f8f9fa;
+            /* Efek hover halus */
+        }
+
+        .fasilitas-item img {
+            height: 60px;
+            margin-bottom: 20px;
+            object-fit: contain;
+        }
+
+        .fasilitas-item h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .fasilitas-item p {
+            font-size: 0.95rem;
+            color: #6c757d;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* Responsive untuk Tablet dan HP */
+        @media (max-width: 992px) {
+            .fasilitas-grid {
+                grid-template-columns: repeat(2, 1fr);
+                /* 2 Kolom di tablet */
+            }
+        }
+
+        @media (max-width: 576px) {
+            .fasilitas-grid {
+                grid-template-columns: 1fr;
+                /* 1 Kolom di HP */
+            }
+        }
+    </style>
     <!-- Fasilitas Sekitar End -->
 
 
@@ -314,7 +412,6 @@
     <section id="tipe-rmh" class="tipe-rumah">
         <div class="tipe-container">
 
-            <!-- HEADER -->
             <div class="tipe-header">
                 <h1>Tipe Rumah</h1>
                 <p>
@@ -323,96 +420,104 @@
                 </p>
             </div>
 
-            <!-- GRID -->
             <div class="tipe-grid">
 
-                <!-- CARD -->
+                {{-- --- BAGIAN DINAMIS (DARI DATABASE) --- --}}
+                @foreach($tiperumah as $t)
+                    <div class="tipe-card">
+                        <img src="{{ asset('storage/' . $t->gambar) }}" alt="{{ $t->nama_tipe_rumah }}">
+                        <div class="tipe-body">
+                            <h2>{{ $t->nama_tipe_rumah }}</h2>
+                            <span class="badge">{{ $t->luas_bangunan }}</span>
+
+                            <p class="start">START FROM</p>
+                            <p class="price">{{ $t->harga }}</p>
+
+                            <span class="cicilan">{{ $t->cicilan }}</span>
+
+                            <div class="tipe-info">
+                                {{-- Angka diambil dari DB, teks tetap statis sesuai request --}}
+                                <div>🛏 {{ $t->kamar_tidur }} Bedrooms</div>
+                                <div>🚿 {{ $t->kamar_mandi }} Bathroom</div>
+                                <div>🚗 {{ $t->garasi }} Carport</div>
+                            </div>
+
+                            <button class="btn-unit">{{ $t->tekstombol }}</button>
+                        </div>
+                    </div>
+                @endforeach
+                {{-- --- END BAGIAN DINAMIS --- --}}
+
+
+                {{-- --- BAGIAN STATIS (TETAP DI SINI) --- --}}
                 <div class="tipe-card">
                     <img src="{{ asset('image/Rectangle 101.png') }}" alt="Tipe Lite">
                     <div class="tipe-body">
                         <h2>Tipe Horizon Lite</h2>
                         <span class="badge">LT 40m LB 60m</span>
-
                         <p class="start">START FROM</p>
                         <p class="price">Rp900 Juta – Rp1,2 Miliar</p>
-
                         <span class="cicilan">Cicilan mulai 3,0 JT-an</span>
-
                         <div class="tipe-info">
                             <div>🛏 2 Bedrooms</div>
                             <div>🚿 1 Bathroom</div>
                             <div>🚗 1 Carport</div>
                         </div>
-
                         <button class="btn-unit">CEK KETERSEDIAAN UNIT</button>
                     </div>
                 </div>
 
-                <!-- CARD -->
                 <div class="tipe-card">
                     <img src="{{ asset('image/Rectangle 101 (1).png') }}" alt="Tipe Smart">
                     <div class="tipe-body">
                         <h2>Tipe Horizon Smart</h2>
                         <span class="badge">LT 40m LB 60m</span>
-
                         <p class="start">START FROM</p>
                         <p class="price">Rp1,2 Miliar – 1,8 Miliar</p>
-
                         <span class="cicilan">Cicilan mulai 3,0 JT-an</span>
-
                         <div class="tipe-info">
                             <div>🛏 2 Bedrooms</div>
                             <div>🚿 2 Bathroom</div>
                             <div>🚗 1 Carport</div>
                         </div>
-
                         <button class="btn-unit">CEK KETERSEDIAAN UNIT</button>
                     </div>
                 </div>
 
-                <!-- CARD -->
                 <div class="tipe-card">
                     <img src="{{ asset('image/Rectangle 101 (2).png') }}" alt="Tipe Prime">
                     <div class="tipe-body">
                         <h2>Tipe Horizon Prime</h2>
                         <span class="badge">LT 40m LB 60m</span>
-
                         <p class="start">START FROM</p>
                         <p class="price">Rp1,8 Miliar – Rp2,7 Miliar</p>
-
                         <span class="cicilan">Cicilan mulai 3,0 JT-an</span>
-
                         <div class="tipe-info">
                             <div>🛏 3 Bedrooms</div>
                             <div>🚿 2 Bathroom</div>
                             <div>🚗 1 Carport</div>
                         </div>
-
                         <button class="btn-unit">CEK KETERSEDIAAN UNIT</button>
                     </div>
                 </div>
 
-                <!-- CARD -->
                 <div class="tipe-card">
                     <img src="{{ asset('image/Rectangle 101 (3).png') }}" alt="Tipe Signature">
                     <div class="tipe-body">
                         <h2>Tipe Horizon Signature</h2>
                         <span class="badge">LT 40m LB 60m</span>
-
                         <p class="start">START FROM</p>
                         <p class="price">Rp2,8 Miliar – Rp4 Miliar</p>
-
                         <span class="cicilan">Cicilan mulai 3,0 JT-an</span>
-
                         <div class="tipe-info">
                             <div>🛏 4 Bedrooms</div>
                             <div>🚿 3 Bathroom</div>
                             <div>🚗 2 Carport</div>
                         </div>
-
                         <button class="btn-unit">CEK KETERSEDIAAN UNIT</button>
                     </div>
                 </div>
+                {{-- --- END BAGIAN STATIS --- --}}
 
             </div>
         </div>
