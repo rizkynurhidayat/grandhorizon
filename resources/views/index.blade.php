@@ -107,7 +107,7 @@
                     </p>
 
                     <button class="btn-selengkapnya" {{ $tentang->tekstombol ? 'data-text="' . $tentang->tekstombol . '"' : '' }}>
-                        Lihat Selengkapnya
+                        Lihat selengkapnya 
                     </button>
                 </div>
             </div>
