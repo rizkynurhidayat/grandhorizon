@@ -94,21 +94,22 @@
         <div class="about-content">
 
             <!-- KIRI -->
-            <div class="about-image" style="background-image: url('{{ asset('storage/' . ($tentang->gambar ?? '')) }}')">
+            <div class="about-image"
+                style="background-image: url('{{ asset('storage/' . ($tentang->gambar ?? '')) }}')">
                 <div class="about-overlay">
                     <p {{ $tentang->subjudul ? 'class="about-subjudul "' : '' }}>
                         Grand Horizon adalah kawasan perumahan modern yang menawarkan hunian nyaman,
                         aman, dan cocok untuk keluarga.
                     </p>
 
-                    <p  {{ $tentang->deskripsi ? 'class="about-description"' : '' }}>
+                    <p {{ $tentang->deskripsi ? 'class="about-description"' : '' }}>
                         Berlokasi strategis dan mudah diakses, perumahan ini dekat dengan berbagai
                         fasilitas umum seperti sekolah, pusat perbelanjaan, rumah sakit,
                         dan akses transportasi.
                     </p>
 
                     <button class="btn-selengkapnya" {{ $tentang->tekstombol ? 'data-text="' . $tentang->tekstombol . '"' : '' }}>
-                        Lihat selengkapnya 
+                        Lihat selengkapnya
                     </button>
                 </div>
             </div>
@@ -157,99 +158,98 @@
         <h1>Fasilitas Sekitar Grand Horizon</h1>
 
         <div class="fasilitas-grid">
-
-            <div class="fasilitas-item">
-                <img src="{{ asset('image/Vector (3).png') }}" alt="">
-                <h3>Akses Jalan</h3>
-                <p>
-                    GT Serang Timur (6,7 km)<br>
-                    GT Serang Barat (1,4 km)<br>
-                    Tol Cilegon Timur (12,1 km)
-                </p>
-            </div>
-
-            <div class="fasilitas-item">
-                <img src="{{ asset('image/picon_office.png') }}" alt="">
-                <h3>Kantor Pemerintah</h3>
-                <p>
-                    Kantor Imigrasi (6 km)<br>
-                    SAMSAT MOS (11,4 km)<br>
-                    Polsek Serang (3,5 km)
-                </p>
-            </div>
-
-            <div class="fasilitas-item">
-                <img src="{{ asset('image/Vector (4).png') }}" alt="">
-                <h3>Sarana Transportasi</h3>
-                <p>
-                    Stasiun Serang (4,2 km)<br>
-                    Pool Budiman (11,9 km)<br>
-                    Terminal Cipocok (6,2 km)
-                </p>
-            </div>
-
-            <div class="fasilitas-item">
-                <img src="{{ asset('image/Vector.png') }}" alt="">
-                <h3>Pasar Tradisional</h3>
-                <p>
-                    Pasar Induk (5,2 km)<br>
-                    Pasar Taman Sari (4,4 km)<br>
-                    Pasar Lama (3 km)
-                </p>
-            </div>
-
-            <div class="fasilitas-item">
-                <img src="{{ asset('image/Vector.svg') }}" alt="">
-                <h3>Pusat Belanja Modern</h3>
-                <p>
-                    Mall of Serang (8,2 km)<br>
-                    Lotte Grosir (1,8 km)<br>
-                    Transmart (5,8 km)
-                </p>
-            </div>
-
-            <div class="fasilitas-item">
-                <img src="{{ asset('image/ri_hospital-fill.svg') }}" alt="">
-                <h3>Rumah Sakit</h3>
-                <p>
-                    RSUD Kota Serang (9,7 km)<br>
-                    RS Fatimah (850 m)<br>
-                    RS Kencana (4,1 km)
-                </p>
-            </div>
-
-            <div class="fasilitas-item">
-                <img src="{{ asset('image/icon-park-solid_school.svg') }}" alt="">
-                <h3>Sekolah</h3>
-                <p>
-                    SMAN 1 Serang (4,3 km)<br>
-                    SMAN 2 Serang (7,7 km)<br>
-                    Sekolah Peradaban (4,4 km)
-                </p>
-            </div>
-
-            <div class="fasilitas-item">
-                <img src="{{ asset('image/ion_school.svg') }}" alt="">
-                <h3>Perguruan Tinggi</h3>
-                <p>
-                    D3 Keperawatan UNTIRTA (1,9 km)<br>
-                    Universitas Serang Raya (1,8 km)<br>
-                    UPI Kampus Serang (3,9 km)
-                </p>
-            </div>
-
-            <div class="fasilitas-item">
-                <img src="{{ asset('image/icon-park-solid_correct.svg') }}" alt="">
-                <h3>Lainnya</h3>
-                <p>
-                    Waterboom Rancatales (1,2 km)<br>
-                    Batu Gede Sayar (8 km)<br>
-                    Sagara Lugina (4,9 km)
-                </p>
-            </div>
-
+            @foreach($fasilitas as $f)
+                <div class="fasilitas-item">
+                    <img src="{{ asset('storage/' . $f->gambar) }}" alt="{{ $f->judul }}">
+                    <h3>{{ $f->judul }}</h3>
+                    <p>
+                        {!! nl2br(e($f->deskripsi)) !!}
+                    </p>
+                </div>
+            @endforeach
         </div>
     </section>
+
+    <style>
+        /* Section Container */
+        #fasilitas-w {
+            padding: 60px 20px;
+            text-align: center;
+            background-color: #fff;
+        }
+
+        #fasilitas-w h1 {
+            margin-bottom: 40px;
+            font-weight: bold;
+        }
+
+        /* Grid Container - Trik Garis Otomatis */
+        .fasilitas-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            /* 3 Kolom */
+            gap: 1px;
+            /* Celah 1px antara item tetap diatur, tetapi latar belakang akan disembunyikan */
+            **background-color: #fff;
+            **
+            /* Ubah menjadi putih (#fff) */
+            **border: 1px solid #fff;
+            **
+            /* Ubah juga garis luar agar senada */
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Grid Item */
+        .fasilitas-item {
+            background-color: #fff;
+            /* Wajib putih agar menutupi background grid */
+            padding: 40px 20px;
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .fasilitas-item:hover {
+            background-color: #f8f9fa;
+            /* Efek hover halus */
+        }
+
+        .fasilitas-item img {
+            height: 60px;
+            margin-bottom: 20px;
+            object-fit: contain;
+        }
+
+        .fasilitas-item h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .fasilitas-item p {
+            font-size: 0.95rem;
+            color: #6c757d;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* Responsive untuk Tablet dan HP */
+        @media (max-width: 992px) {
+            .fasilitas-grid {
+                grid-template-columns: repeat(2, 1fr);
+                /* 2 Kolom di tablet */
+            }
+        }
+
+        @media (max-width: 576px) {
+            .fasilitas-grid {
+                grid-template-columns: 1fr;
+                /* 1 Kolom di HP */
+            }
+        }
+    </style>
     <!-- Fasilitas Sekitar End -->
 
 

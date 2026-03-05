@@ -22,6 +22,9 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
         return view('admin.dashboard');
     })->name('admin.dashboard');
 
+    // Fasilitas Sekitar (CRUD Lengkap)
+    Route::resource('fasilitas', \App\Http\Controllers\FasilitasController::class);
+
     // Hero Section
     Route::get('/hero/edit', [HeroSectionController::class, 'edit'])->name('hero.edit');
     Route::put('/hero/update', [HeroSectionController::class, 'update'])->name('hero.update');
