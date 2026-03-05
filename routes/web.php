@@ -1,47 +1,36 @@
 <?php
 
-use App\Http\Controllers\Admin\TipeRumahController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HeroSectionController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HubungiKamiController;
-use Illuminate\Support\Facades\Route;
-
-// Halaman Depan
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\HeroSectionController; // Pakai yang ini sesuai file yang kita buat tadi
 use App\Http\Controllers\TentangController;
+use Illuminate\Support\Facades\Route;
 
-// Halaman Depan
-use App\Http\Controllers\HomeController;
+// --- HALAMAN DEPAN ---
 Route::get('/', [HomeController::class, 'index'])->name('home');
-
-// Form Store (Pindahkan ke sini agar bersih)
 Route::post('/hubungi-kami/store', [HubungiKamiController::class, 'store'])->name('hubungi-kami.store');
 
-// Auth
+// --- AUTH ---
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/login', [AuthController::class, 'authenticate'])->name('login.post');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-// Admin Area
+// --- ADMIN AREA ---
 Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::get('/', function () {
         return view('admin.dashboard');
     })->name('admin.dashboard');
 
+    // Hero Section
     Route::get('/hero/edit', [HeroSectionController::class, 'edit'])->name('hero.edit');
     Route::put('/hero/update', [HeroSectionController::class, 'update'])->name('hero.update');
 
-    // Route::resource('tipe-rumah', TipeRumahController::class);
+    // Tentang Kami (Sistem Edit Tunggal)
+    Route::get('/tentang/edit', [TentangController::class, 'edit'])->name('tentang.edit');
+    Route::put('/tentang/update', [TentangController::class, 'update'])->name('tentang.update');
 
-    // Route Index & Delete untuk Admin
+    // Pesan Masuk
     Route::get('/hubungi-kami', [HubungiKamiController::class, 'index'])->name('admin.hubungi-kami.index');
     Route::delete('/hubungi-kami/{id}', [HubungiKamiController::class, 'destroy'])->name('admin.hubungi-kami.destroy');
-});
-    
-    // CRUD Tentang 
-    // URL-nya nanti otomatis jadi: /admin/tentang
-    Route::resource('tentang', TentangController::class);
 });
