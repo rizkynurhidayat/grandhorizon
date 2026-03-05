@@ -155,26 +155,26 @@ document.addEventListener("DOMContentLoaded", () => {
         pesan.value.trim().length >= 10 ? success(pesan) : error(pesan);
     });
 
-    // SUBMIT
-    form.addEventListener("submit", function (e) {
-        e.preventDefault();
+    // // SUBMIT
+    // form.addEventListener("submit", function (e) {
+    //     e.preventDefault();
 
-        if (
-            nama.classList.contains("success") &&
-            hp.classList.contains("success") &&
-            email.classList.contains("success") &&
-            jadwal.classList.contains("success") &&
-            pesan.classList.contains("success")
-        ) {
-            alert("✅ Form berhasil dikirim!");
-            form.reset();
-            document.querySelectorAll(".success").forEach(el =>
-                el.classList.remove("success")
-            );
-        } else {
-            alert("❌ Lengkapi semua data dengan benar");
-        }
-    });
+    //     if (
+    //         nama.classList.contains("success") &&
+    //         hp.classList.contains("success") &&
+    //         email.classList.contains("success") &&
+    //         jadwal.classList.contains("success") &&
+    //         pesan.classList.contains("success")
+    //     ) {
+    //         alert("✅ Form berhasil dikirim!");
+    //         form.reset();
+    //         document.querySelectorAll(".success").forEach(el =>
+    //             el.classList.remove("success")
+    //         );
+    //     } else {
+    //         alert("❌ Lengkapi semua data dengan benar");
+    //     }
+    // });
 
 });
 

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\HeroSection; // Import Model HeroSection
+use App\Models\HeroSection;
+use Illuminate\Http\Request; // Import Model HeroSection
 use Illuminate\Support\Facades\File; // Untuk menghapus gambar lama jika ada
 
 class HeroSectionController extends Controller
@@ -11,10 +11,17 @@ class HeroSectionController extends Controller
     // 1. Menampilkan halaman edit
     public function edit()
     {
-        // Mengambil data pertama (asumsi hanya ada satu konten hero)
-        $hero = HeroSection::first(); 
-        
-        // Kirim data ke folder resources/views/admin/hero/edit.blade.php
+        $hero = HeroSection::firstOrCreate(
+            ['id' => 1],
+            [
+                'judul' => 'Judul Default',
+                'subjudul' => 'Subjudul Default',
+                'alamat' => '-',
+                'tekstombol' => 'Klik Disini',
+                'gambar' => 'default.jpg', // JANGAN null, kasih string kosong atau nama file
+            ]
+        );
+
         return view('admin.hero.edit', compact('hero'));
     }
 
@@ -43,15 +50,15 @@ class HeroSectionController extends Controller
         // Logika jika user mengunggah gambar baru
         if ($request->hasFile('gambar')) {
             // Hapus gambar lama dari folder jika bukan gambar default
-            if ($hero->gambar && File::exists(public_path('assets/img/hero/' . $hero->gambar))) {
-                File::delete(public_path('assets/img/hero/' . $hero->gambar));
+            if ($hero->gambar && File::exists(public_path('assets/img/hero/'.$hero->gambar))) {
+                File::delete(public_path('assets/img/hero/'.$hero->gambar));
             }
 
             // Upload gambar baru
             $file = $request->file('gambar');
-            $nama_file = time() . "_" . $file->getClientOriginalName();
+            $nama_file = time().'_'.$file->getClientOriginalName();
             $file->move(public_path('assets/img/hero'), $nama_file);
-            
+
             // Masukkan nama file baru ke array data
             $data['gambar'] = $nama_file;
         }

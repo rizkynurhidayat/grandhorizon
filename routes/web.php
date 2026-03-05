@@ -1,33 +1,36 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\HeroSectionController; // Pakai yang ini sesuai file yang kita buat tadi
-use App\Http\Controllers\TentangController;
-
-// Halaman Depan
+use App\Http\Controllers\HeroSectionController;
 use App\Http\Controllers\HomeController;
-Route::get('/', [HomeController::class, 'index'])->name('home');
+use App\Http\Controllers\HubungiKamiController;
+use App\Http\Controllers\TentangController;
+use Illuminate\Support\Facades\Route;
 
-// --- AUTHENTICATION ---
+// --- HALAMAN DEPAN ---
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::post('/hubungi-kami/store', [HubungiKamiController::class, 'store'])->name('hubungi-kami.store');
+
+// --- AUTH ---
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/login', [AuthController::class, 'authenticate'])->name('login.post');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-// --- ADMIN AREA (Harus Login) ---
+// --- ADMIN AREA ---
 Route::middleware(['auth'])->prefix('admin')->group(function () {
-    
-    // Dashboard Utama
-    Route::get('/', function () { 
-        return view('admin.dashboard'); 
+    Route::get('/', function () {
+        return view('admin.dashboard');
     })->name('admin.dashboard');
 
-    // Fitur Hero Section
-    // URL: /admin/hero/edit
+    // Hero Section
     Route::get('/hero/edit', [HeroSectionController::class, 'edit'])->name('hero.edit');
     Route::put('/hero/update', [HeroSectionController::class, 'update'])->name('hero.update');
-    
-    // CRUD Tentang 
-    // URL-nya nanti otomatis jadi: /admin/tentang
-    Route::resource('tentang', TentangController::class);
+
+    // Tentang Kami (Sistem Edit Tunggal)
+    Route::get('/tentang/edit', [TentangController::class, 'edit'])->name('tentang.edit');
+    Route::put('/tentang/update', [TentangController::class, 'update'])->name('tentang.update');
+
+    // Pesan Masuk
+    Route::get('/hubungi-kami', [HubungiKamiController::class, 'index'])->name('admin.hubungi-kami.index');
+    Route::delete('/hubungi-kami/{id}', [HubungiKamiController::class, 'destroy'])->name('admin.hubungi-kami.destroy');
 });
