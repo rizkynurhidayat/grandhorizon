@@ -96,20 +96,33 @@
             <!-- KIRI -->
             <div class="about-image" style="background-image: url('{{ asset('storage/' . ($tentang->gambar ?? '')) }}')">
                 <div class="about-overlay">
+                        {{-- <h2>{{ $tentang->subjudul ?? 'Hunian Nyaman dan Strategis' }}</h2>
                     <p {{ $tentang->subjudul ? 'class="about-subjudul "' : '' }}>
                         Grand Horizon adalah kawasan perumahan modern yang menawarkan hunian nyaman,
                         aman, dan cocok untuk keluarga.
-                    </p>
+                    </p> --}}
+                    {{-- Panggil Subjudul --}}
+                         <p class="about-subjudul">
+                               {{ $tentang->subjudul ?? 'Grand Horizon adalah kawasan perumahan modern...' }}
+                         </p>
 
-                    <p  {{ $tentang->deskripsi ? 'class="about-description"' : '' }}>
+                    {{-- <p  {{ $tentang->deskripsi ? 'class="about-description"' : '' }}>
                         Berlokasi strategis dan mudah diakses, perumahan ini dekat dengan berbagai
                         fasilitas umum seperti sekolah, pusat perbelanjaan, rumah sakit,
                         dan akses transportasi.
-                    </p>
+                    </p> --}}
+                    {{-- Panggil Deskripsi --}}
+                         <p class="about-description">
+                               {{ $tentang->deskripsi ?? 'Berlokasi strategis dan mudah diakses...' }}
+                        </p>
 
-                    <button class="btn-selengkapnya" {{ $tentang->tekstombol ? 'data-text="' . $tentang->tekstombol . '"' : '' }}>
-                        Lihat selengkapnya 
-                    </button>
+                    {{-- <button class="btn-selengkapnya" {{ $tentang->tekstombol ? 'data-text="' . $tentang->tekstombol . '"' : '' }}>
+                        Lihat selengkapnya
+                    </button> --}}
+                    {{-- Panggil Teks Tombol --}}
+                         <button class="btn-selengkapnya">
+                             {{ $tentang->tekstombol ?? 'Lihat selengkapnya' }}
+                         </button>
                 </div>
             </div>
 
@@ -117,6 +130,30 @@
             <div class="about-fitur">
                 <h4>{{ $tentang->keunggulan_judul ?? '4 Keunggulan Grand Horizon' }}</h4>
                 <ul>
+        @for ($i = 1; $i <= 4; $i++)
+            @php 
+                $judul = "judul_unggulan_$i";
+                $desc = "desc_unggulan_$i";
+                $logo = "logo_unggulan_$i";
+            @endphp
+
+            @if($tentang->$judul) {{-- Cek jika judul diisi di admin --}}
+            <li>
+                <div>
+                    {{-- Panggil Logo dari Storage, kalau kosong pakai gambar default --}}
+                    <img src="{{ $tentang->$logo ? asset('storage/' . $tentang->$logo) : asset('image/Vector.png') }}">
+                    
+                    {{-- Panggil Judul --}}
+                    <h3>{{ $tentang->$judul }}</h3>
+                    
+                    {{-- Panggil Deskripsi --}}
+                    <p>{{ $tentang->$desc }}</p>
+                </div>
+            </li>
+            @endif
+        @endfor
+    </ul>
+                {{-- <ul>
                     <li>
                         <div>
                             <img src="{{ asset('image/Vector.png') }}" {{ $tentang->logo }}>
@@ -145,7 +182,7 @@
                             <p>Mudah diakses dan dekat dengan fasilitas umum.</p>
                         </div>
                     </li>
-                </ul>
+                </ul> --}}
             </div>
 
         </div>
@@ -170,7 +207,7 @@
             </div>
         @endforeach
      </div>
-    </section>
+</section>
     {{-- <section id="fasilitas-w"> --}}
         {{-- <h1>Fasilitas Sekitar Grand Horizon</h1>
 
