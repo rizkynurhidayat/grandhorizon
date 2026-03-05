@@ -88,25 +88,25 @@
 
     <!-- Selengkapnya grand horizon -->
     <section id="about">
-        <h1 class="about-title">Tentang Grand Horizon</h1>
+        <h1 class="about-title">{{ $tentang->judul ?? 'Tentang Grand Horizon' }}</h1>
 
         <div class="about-content">
 
             <!-- KIRI -->
-            <div class="about-image">
+            <div class="about-image" style="background-image: url('{{ asset('storage/' . ($tentang->gambar ?? '')) }}')">
                 <div class="about-overlay">
-                    <p>
+                    <p {{ $tentang->subjudul ? 'class="about-subjudul "' : '' }}>
                         Grand Horizon adalah kawasan perumahan modern yang menawarkan hunian nyaman,
                         aman, dan cocok untuk keluarga.
                     </p>
 
-                    <p>
+                    <p  {{ $tentang->deskripsi ? 'class="about-description"' : '' }}>
                         Berlokasi strategis dan mudah diakses, perumahan ini dekat dengan berbagai
                         fasilitas umum seperti sekolah, pusat perbelanjaan, rumah sakit,
                         dan akses transportasi.
                     </p>
 
-                    <button class="btn-selengkapnya">
+                    <button class="btn-selengkapnya" {{ $tentang->tekstombol ? 'data-text="' . $tentang->tekstombol . '"' : '' }}>
                         Lihat Selengkapnya
                     </button>
                 </div>
@@ -114,32 +114,32 @@
 
             <!-- KANAN -->
             <div class="about-fitur">
-                <h4>4 Keunggulan Grand Horizon</h4>
+                <h4>{{ $tentang->keunggulan_judul ?? '4 Keunggulan Grand Horizon' }}</h4>
                 <ul>
                     <li>
                         <div>
-                            <img src="{{ asset('image/Vector.png') }}">
+                            <img src="{{ asset('image/Vector.png') }}" {{ $tentang->logo }}>
                             <h3>Legalitas terjamin</h3>
                             <p>Semua dokumen dan perizinan lengkap serta resmi.</p>
                         </div>
                     </li>
                     <li>
                         <div>
-                            <img src="{{ asset('image/tabler_credit-card-filled.png') }}">
+                            <img src="{{ asset('image/tabler_credit-card-filled.png') }}" {{ $tentang->logo }}>
                             <h3>Kredit mudah</h3>
                             <p>Proses pembiayaan mudah dan cicilan terjangkau.</p>
                         </div>
                     </li>
                     <li>
                         <div>
-                            <img src="{{ asset('image/Vector (1).png') }}">
+                            <img src="{{ asset('image/Vector (1).png') }}" {{ $tentang->logo }}>
                             <h3>Bebas banjir</h3>
                             <p>Lokasi aman dari genangan dan banjir.</p>
                         </div>
                     </li>
                     <li>
                         <div>
-                            <img src="{{ asset('image/Vector (2).png') }}">
+                            <img src="{{ asset('image/Vector (2).png') }}" {{ $tentang->logo }}>
                             <h3>Lokasi mudah diakses</h3>
                             <p>Mudah diakses dan dekat dengan fasilitas umum.</p>
                         </div>
