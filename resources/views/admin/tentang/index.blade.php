@@ -17,7 +17,7 @@
                         <th>Judul</th>
                         <th>Subjudul</th>
                         <th>Gambar Utama</th>
-                        <th>Logo</th>
+                        <th>Logo/icon</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
