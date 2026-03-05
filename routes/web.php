@@ -8,6 +8,13 @@ use App\Http\Controllers\HubungiKamiController;
 use Illuminate\Support\Facades\Route;
 
 // Halaman Depan
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HeroSectionController; // Pakai yang ini sesuai file yang kita buat tadi
+use App\Http\Controllers\TentangController;
+
+// Halaman Depan
+use App\Http\Controllers\HomeController;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 // Form Store (Pindahkan ke sini agar bersih)
@@ -32,4 +39,9 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     // Route Index & Delete untuk Admin
     Route::get('/hubungi-kami', [HubungiKamiController::class, 'index'])->name('admin.hubungi-kami.index');
     Route::delete('/hubungi-kami/{id}', [HubungiKamiController::class, 'destroy'])->name('admin.hubungi-kami.destroy');
+});
+    
+    // CRUD Tentang 
+    // URL-nya nanti otomatis jadi: /admin/tentang
+    Route::resource('tentang', TentangController::class);
 });

@@ -51,7 +51,7 @@
         <hr>
         <a href="{{ route('admin.dashboard') }}">🏠 Dashboard</a>
         <a href="{{ route('hero.edit') }}">🖼️ Hero Section</a>
-        <a href="#">ℹ️ Tentang</a>
+        <a href="{{ route('tentang.index') }}">ℹ️ Tentang</a>
         <a href="#">🏢 Tipe Rumah</a>
         <a href="#">🌟 Fasilitas</a>
         <a href="#">📸 Galeri Perumahan</a>
@@ -84,7 +84,7 @@
             </div>
         @endif
     </div>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
