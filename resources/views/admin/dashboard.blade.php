@@ -59,6 +59,11 @@
     <div class="sidebar">
         <h4>Grand Horizon</h4>
         <hr>
+        <a href="{{ route('admin.dashboard') }}">🏠 Dashboard</a>
+        <a href="{{ route('hero.edit') }}">🖼️ Hero Section</a>
+        <a href="{{ route('tentang.edit') }}">ℹ️ Tentang</a>
+        <a href="#">🏢 Tipe Rumah</a>
+        <a href="{{ route('fasilitas.index') }}">🌟 Fasilitas</a>
         <a href="{{ route('admin.dashboard') }}" class="{{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">🏠
             Dashboard</a>
         <a href="{{ route('hero.edit') }}" class="{{ request()->routeIs('hero.*') ? 'active' : '' }}">🖼️ Hero

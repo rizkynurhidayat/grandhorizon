@@ -23,7 +23,56 @@
                 </thead>
                 <tbody class="table-border-bottom-0">
                     @forelse($tentangs as $item)
-                    <tr>
+<tr>
+    <td><strong>{{ $item->judul }}</strong></td>
+    <td>{{ $item->subjudul }}</td>
+    
+    <td>
+        <img src="{{ asset('storage/' . $item->gambar) }}" 
+             class="rounded" 
+             width="80" 
+             height="50" 
+             style="object-fit: cover;" 
+             alt="img">
+    </td>
+
+    <td>
+        <div class="p-1 bg-dark d-inline-block rounded">
+            <img src="{{ asset('storage/' . $item->logo) }}" 
+                 width="30" 
+                 height="30" 
+                 style="object-fit: contain;" 
+                 alt="icon">
+        </div>
+    </td>
+    
+    <td>
+        <div class="dropdown">
+            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                <i class="bx bx-dots-vertical-rounded"></i>
+            </button>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="{{ route('tentang.edit', $item->id) }}">
+                    <i class="bx bx-edit-alt me-1"></i> Edit
+                </a>
+                <form action="{{ route('tentang.destroy', $item->id) }}" method="POST" onsubmit="return confirm('Yakin mau hapus?')">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="dropdown-item">
+                        <i class="bx bx-trash me-1"></i> Delete
+                    </button>
+                </form>
+            </div>
+        </div>
+    </td>
+</tr>
+@empty
+<tr>
+    <td colspan="5" class="text-center py-4">Data belum ada. Klik "Tambah Tentang".</td>
+</tr>
+@endforelse
+
+                    {{-- <tr>
                         <td><strong>{{ $item->judul }}</strong></td>
                         <td>{{ $item->subjudul }}</td>
                         <td>
@@ -56,7 +105,7 @@
                     @empty
                     <tr>
                         <td colspan="5" class="text-center py-4">Data belum ada. Klik "Tambah Tentang".</td>
-                    </tr>
+                    </tr> --}}
                     @endforelse
                 </tbody>
             </table>

@@ -97,17 +97,34 @@
             <div class="about-image"
                 style="background-image: url('{{ asset('storage/' . ($tentang->gambar ?? '')) }}')">
                 <div class="about-overlay">
+                        {{-- <h2>{{ $tentang->subjudul ?? 'Hunian Nyaman dan Strategis' }}</h2>
                     <p {{ $tentang->subjudul ? 'class="about-subjudul "' : '' }}>
                         Grand Horizon adalah kawasan perumahan modern yang menawarkan hunian nyaman,
                         aman, dan cocok untuk keluarga.
-                    </p>
+                    </p> --}}
+                    {{-- Panggil Subjudul --}}
+                         <p class="about-subjudul">
+                               {{ $tentang->subjudul ?? 'Grand Horizon adalah kawasan perumahan modern...' }}
+                         </p>
 
+                    {{-- <p  {{ $tentang->deskripsi ? 'class="about-description"' : '' }}>
                     <p {{ $tentang->deskripsi ? 'class="about-description"' : '' }}>
                         Berlokasi strategis dan mudah diakses, perumahan ini dekat dengan berbagai
                         fasilitas umum seperti sekolah, pusat perbelanjaan, rumah sakit,
                         dan akses transportasi.
-                    </p>
+                    </p> --}}
+                    {{-- Panggil Deskripsi --}}
+                         <p class="about-description">
+                               {{ $tentang->deskripsi ?? 'Berlokasi strategis dan mudah diakses...' }}
+                        </p>
 
+                    {{-- <button class="btn-selengkapnya" {{ $tentang->tekstombol ? 'data-text="' . $tentang->tekstombol . '"' : '' }}>
+                        Lihat selengkapnya
+                    </button> --}}
+                    {{-- Panggil Teks Tombol --}}
+                         <button class="btn-selengkapnya">
+                             {{ $tentang->tekstombol ?? 'Lihat selengkapnya' }}
+                         </button>
                     <button class="btn-selengkapnya" {{ $tentang->tekstombol ? 'data-text="' . $tentang->tekstombol . '"' : '' }}>
                         Lihat selengkapnya
                     </button>
@@ -118,6 +135,30 @@
             <div class="about-fitur">
                 <h4>{{ $tentang->keunggulan_judul ?? '4 Keunggulan Grand Horizon' }}</h4>
                 <ul>
+        @for ($i = 1; $i <= 4; $i++)
+            @php 
+                $judul = "judul_unggulan_$i";
+                $desc = "desc_unggulan_$i";
+                $logo = "logo_unggulan_$i";
+            @endphp
+
+            @if($tentang->$judul) {{-- Cek jika judul diisi di admin --}}
+            <li>
+                <div>
+                    {{-- Panggil Logo dari Storage, kalau kosong pakai gambar default --}}
+                    <img src="{{ $tentang->$logo ? asset('storage/' . $tentang->$logo) : asset('image/Vector.png') }}">
+                    
+                    {{-- Panggil Judul --}}
+                    <h3>{{ $tentang->$judul }}</h3>
+                    
+                    {{-- Panggil Deskripsi --}}
+                    <p>{{ $tentang->$desc }}</p>
+                </div>
+            </li>
+            @endif
+        @endfor
+    </ul>
+                {{-- <ul>
                     <li>
                         <div>
                             <img src="{{ asset('image/Vector.png') }}" {{ $tentang->logo }}>
@@ -146,7 +187,7 @@
                             <p>Mudah diakses dan dekat dengan fasilitas umum.</p>
                         </div>
                     </li>
-                </ul>
+                </ul> --}}
             </div>
 
         </div>
@@ -155,9 +196,122 @@
 
     <!-- Fasilitas Sekitar -->
     <section id="fasilitas-w">
-        <h1>Fasilitas Sekitar Grand Horizon</h1>
+    <h1>Fasilitas Sekitar Grand Horizon</h1>
+
+    <div class="fasilitas-grid">
+        @foreach($fasilitas as $item)
+            <div class="fasilitas-item">
+                {{-- Gunakan asset storage langsung karena di DB sudah ada kata 'fasilitas/' --}}
+                <img src="{{ asset('storage/' . $item->gambar) }}" alt="{{ $item->judul }}">
+                
+                <h3>{{ $item->judul }}</h3>
+                
+                <p>
+                    {!! nl2br(e($item->deskripsi)) !!}
+                </p>
+            </div>
+        @endforeach
+     </div>
+</section>
+    {{-- <section id="fasilitas-w"> --}}
+        {{-- <h1>Fasilitas Sekitar Grand Horizon</h1>
 
         <div class="fasilitas-grid">
+<<<<<<< HEAD
+            <section id="fasilitas-w">
+    <h1>Fasilitas Sekitar Grand Horizon</h1> --}}
+
+            {{-- <div class="fasilitas-item">
+                <img src="{{ asset('image/Vector (3).png') }}" alt="">
+                <h3>Akses Jalan</h3>
+                <p>
+                    GT Serang Timur (6,7 km)<br>
+                    GT Serang Barat (1,4 km)<br>
+                    Tol Cilegon Timur (12,1 km)
+                </p>
+            </div> --}}
+
+            {{-- <div class="fasilitas-item">
+                <img src="{{ asset('image/picon_office.png') }}" alt="">
+                <h3>Kantor Pemerintah</h3>
+                <p>
+                    Kantor Imigrasi (6 km)<br>
+                    SAMSAT MOS (11,4 km)<br>
+                    Polsek Serang (3,5 km)
+                </p>
+            </div> --}}
+
+            {{-- <div class="fasilitas-item">
+                <img src="{{ asset('image/Vector (4).png') }}" alt="">
+                <h3>Sarana Transportasi</h3>
+                <p>
+                    Stasiun Serang (4,2 km)<br>
+                    Pool Budiman (11,9 km)<br>
+                    Terminal Cipocok (6,2 km)
+                </p>
+            </div> --}}
+
+            {{-- <div class="fasilitas-item">
+                <img src="{{ asset('image/Vector.png') }}" alt="">
+                <h3>Pasar Tradisional</h3>
+                <p>
+                    Pasar Induk (5,2 km)<br>
+                    Pasar Taman Sari (4,4 km)<br>
+                    Pasar Lama (3 km)
+                </p>
+            </div> --}}
+
+            {{-- <div class="fasilitas-item">
+                <img src="{{ asset('image/Vector.svg') }}" alt="">
+                <h3>Pusat Belanja Modern</h3>
+                <p>
+                    Mall of Serang (8,2 km)<br>
+                    Lotte Grosir (1,8 km)<br>
+                    Transmart (5,8 km)
+                </p>
+            </div> --}}
+
+            {{-- <div class="fasilitas-item">
+                <img src="{{ asset('image/ri_hospital-fill.svg') }}" alt="">
+                <h3>Rumah Sakit</h3>
+                <p>
+                    RSUD Kota Serang (9,7 km)<br>
+                    RS Fatimah (850 m)<br>
+                    RS Kencana (4,1 km)
+                </p>
+            </div> --}}
+
+            {{-- <div class="fasilitas-item">
+                <img src="{{ asset('image/icon-park-solid_school.svg') }}" alt="">
+                <h3>Sekolah</h3>
+                <p>
+                    SMAN 1 Serang (4,3 km)<br>
+                    SMAN 2 Serang (7,7 km)<br>
+                    Sekolah Peradaban (4,4 km)
+                </p>
+            </div> --}}
+
+            {{-- <div class="fasilitas-item">
+                <img src="{{ asset('image/ion_school.svg') }}" alt="">
+                <h3>Perguruan Tinggi</h3>
+                <p>
+                    D3 Keperawatan UNTIRTA (1,9 km)<br>
+                    Universitas Serang Raya (1,8 km)<br>
+                    UPI Kampus Serang (3,9 km)
+                </p>
+            </div> --}}
+{{-- 
+            <div class="fasilitas-item">
+                <img src="{{ asset('image/icon-park-solid_correct.svg') }}" alt="">
+                <h3>Lainnya</h3>
+                <p>
+                    Waterboom Rancatales (1,2 km)<br>
+                    Batu Gede Sayar (8 km)<br>
+                    Sagara Lugina (4,9 km)
+                </p>
+            </div> --}}
+
+=======
             @foreach($fasilitas as $f)
                 <div class="fasilitas-item">
                     <img src="{{ asset('storage/' . $f->gambar) }}" alt="{{ $f->judul }}">
@@ -167,6 +321,7 @@
                     </p>
                 </div>
             @endforeach
+>>>>>>> ca64be5e9ad65b844b902bac85d3b9f4180f7825
         </div>
     </section>
 

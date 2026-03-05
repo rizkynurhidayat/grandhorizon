@@ -19,7 +19,17 @@ return new class extends Migration
             $table->text('deskripsi');
             $table->string('logo');
             $table->string('tekstombol');
+
+            // Tambahan otomatis untuk 4 Keunggulan
+            for ($i = 1; $i <= 4; $i++) {
+                $table->string("judul_unggulan_$i")->nullable();
+                $table->text("desc_unggulan_$i")->nullable();
+                $table->string("logo_unggulan_$i")->nullable();
+            }
+
             $table->timestamps();
+
+
         });
     }
 
