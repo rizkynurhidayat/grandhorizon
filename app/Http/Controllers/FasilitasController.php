@@ -21,22 +21,20 @@ class FasilitasController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
+        $validator = $request->validate([
             'judul' => 'required',
             'deskripsi' => 'required',
-            'gambar' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'gambar' => 'required|image|max:2048',
         ]);
 
-        $gambar = $request->file('gambar');
-        $gambar->storeAs('public/fasilitas', $gambar->hashName());
+        if ($request->hasFile('gambar')) {
+            // Akan otomatis membuat folder 'fasilitas' di dalam storage/app/public
+            $validator['gambar'] = $request->file('gambar')->store('fasilitas', 'public');
+        }
 
-        Fasilitas::create([
-            'judul' => $request->judul,
-            'deskripsi' => $request->deskripsi,
-            'gambar' => $gambar->hashName(),
-        ]);
+        Fasilitas::create($validator);
 
-        return redirect()->route('fasilitas.index')->with('success', 'Data Berhasil Disimpan!');
+        return redirect()->route('fasilitas.index')->with('success', 'Data Fasilitas berhasil ditambahkan!');
     }
 
     public function edit(Fasilitas $fasilitas)
@@ -46,35 +44,35 @@ class FasilitasController extends Controller
 
     public function update(Request $request, Fasilitas $fasilitas)
     {
-        $request->validate([
+        $validator = $request->validate([
             'judul' => 'required',
             'deskripsi' => 'required',
+            'gambar' => 'nullable|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         if ($request->hasFile('gambar')) {
-            $gambar = $request->file('gambar');
-            $gambar->storeAs('public/fasilitas', $gambar->hashName());
-            Storage::delete('public/fasilitas/' . $fasilitas->gambar);
-
-            $fasilitas->update([
-                'judul' => $request->judul,
-                'deskripsi' => $request->deskripsi,
-                'gambar' => $gambar->hashName(),
-            ]);
-        } else {
-            $fasilitas->update([
-                'judul' => $request->judul,
-                'deskripsi' => $request->deskripsi,
-            ]);
+            // Hapus gambar lama jika ada
+            if ($fasilitas->gambar && Storage::disk('public')->exists($fasilitas->gambar)) {
+                Storage::disk('public')->delete($fasilitas->gambar);
+            }
+            // Simpan gambar baru ke folder fasilitas
+            $validator['gambar'] = $request->file('gambar')->store('fasilitas', 'public');
         }
 
-        return redirect()->route('fasilitas.index')->with('success', 'Data Berhasil Diupdate!');
+        $fasilitas->update($validator);
+
+        return redirect()->route('fasilitas.index')->with('success', 'Data Fasilitas berhasil diperbarui!');
     }
 
     public function destroy(Fasilitas $fasilitas)
     {
-        Storage::delete('public/fasilitas/' . $fasilitas->gambar);
+        // Hapus file gambar dari storage sebelum hapus data di database
+        if ($fasilitas->gambar && Storage::disk('public')->exists($fasilitas->gambar)) {
+            Storage::disk('public')->delete($fasilitas->gambar);
+        }
+
         $fasilitas->delete();
-        return redirect()->route('fasilitas.index')->with('success', 'Data Berhasil Dihapus!');
+
+        return redirect()->route('fasilitas.index')->with('success', 'Data Fasilitas berhasil dihapus!');
     }
 }

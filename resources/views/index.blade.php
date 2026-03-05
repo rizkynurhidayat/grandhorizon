@@ -154,11 +154,31 @@
 
     <!-- Fasilitas Sekitar -->
     <section id="fasilitas-w">
-        <h1>Fasilitas Sekitar Grand Horizon</h1>
+    <h1>Fasilitas Sekitar Grand Horizon</h1>
+
+    <div class="fasilitas-grid">
+        @foreach($fasilitas as $item)
+            <div class="fasilitas-item">
+                {{-- Gunakan asset storage langsung karena di DB sudah ada kata 'fasilitas/' --}}
+                <img src="{{ asset('storage/' . $item->gambar) }}" alt="{{ $item->judul }}">
+                
+                <h3>{{ $item->judul }}</h3>
+                
+                <p>
+                    {!! nl2br(e($item->deskripsi)) !!}
+                </p>
+            </div>
+        @endforeach
+     </div>
+    </section>
+    {{-- <section id="fasilitas-w"> --}}
+        {{-- <h1>Fasilitas Sekitar Grand Horizon</h1>
 
         <div class="fasilitas-grid">
+            <section id="fasilitas-w">
+    <h1>Fasilitas Sekitar Grand Horizon</h1> --}}
 
-            <div class="fasilitas-item">
+            {{-- <div class="fasilitas-item">
                 <img src="{{ asset('image/Vector (3).png') }}" alt="">
                 <h3>Akses Jalan</h3>
                 <p>
@@ -166,9 +186,9 @@
                     GT Serang Barat (1,4 km)<br>
                     Tol Cilegon Timur (12,1 km)
                 </p>
-            </div>
+            </div> --}}
 
-            <div class="fasilitas-item">
+            {{-- <div class="fasilitas-item">
                 <img src="{{ asset('image/picon_office.png') }}" alt="">
                 <h3>Kantor Pemerintah</h3>
                 <p>
@@ -176,9 +196,9 @@
                     SAMSAT MOS (11,4 km)<br>
                     Polsek Serang (3,5 km)
                 </p>
-            </div>
+            </div> --}}
 
-            <div class="fasilitas-item">
+            {{-- <div class="fasilitas-item">
                 <img src="{{ asset('image/Vector (4).png') }}" alt="">
                 <h3>Sarana Transportasi</h3>
                 <p>
@@ -186,9 +206,9 @@
                     Pool Budiman (11,9 km)<br>
                     Terminal Cipocok (6,2 km)
                 </p>
-            </div>
+            </div> --}}
 
-            <div class="fasilitas-item">
+            {{-- <div class="fasilitas-item">
                 <img src="{{ asset('image/Vector.png') }}" alt="">
                 <h3>Pasar Tradisional</h3>
                 <p>
@@ -196,9 +216,9 @@
                     Pasar Taman Sari (4,4 km)<br>
                     Pasar Lama (3 km)
                 </p>
-            </div>
+            </div> --}}
 
-            <div class="fasilitas-item">
+            {{-- <div class="fasilitas-item">
                 <img src="{{ asset('image/Vector.svg') }}" alt="">
                 <h3>Pusat Belanja Modern</h3>
                 <p>
@@ -206,9 +226,9 @@
                     Lotte Grosir (1,8 km)<br>
                     Transmart (5,8 km)
                 </p>
-            </div>
+            </div> --}}
 
-            <div class="fasilitas-item">
+            {{-- <div class="fasilitas-item">
                 <img src="{{ asset('image/ri_hospital-fill.svg') }}" alt="">
                 <h3>Rumah Sakit</h3>
                 <p>
@@ -216,9 +236,9 @@
                     RS Fatimah (850 m)<br>
                     RS Kencana (4,1 km)
                 </p>
-            </div>
+            </div> --}}
 
-            <div class="fasilitas-item">
+            {{-- <div class="fasilitas-item">
                 <img src="{{ asset('image/icon-park-solid_school.svg') }}" alt="">
                 <h3>Sekolah</h3>
                 <p>
@@ -226,9 +246,9 @@
                     SMAN 2 Serang (7,7 km)<br>
                     Sekolah Peradaban (4,4 km)
                 </p>
-            </div>
+            </div> --}}
 
-            <div class="fasilitas-item">
+            {{-- <div class="fasilitas-item">
                 <img src="{{ asset('image/ion_school.svg') }}" alt="">
                 <h3>Perguruan Tinggi</h3>
                 <p>
@@ -236,8 +256,8 @@
                     Universitas Serang Raya (1,8 km)<br>
                     UPI Kampus Serang (3,9 km)
                 </p>
-            </div>
-
+            </div> --}}
+{{-- 
             <div class="fasilitas-item">
                 <img src="{{ asset('image/icon-park-solid_correct.svg') }}" alt="">
                 <h3>Lainnya</h3>
@@ -246,7 +266,7 @@
                     Batu Gede Sayar (8 km)<br>
                     Sagara Lugina (4,9 km)
                 </p>
-            </div>
+            </div> --}}
 
         </div>
     </section>

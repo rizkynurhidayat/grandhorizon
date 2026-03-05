@@ -62,7 +62,7 @@
         <a href="{{ route('hero.edit') }}">🖼️ Hero Section</a>
         <a href="{{ route('tentang.edit') }}">ℹ️ Tentang</a>
         <a href="#">🏢 Tipe Rumah</a>
-        <a href="#">🌟 Fasilitas</a>
+        <a href="{{ route('fasilitas.index') }}">🌟 Fasilitas</a>
         <a href="#">📸 Galeri Perumahan</a>
         <a href="#">💬 Testimoni</a>
         <a href="{{ route('admin.hubungi-kami.index') }}">📧 Pesan Masuk</a>
