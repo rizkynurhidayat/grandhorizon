@@ -194,13 +194,14 @@
     </section>
     <!-- Selengkapnya end -->
 
+    <!-- Fasilitas Sekitar -->
     <section id="fasilitas-w">
     <h1>Fasilitas Sekitar Grand Horizon</h1>
 
     <div class="fasilitas-grid">
         @foreach($fasilitas as $item)
             <div class="fasilitas-item">
-                {{-- Menampilkan gambar dari storage --}}
+                {{-- Gunakan asset storage langsung karena di DB sudah ada kata 'fasilitas/' --}}
                 <img src="{{ asset('storage/' . $item->gambar) }}" alt="{{ $item->judul }}">
                 
                 <h3>{{ $item->judul }}</h3>
@@ -210,83 +211,93 @@
                 </p>
             </div>
         @endforeach
-    </div>
+     </div>
 </section>
-<style>
-    /* Section Container */
-    #fasilitas-w {
-        padding: 60px 20px;
-        text-align: center;
-        background-color: #fff;
-    }
 
-    #fasilitas-w h1 {
-        margin-bottom: 40px;
-        font-weight: bold;
-        font-size: 2rem;
-    }
+        </div>
+    </section>
 
-    /* Grid Container */
-    .fasilitas-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1px;
-        background-color: #fff;
-        border: 1px solid #fff;
-        max-width: 1200px;
-        margin: 0 auto;
-    }
-
-    /* Grid Item */
-    .fasilitas-item {
-        background-color: #fff;
-        padding: 40px 20px;
-        transition: 0.3s;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .fasilitas-item:hover {
-        background-color: #f8f9fa;
-        transform: translateY(-5px); /* Tambahan efek sedikit angkat */
-    }
-
-    .fasilitas-item img {
-        height: 60px;
-        margin-bottom: 20px;
-        object-fit: contain;
-    }
-
-    .fasilitas-item h3 {
-        font-size: 1.25rem;
-        font-weight: 600;
-        margin-bottom: 15px;
-    }
-
-    .fasilitas-item p {
-        font-size: 0.95rem;
-        color: #6c757d;
-        line-height: 1.6;
-        margin: 0;
-    }
-
-    /* Responsive untuk Tablet dan HP */
-    @media (max-width: 992px) {
-        .fasilitas-grid {
-            grid-template-columns: repeat(2, 1fr);
+    <style>
+        /* Section Container */
+        #fasilitas-w {
+            padding: 60px 20px;
+            text-align: center;
+            background-color: #fff;
         }
-    }
 
-    @media (max-width: 576px) {
-        .fasilitas-grid {
-            grid-template-columns: 1fr;
-        }
         #fasilitas-w h1 {
-            font-size: 1.5rem;
+            margin-bottom: 40px;
+            font-weight: bold;
         }
-    }
-</style>
+
+        /* Grid Container - Trik Garis Otomatis */
+        .fasilitas-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            /* 3 Kolom */
+            gap: 1px;
+            /* Celah 1px antara item tetap diatur, tetapi latar belakang akan disembunyikan */
+            **background-color: #fff;
+            **
+            /* Ubah menjadi putih (#fff) */
+            **border: 1px solid #fff;
+            **
+            /* Ubah juga garis luar agar senada */
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Grid Item */
+        .fasilitas-item {
+            background-color: #fff;
+            /* Wajib putih agar menutupi background grid */
+            padding: 40px 20px;
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .fasilitas-item:hover {
+            background-color: #f8f9fa;
+            /* Efek hover halus */
+        }
+
+        .fasilitas-item img {
+            height: 60px;
+            margin-bottom: 20px;
+            object-fit: contain;
+        }
+
+        .fasilitas-item h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .fasilitas-item p {
+            font-size: 0.95rem;
+            color: #6c757d;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* Responsive untuk Tablet dan HP */
+        @media (max-width: 992px) {
+            .fasilitas-grid {
+                grid-template-columns: repeat(2, 1fr);
+                /* 2 Kolom di tablet */
+            }
+        }
+
+        @media (max-width: 576px) {
+            .fasilitas-grid {
+                grid-template-columns: 1fr;
+                /* 1 Kolom di HP */
+            }
+        }
+    </style>
+    <!-- Fasilitas Sekitar End -->
 
 
     <!-- Tipe rumah -->
