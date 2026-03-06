@@ -57,48 +57,46 @@
 
 <body>
     <div class="sidebar">
-        <h4>Grand Horizon</h4>
-        <hr>
+    <h4>Grand Horizon</h4>
+    <hr>
+    
+    <a href="{{ route('admin.dashboard') }}" class="{{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
+        🏠 Dashboard
+    </a>
+    
+    <a href="{{ route('hero.edit') }}" class="{{ request()->routeIs('hero.*') ? 'active' : '' }}">
+        🖼️ Hero Section
+    </a>
+    
+    <a href="{{ route('tentang.edit') }}" class="{{ request()->routeIs('tentang.*') ? 'active' : '' }}">
+        ℹ️ Tentang
+    </a>
 
-        <a href="{{ route('admin.dashboard') }}" class="{{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
-            🏠 Dashboard
-        </a>
+    <a href="{{ route('tiperumah.index') }}" class="{{ request()->routeIs('tiperumah.*') ? 'active' : '' }}">
+        🏢 Tipe Rumah
+    </a>
 
-        <a href="{{ route('hero.edit') }}" class="{{ request()->routeIs('hero.*') ? 'active' : '' }}">
-            🖼️ Hero Section
-        </a>
+    <a href="{{ route('fasilitas.index') }}" class="{{ request()->routeIs('fasilitas.*') ? 'active' : '' }}">
+        🌟 Fasilitas
+    </a>
 
-        <a href="{{ route('tentang.edit') }}" class="{{ request()->routeIs('tentang.*') ? 'active' : '' }}">
-            ℹ️ Tentang
-        </a>
+    <a href="#">📸 Galeri Perumahan</a>
+    
+    <a href="#">💬 Testimoni</a>
+    
+    <a href="{{ route('admin.hubungi-kami.index') }}" class="{{ request()->routeIs('admin.hubungi-kami.*') ? 'active' : '' }}">
+        📧 Pesan Masuk
+    </a>
+    
+    <hr>
+    
+    <form action="{{ route('logout') }}" method="POST">
+        @csrf
+        <button type="submit" class="btn btn-danger w-100">Keluar</button>
+    </form>
+</div>
 
-        <a href="{{ route('tiperumah.index') }}" class="{{ request()->routeIs('tiperumah.*') ? 'active' : '' }}">
-            🏢 Tipe Rumah
-        </a>
-
-        <a href="{{ route('fasilitas.index') }}" class="{{ request()->routeIs('fasilitas.*') ? 'active' : '' }}">
-            🌟 Fasilitas
-        </a>
-
-        <a href="{{ route('fasilitasperumahan.index') }}"
-            class="{{ request()->routeIs('fasilitasperumahan.*') ? 'active' : '' }}">
-            <i class='bx bx-images me-2'></i> Fasilitas Perumahan
-        </a>
-
-        <a href="#">💬 Testimoni</a>
-
-        <a href="{{ route('admin.hubungi-kami.index') }}"
-            class="{{ request()->routeIs('admin.hubungi-kami.*') ? 'active' : '' }}">
-            📧 Pesan Masuk
-        </a>
-
-        <hr>
-
-        <form action="{{ route('logout') }}" method="POST">
-            @csrf
-            <button type="submit" class="btn btn-danger w-100">Keluar</button>
-        </form>
-    </div>
+  
 
 
 
