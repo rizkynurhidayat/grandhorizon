@@ -2,37 +2,24 @@
 
 namespace App\Http\Controllers;
 
-// Import semua model yang dibutuhkan
+// PASTIKAN SEMUA MODEL DI-IMPORT DI SINI
 use App\Models\Fasilitas;
 use App\Models\HeroSection;
 use App\Models\Tentang;
-<<<<<<< HEAD
-use App\Models\Fasilitas;
+use App\Models\TipeRumah; // Jangan sampai ketinggalan
 use Illuminate\Http\Request;
-=======
-use App\Models\TipeRumah;
->>>>>>> ca64be5e9ad65b844b902bac85d3b9f4180f7825
 
 class HomeController extends Controller
 {
     public function index()
     {
-        // 1. Mengambil data tunggal (Singleton)
+        // 1. Ambil semua data dari database
         $hero = HeroSection::first();
-        $tentang = Tentang::first(); 
-        $fasilitas = Fasilitas::all(); // Ambil semua data fasilitas untuk ditampilkan di halaman depan
-        
-        // Si kurir mengantarkan data ($hero, $tentang, $fasilitas) ke halaman index.blade.php
-        return view('index', compact('hero', 'tentang', 'fasilitas'));
         $tentang = Tentang::first();
-
-        // 2. Mengambil data koleksi (Array/Grid)
         $fasilitas = Fasilitas::all();
+        $tiperumah = TipeRumah::latest()->get(); // Ini yang tadi "ketinggalan"
 
-        // Menggunakan latest() agar tipe rumah yang baru diinput muncul paling depan
-        $tiperumah = TipeRumah::latest()->get();
-
-        // 3. Kirim SEMUA data ke satu halaman (welcome.blade.php)
+        // 2. Kirim SEMUA data sekaligus dalam SATU return
         return view('index', compact('hero', 'tentang', 'fasilitas', 'tiperumah'));
     }
 }
