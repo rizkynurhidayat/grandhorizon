@@ -2,24 +2,23 @@
 
 namespace App\Http\Controllers;
 
-// PASTIKAN SEMUA MODEL DI-IMPORT DI SINI
 use App\Models\Fasilitas;
+use App\Models\FasilitasPerumahan;
 use App\Models\HeroSection;
 use App\Models\Tentang;
-use App\Models\TipeRumah; // Jangan sampai ketinggalan
-use Illuminate\Http\Request;
+use App\Models\TipeRumah; // Import Model Baru
 
 class HomeController extends Controller
 {
     public function index()
     {
-        // 1. Ambil semua data dari database
         $hero = HeroSection::first();
         $tentang = Tentang::first();
         $fasilitas = Fasilitas::all();
-        $tiperumah = TipeRumah::latest()->get(); // Ini yang tadi "ketinggalan"
+        $tiperumah = TipeRumah::latest()->get();
+        // Ambil data fasilitas perumahan untuk slider
+        $fasilitasperumahan = FasilitasPerumahan::latest()->get();
 
-        // 2. Kirim SEMUA data sekaligus dalam SATU return
-        return view('index', compact('hero', 'tentang', 'fasilitas', 'tiperumah'));
+        return view('index', compact('hero', 'tentang', 'fasilitas', 'tiperumah', 'fasilitasperumahan'));
     }
 }

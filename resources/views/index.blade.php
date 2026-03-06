@@ -192,99 +192,104 @@
     </section>
     <!-- Selengkapnya end -->
 
-    <section id="fasilitas-w">
+    <!-- Fasilitas Sekitar -->
+    @if($fasilitas->count() > 0)
+<section id="fasilitas-w">
     <h1>Fasilitas Sekitar Grand Horizon</h1>
 
     <div class="fasilitas-grid">
         @foreach($fasilitas as $item)
             <div class="fasilitas-item">
-                {{-- Menampilkan gambar dari storage --}}
                 <img src="{{ asset('storage/' . $item->gambar) }}" alt="{{ $item->judul }}">
-                
                 <h3>{{ $item->judul }}</h3>
-                
-                <p>
-                    {!! nl2br(e($item->deskripsi)) !!}
-                </p>
+                <p>{!! nl2br(e($item->deskripsi)) !!}</p>
             </div>
         @endforeach
     </div>
 </section>
-<style>
-    /* Section Container */
-    #fasilitas-w {
-        padding: 60px 20px;
-        text-align: center;
-        background-color: #fff;
-    }
+@endif
 
-    #fasilitas-w h1 {
-        margin-bottom: 40px;
-        font-weight: bold;
-        font-size: 2rem;
-    }
+        
 
-    /* Grid Container */
-    .fasilitas-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1px;
-        background-color: #fff;
-        border: 1px solid #fff;
-        max-width: 1200px;
-        margin: 0 auto;
-    }
-
-    /* Grid Item */
-    .fasilitas-item {
-        background-color: #fff;
-        padding: 40px 20px;
-        transition: 0.3s;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .fasilitas-item:hover {
-        background-color: #f8f9fa;
-        transform: translateY(-5px); /* Tambahan efek sedikit angkat */
-    }
-
-    .fasilitas-item img {
-        height: 60px;
-        margin-bottom: 20px;
-        object-fit: contain;
-    }
-
-    .fasilitas-item h3 {
-        font-size: 1.25rem;
-        font-weight: 600;
-        margin-bottom: 15px;
-    }
-
-    .fasilitas-item p {
-        font-size: 0.95rem;
-        color: #6c757d;
-        line-height: 1.6;
-        margin: 0;
-    }
-
-    /* Responsive untuk Tablet dan HP */
-    @media (max-width: 992px) {
-        .fasilitas-grid {
-            grid-template-columns: repeat(2, 1fr);
+    <style>
+        /* Section Container */
+        #fasilitas-w {
+            padding: 60px 20px;
+            text-align: center;
+            background-color: #fff;
         }
-    }
 
-    @media (max-width: 576px) {
-        .fasilitas-grid {
-            grid-template-columns: 1fr;
-        }
         #fasilitas-w h1 {
-            font-size: 1.5rem;
+            margin-bottom: 40px;
+            font-weight: bold;
         }
-    }
-</style>
+
+        /* Grid Container - Hapus Border & Background di sini */
+.fasilitas-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0; /* Gap diubah jadi 0 agar border antar item menyatu */
+    max-width: 1200px;
+    margin: 0 auto;
+    border: none; /* Pastikan tidak ada border di container utama */
+}
+
+/* Grid Item - Tambahkan Border di sini */
+.fasilitas-item {
+    background-color: #fff;
+    padding: 40px 20px;
+    transition: 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    /* Tambahkan border di tiap item */
+    border: 1px solid #ddd; 
+    /* Gunakan margin negatif agar garis tidak double saat bertemu item lain */
+    margin-left: -1px;
+    margin-top: -1px;
+}
+
+.fasilitas-item:hover {
+    background-color: #f8f9fa;
+    z-index: 1; /* Agar border hover tetap terlihat di atas */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+        .fasilitas-item img {
+            height: 60px;
+            margin-bottom: 20px;
+            object-fit: contain;
+        }
+
+        .fasilitas-item h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .fasilitas-item p {
+            font-size: 0.95rem;
+            color: #6c757d;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* Responsive untuk Tablet dan HP */
+        @media (max-width: 992px) {
+            .fasilitas-grid {
+                grid-template-columns: repeat(2, 1fr);
+                /* 2 Kolom di tablet */
+            }
+        }
+
+        @media (max-width: 576px) {
+            .fasilitas-grid {
+                grid-template-columns: 1fr;
+                /* 1 Kolom di HP */
+            }
+        }
+    </style>
+    <!-- Fasilitas Sekitar End -->
 
 
     <!-- Tipe rumah -->
@@ -403,31 +408,31 @@
     </section>
     <!-- Tipe rumah end -->
 
-    <!-- Fasilitas perumahan -->
-    <section id="fas-perumahan" class="fasilitas-perumahan">
-        <h1>Fasilitas Perumahan</h1>
-
-        <div class="slider">
-            <button class="nav prev">&#10094;</button>
-
-            <div class="slider-wrapper"> <!--go jendela-->
-                <div class="slider-track"> <!--gambar jejeran ke samping-->
-                    <img src="{{ asset('image/Rectangle 73.png') }}" alt="gambar cctv">
-                    <img src="{{ asset('image/Rectangle 73 (1).png') }}" alt="gambar ruang tv">
-                    <img src="{{ asset('image/Rectangle 73 (2).png') }}" alt="gambar taman hijau">
-                </div>
+    <section id="fas-perumahan" class="fasilitas-perumahan reveal">
+    <h1>Fasilitas Perumahan</h1>
+    <div class="slider">
+        <button class="nav prev">&#10094;</button>
+        <div class="slider-wrapper">
+            <div class="slider-track">
+                <img src="{{ asset('image/Rectangle 73.png') }}" alt="statik 1">
+                <img src="{{ asset('image/Rectangle 73 (1).png') }}" alt="statik 2">
+                <img src="{{ asset('image/Rectangle 73 (2).png') }}" alt="statik 3">
+                @foreach($fasilitasperumahan as $fp)
+                    <img src="{{ asset('storage/' . $fp->gambar) }}" alt="Fasilitas">
+                @endforeach
             </div>
-
-            <button class="nav next">&#10095;</button>
         </div>
-
-        <div class="dots"> <!-- go indikator slide pas murub/aktif-->
-            <span class="dot active"></span>
+        <button class="nav next">&#10095;</button>
+    </div>
+    <div class="dots" id="dots-container">
+        <span class="dot active"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        @foreach($fasilitasperumahan as $fp)
             <span class="dot"></span>
-            <span class="dot"></span>
-        </div>
-    </section>
-    <!-- Fasilitas perumahan end -->
+        @endforeach
+    </div>
+</section>
 
 
     <!-- Testimoni klien -->
@@ -632,6 +637,6 @@
     <!-- section footer end-->
 </body>
 
-<script src="{{ asset('js/scripts.js') }}"></script>
+<script src="{{ asset('js/scriprts.js') }}"></script>
 
 </html>
