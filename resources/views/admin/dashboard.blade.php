@@ -55,38 +55,47 @@
 </head>
 
 <body>
-
     <div class="sidebar">
-        <h4>Grand Horizon</h4>
-        <hr>
-        <a href="{{ route('admin.dashboard') }}">🏠 Dashboard</a>
-        <a href="{{ route('hero.edit') }}">🖼️ Hero Section</a>
-        <a href="{{ route('tentang.edit') }}">ℹ️ Tentang</a>
-        <a href="#">🏢 Tipe Rumah</a>
-        <a href="{{ route('fasilitas.index') }}">🌟 Fasilitas</a>
-        <a href="{{ route('admin.dashboard') }}" class="{{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">🏠
-            Dashboard</a>
-        <a href="{{ route('hero.edit') }}" class="{{ request()->routeIs('hero.*') ? 'active' : '' }}">🖼️ Hero
-            Section</a>
-        <a href="{{ route('tentang.edit') }}" class="{{ request()->routeIs('tentang.*') ? 'active' : '' }}">ℹ️
-            Tentang</a>
+    <h4>Grand Horizon</h4>
+    <hr>
+    
+    <a href="{{ route('admin.dashboard') }}" class="{{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
+        🏠 Dashboard
+    </a>
+    
+    <a href="{{ route('hero.edit') }}" class="{{ request()->routeIs('hero.*') ? 'active' : '' }}">
+        🖼️ Hero Section
+    </a>
+    
+    <a href="{{ route('tentang.edit') }}" class="{{ request()->routeIs('tentang.*') ? 'active' : '' }}">
+        ℹ️ Tentang
+    </a>
 
-        {{-- LINK TIPE RUMAH AKTIF --}}
-        <a href="{{ route('tiperumah.index') }}" class="{{ request()->routeIs('tiperumah.*') ? 'active' : '' }}">🏢 Tipe
-            Rumah</a>
+    <a href="{{ route('tiperumah.index') }}" class="{{ request()->routeIs('tiperumah.*') ? 'active' : '' }}">
+        🏢 Tipe Rumah
+    </a>
 
-        <a href="{{ route('fasilitas.index') }}" class="{{ request()->routeIs('fasilitas.*') ? 'active' : '' }}">🌟
-            Fasilitas</a>
-        <a href="#">📸 Galeri Perumahan</a>
-        <a href="#">💬 Testimoni</a>
-        <a href="{{ route('admin.hubungi-kami.index') }}"
-            class="{{ request()->routeIs('admin.hubungi-kami.*') ? 'active' : '' }}">📧 Pesan Masuk</a>
-        <hr>
-        <form action="{{ route('logout') }}" method="POST">
-            @csrf
-            <button type="submit" class="btn btn-danger w-100">Keluar</button>
-        </form>
-    </div>
+    <a href="{{ route('fasilitas.index') }}" class="{{ request()->routeIs('fasilitas.*') ? 'active' : '' }}">
+        🌟 Fasilitas
+    </a>
+
+    <a href="#">📸 Galeri Perumahan</a>
+    
+    <a href="#">💬 Testimoni</a>
+    
+    <a href="{{ route('admin.hubungi-kami.index') }}" class="{{ request()->routeIs('admin.hubungi-kami.*') ? 'active' : '' }}">
+        📧 Pesan Masuk
+    </a>
+    
+    <hr>
+    
+    <form action="{{ route('logout') }}" method="POST">
+        @csrf
+        <button type="submit" class="btn btn-danger w-100">Keluar</button>
+    </form>
+</div>
+
+  
 
     <div class="content">
         @if(View::hasSection('content'))
