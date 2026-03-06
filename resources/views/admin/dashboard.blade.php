@@ -24,32 +24,42 @@
             padding: 20px;
             position: fixed;
             height: 100%;
+            z-index: 1000;
         }
 
         .sidebar a {
-            color: white;
+            color: rgba(255, 255, 255, 0.8);
             text-decoration: none;
             display: block;
             padding: 12px;
             border-radius: 5px;
             transition: 0.3s;
+            margin-bottom: 5px;
         }
 
         .sidebar a:hover,
         .sidebar a.active {
             background: #495057;
+            color: white;
         }
 
         .content {
             flex: 1;
             margin-left: 250px;
-            /* Agar konten tidak tertutup sidebar fixed */
             padding: 30px;
+            width: calc(100% - 250px);
         }
 
-        /* Fix agar dropdown tidak terpotong table-responsive */
         .table-responsive {
             overflow: visible !important;
+        }
+
+        .card-stat {
+            transition: transform 0.3s;
+        }
+
+        .card-stat:hover {
+            transform: translateY(-5px);
         }
     </style>
 </head>
@@ -101,23 +111,33 @@
         @if(View::hasSection('content'))
             @yield('content')
         @else
-            <h2>Selamat Datang, {{ Auth::user()->name }}!</h2>
-            <p>Gunakan menu di samping untuk mengelola konten website Grand Horizon.</p>
-
-            <div class="row mt-4">
-                <div class="col-md-4">
-                    <div class="card bg-primary text-white p-3 border-0 shadow-sm">
-                        <h5>Total Tipe Rumah</h5>
-                        {{-- Data dinamis dari controller --}}
-                        <h3>{{ $tipeRumahCount ?? '0' }} Unit</h3>
+            <div class="container-fluid">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <div>
+                        <h2 class="fw-bold mb-1">Selamat Datang, {{ Auth::user()->name }}! 🚀</h2>
+                        <p class="text-muted">Kelola konten website Grand Horizon Anda di sini.</p>
                     </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card bg-primary text-white p-4 border-0 shadow-sm rounded-4 card-stat">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="mb-1 opacity-75">Total Tipe Rumah</h6>
+                                    <h3 class="mb-0 fw-bold">{{ $tipeRumahCount ?? '0' }} Unit</h3>
+                                </div>
+                                <i class='bx bx-building-house fs-1 opacity-50'></i>
+                            </div>
+                        </div>
+                    </div>
+                    {{-- Kamu bisa tambah card statistik lain di sini --}}
                 </div>
             </div>
         @endif
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
 </body>
 
 </html>
