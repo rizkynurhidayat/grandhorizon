@@ -195,27 +195,23 @@
     <!-- Selengkapnya end -->
 
     <!-- Fasilitas Sekitar -->
-    <section id="fasilitas-w">
+    @if($fasilitas->count() > 0)
+<section id="fasilitas-w">
     <h1>Fasilitas Sekitar Grand Horizon</h1>
 
     <div class="fasilitas-grid">
         @foreach($fasilitas as $item)
             <div class="fasilitas-item">
-                {{-- Gunakan asset storage langsung karena di DB sudah ada kata 'fasilitas/' --}}
                 <img src="{{ asset('storage/' . $item->gambar) }}" alt="{{ $item->judul }}">
-                
                 <h3>{{ $item->judul }}</h3>
-                
-                <p>
-                    {!! nl2br(e($item->deskripsi)) !!}
-                </p>
+                <p>{!! nl2br(e($item->deskripsi)) !!}</p>
             </div>
         @endforeach
-     </div>
+    </div>
 </section>
+@endif
 
-        </div>
-    </section>
+        
 
     <style>
         /* Section Container */
@@ -230,39 +226,37 @@
             font-weight: bold;
         }
 
-        /* Grid Container - Trik Garis Otomatis */
-        .fasilitas-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            /* 3 Kolom */
-            gap: 1px;
-            /* Celah 1px antara item tetap diatur, tetapi latar belakang akan disembunyikan */
-            **background-color: #fff;
-            **
-            /* Ubah menjadi putih (#fff) */
-            **border: 1px solid #fff;
-            **
-            /* Ubah juga garis luar agar senada */
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+        /* Grid Container - Hapus Border & Background di sini */
+.fasilitas-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0; /* Gap diubah jadi 0 agar border antar item menyatu */
+    max-width: 1200px;
+    margin: 0 auto;
+    border: none; /* Pastikan tidak ada border di container utama */
+}
 
-        /* Grid Item */
-        .fasilitas-item {
-            background-color: #fff;
-            /* Wajib putih agar menutupi background grid */
-            padding: 40px 20px;
-            transition: 0.3s;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+/* Grid Item - Tambahkan Border di sini */
+.fasilitas-item {
+    background-color: #fff;
+    padding: 40px 20px;
+    transition: 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    /* Tambahkan border di tiap item */
+    border: 1px solid #ddd; 
+    /* Gunakan margin negatif agar garis tidak double saat bertemu item lain */
+    margin-left: -1px;
+    margin-top: -1px;
+}
 
-        .fasilitas-item:hover {
-            background-color: #f8f9fa;
-            /* Efek hover halus */
-        }
-
+.fasilitas-item:hover {
+    background-color: #f8f9fa;
+    z-index: 1; /* Agar border hover tetap terlihat di atas */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
         .fasilitas-item img {
             height: 60px;
             margin-bottom: 20px;
@@ -416,31 +410,31 @@
     </section>
     <!-- Tipe rumah end -->
 
-    <!-- Fasilitas perumahan -->
-    <section id="fas-perumahan" class="fasilitas-perumahan">
-        <h1>Fasilitas Perumahan</h1>
-
-        <div class="slider">
-            <button class="nav prev">&#10094;</button>
-
-            <div class="slider-wrapper"> <!--go jendela-->
-                <div class="slider-track"> <!--gambar jejeran ke samping-->
-                    <img src="{{ asset('image/Rectangle 73.png') }}" alt="gambar cctv">
-                    <img src="{{ asset('image/Rectangle 73 (1).png') }}" alt="gambar ruang tv">
-                    <img src="{{ asset('image/Rectangle 73 (2).png') }}" alt="gambar taman hijau">
-                </div>
+    <section id="fas-perumahan" class="fasilitas-perumahan reveal">
+    <h1>Fasilitas Perumahan</h1>
+    <div class="slider">
+        <button class="nav prev">&#10094;</button>
+        <div class="slider-wrapper">
+            <div class="slider-track">
+                <img src="{{ asset('image/Rectangle 73.png') }}" alt="statik 1">
+                <img src="{{ asset('image/Rectangle 73 (1).png') }}" alt="statik 2">
+                <img src="{{ asset('image/Rectangle 73 (2).png') }}" alt="statik 3">
+                @foreach($fasilitasperumahan as $fp)
+                    <img src="{{ asset('storage/' . $fp->gambar) }}" alt="Fasilitas">
+                @endforeach
             </div>
-
-            <button class="nav next">&#10095;</button>
         </div>
-
-        <div class="dots"> <!-- go indikator slide pas murub/aktif-->
-            <span class="dot active"></span>
+        <button class="nav next">&#10095;</button>
+    </div>
+    <div class="dots" id="dots-container">
+        <span class="dot active"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        @foreach($fasilitasperumahan as $fp)
             <span class="dot"></span>
-            <span class="dot"></span>
-        </div>
-    </section>
-    <!-- Fasilitas perumahan end -->
+        @endforeach
+    </div>
+</section>
 
 
     <!-- Testimoni klien -->
@@ -645,6 +639,6 @@
     <!-- section footer end-->
 </body>
 
-<script src="{{ asset('js/scripts.js') }}"></script>
+<script src="{{ asset('js/scriprts.js') }}"></script>
 
 </html>

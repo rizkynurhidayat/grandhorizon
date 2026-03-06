@@ -11,10 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // Di sini kita pakai nama 'fasilitas_perumahans' supaya tidak bentrok
         Schema::create('fasilitas_perumahans', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_fasilitas');
+            $table->string('nama_fasilitas'); // <--- PASTIKAN ADA INI
             $table->string('gambar');
             $table->timestamps();
         });
