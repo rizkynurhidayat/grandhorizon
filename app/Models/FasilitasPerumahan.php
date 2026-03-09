@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class FasilitasPerumahan extends Model
 {
-    protected $table = 'fasilitas_perumahans'; // Menegaskan nama tabelnya
+    protected $table = 'fasilitas_perumahans';
+
     protected $fillable = ['nama_fasilitas', 'gambar'];
 }

@@ -1,115 +1,95 @@
-/* ================= AMBIL ELEMENT HTML ================= */
+document.addEventListener("DOMContentLoaded", () => {
+    
+    /* ================= 1. SLIDER LOGIC (Fasilitas Perumahan) ================= */
+    const track = document.querySelector('.slider-track');
+    const prevBtn = document.querySelector('.prev');
+    const nextBtn = document.querySelector('.next');
+    const dotsContainer = document.querySelector('#dots-container');
 
-// jukut elemen "rel" sg bakalan digeser kiri–kanan
-const track = document.querySelector('.slider-track');
+    // Fungsi helper untuk ambil elemen terbaru (biar sinkron sama database)
+    const getSlides = () => document.querySelectorAll('.slider-track img');
+    const getDots = () => document.querySelectorAll('.dot');
 
-// jukut  kabeh gambar neng njero slider (jumlah slide)
-const slides = document.querySelectorAll('.slider-track img');
+    if (track && nextBtn && prevBtn) {
+        let index = 0;
 
-// jukut kabeh dot indikator (bulatan bawah)
-const dots = document.querySelectorAll('.dot');
+        function updateSlider() {
+            const slides = getSlides();
+            const dots = getDots();
 
-// jukut tombol panah kiri
-const prevBtn = document.querySelector('.prev');
+            // Animasi geser track
+            track.style.transform = `translateX(-${index * 100}%)`;
 
-// jukut tombol panah kanan
-const nextBtn = document.querySelector('.next');
+            // Update Lampu Indikator (Dots)
+            dots.forEach(dot => dot.classList.remove('active'));
+            if (dots[index]) {
+                dots[index].classList.add('active');
+            }
+        }
 
+        nextBtn.addEventListener('click', () => {
+            const slides = getSlides();
+            index = (index + 1) % slides.length;
+            updateSlider();
+        });
 
-/* ================= SAFETY CHECK ================= */
-/*
-   go mastikna :
-   - element slider ana neng halaman
-   - ben JS ora error dong class drg ketemu
-*/
-if (track && nextBtn && prevBtn) {
+        prevBtn.addEventListener('click', () => {
+            const slides = getSlides();
+            index = (index - 1 + slides.length) % slides.length;
+            updateSlider();
+        });
 
-    // index = posisi slide aktif skrg
-    // 0 = slide pertama, 1 = slide kedua, dst.....
-    let index = 0;
-
-
-    /* ================= FUNGSI UPDATE SLIDER ================= */
-    function updateSlider() {
-
-        /*
-            Nggeser track ke kiri
-            contoh:
-            index = 1 → translateX(-100%)
-            index = 2 → translateX(-200%)
-        */
-        track.style.transform = `translateX(-${index * 100}%)`;
-
-        // hapus class "active" neng kabeh dot
-        dots.forEach(dot => dot.classList.remove('active'));
-
-        // tambahna class "active" maring dot sesuai slide aktif
-        if (dots[index]) {
-            dots[index].classList.add('active');
+        // Delegasi klik pada dot (Lampu Indikator)
+        if (dotsContainer) {
+            dotsContainer.addEventListener('click', (e) => {
+                if (e.target.classList.contains('dot')) {
+                    const dotsArray = Array.from(getDots());
+                    index = dotsArray.indexOf(e.target);
+                    updateSlider();
+                }
+            });
         }
     }
 
+    /* ================= 2. REVEAL ANIMATION (Efek Muncul) ================= */
+    const reveals = document.querySelectorAll(".reveal");
+    const observerOptions = { threshold: 0.2 };
 
-    /* ================= TOMBOL NEXT ================= */
-    nextBtn.addEventListener('click', () => {
-
-        /*
-            index + 1 = ben pindah ke slide berikut e
-            % slides.length = ben muter ke awal lagi
-        */
-        index = (index + 1) % slides.length;
-        updateSlider();
-    });
-
-
-    /* ================= TOMBOL PREV ================= */
-    prevBtn.addEventListener('click', () => {
-
-        /*
-            index - 1 = mundur
-            + slides.length = ben ora  negatif, maksude index -1 kue laka.
-            % slides.length = ben muter maring slide terakhir
-        */
-        index = (index - 1 + slides.length) % slides.length;
-        updateSlider();
-    });
-
-
-    /* ================= DOT CLICK ================= */
-    // go mindah indikator
-    dots.forEach((dot, i) => {
-        dot.addEventListener('click', () => {
-            index = i;
-            updateSlider();
-        });
-    });
-
-} 
-
-// tambahan. dot = lampu indikator 
-
-const reveals = document.querySelectorAll(".reveal");
-
-const observer = new IntersectionObserver(
-    (entries) => {
-        entries.forEach((entry, index) => {
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry, idx) => {
             if (entry.isIntersecting) {
-                // delay bertahap
+                // Delay bertahap biar keren
                 setTimeout(() => {
                     entry.target.classList.add("show");
-                }, index * 120);
-
-                observer.unobserve(entry.target);
+                }, idx * 120);
+                revealObserver.unobserve(entry.target);
             }
         });
-    },
-    {
-        threshold: 0.2,
+    }, observerOptions);
+
+    reveals.forEach(el => revealObserver.observe(el));
+
+    /* ================= 3. FORM VALIDATION (Hubungi Kami) ================= */
+    const contactForm = document.querySelector('form[action*="hubungi-kami"]');
+    if (contactForm) {
+        const inputs = contactForm.querySelectorAll('input, textarea, select');
+
+        const validateInput = (input) => {
+            if (input.checkValidity()) {
+                input.classList.add("success");
+                input.classList.remove("error");
+            } else {
+                input.classList.add("error");
+                input.classList.remove("success");
+            }
+        };
+
+        inputs.forEach(input => {
+            input.addEventListener("input", () => validateInput(input));
+            input.addEventListener("change", () => validateInput(input));
+        });
     }
-);
-
-reveals.forEach(el => observer.observe(el));
-
+});
 
 // form
 document.addEventListener("DOMContentLoaded", () => {
