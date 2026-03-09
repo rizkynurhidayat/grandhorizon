@@ -80,7 +80,7 @@
         🌟 Fasilitas
     </a>
 
-    <a href="#">📸 Galeri Perumahan</a>
+    <a href="{{ route('fasilitasperumahan.index') }}" class="{{ request()->routeIs('fasilitasperumahan.*') ? 'active' : '' }}">📸 Galeri Perumahan</a>
     
     <a href="#">💬 Testimoni</a>
     
