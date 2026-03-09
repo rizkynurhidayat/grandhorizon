@@ -2,33 +2,55 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Fasilitas;
+use App\Models\Testimoni;
+use App\Models\TipeRumah;
 use App\Models\FasilitasPerumahan;
-use App\Models\HeroSection;
 use App\Models\Tentang;
-use App\Models\TipeRumah; // Import Model Baru
-use App\Models\HubungiKami;
+use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
+    /**
+     * Menampilkan Halaman Utama (Landing Page)
+     */
     public function index()
     {
-        $hero = HeroSection::first();
-        $tentang = Tentang::first();
-        $fasilitas = Fasilitas::all();
-        $tiperumah = TipeRumah::latest()->get();
-        // Ambil data fasilitas perumahan untuk slider
-        $fasilitasperumahan = FasilitasPerumahan::latest()->get();
+        // 1. Ambil data Testimoni
+        $testimonis = Testimoni::all();
 
-        return view('index', compact('hero', 'tentang', 'fasilitas', 'tiperumah', 'fasilitasperumahan'));
+        // 2. Ambil data Tipe Rumah (Gunakan huruf kecil sesuai permintaan Blade)
+        $tiperumah = TipeRumah::all();
+
+        // 3. Ambil data Fasilitas (Sekitar)
+        $fasilitas = FasilitasPerumahan::all();
+
+        // 4. Ambil data Fasilitas Perumahan (Slider)
+        // Kita buat variabel ganda agar tidak error jika Blade memanggil nama berbeda
+        $fasilitasperumahan = FasilitasPerumahan::all();
+
+        // 5. Ambil data Tentang Kami
+        // Jika data di database kosong, buat objek kosong agar tidak error "Attempt to read property on null"
+        $tentang = Tentang::first() ?? new Tentang();
+
+        // Kirim semua variabel ke view index.blade.php
+        return view('index', compact(
+            'testimonis', 
+            'tiperumah', 
+            'fasilitas', 
+            'fasilitasperumahan', 
+            'tentang'
+        ));
     }
 
+    /**
+     * Menampilkan Dashboard Admin
+     */
     public function dashboard()
     {
-        $tipeRumahCount = TipeRumah::count();
-        $fasilitasCount = Fasilitas::count();
-        $pesanCount = HubungiKami::count();
-
-        return view('admin.dashboard', compact('tipeRumahCount', 'fasilitasCount', 'pesanCount'));
+        return view('admin.dashboard', [
+            'tipeRumahCount' => TipeRumah::count(),
+            'fasilitasPerumahanCount' => FasilitasPerumahan::count(),
+            'testimoniCount' => Testimoni::count()
+        ]);
     }
 }

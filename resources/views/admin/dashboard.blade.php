@@ -80,9 +80,9 @@
         🌟 Fasilitas
     </a>
 
-    <a href="#">📸 Galeri Perumahan</a>
+    <a href="{{ route('fasilitasperumahan.index') }}">📸 Galeri Perumahan</a>
     
-    <a href="#">💬 Testimoni</a>
+   <a href="{{ route('testimoni.index') }}">💬 Testimoni</a>
     
     <a href="{{ route('admin.hubungi-kami.index') }}" class="{{ request()->routeIs('admin.hubungi-kami.*') ? 'active' : '' }}">
         📧 Pesan Masuk

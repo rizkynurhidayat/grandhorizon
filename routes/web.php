@@ -8,51 +8,53 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HubungiKamiController;
 use App\Http\Controllers\TentangController;
 use App\Http\Controllers\TipeRumahController;
+use App\Http\Controllers\TestimoniController;
 use Illuminate\Support\Facades\Route;
 
-// --- HALAMAN DEPAN ---
+// --- HALAMAN DEPAN (GUEST) ---
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::post('/hubungi-kami/store', [HubungiKamiController::class, 'store'])->name('hubungi-kami.store');
 
-// --- AUTH ---
+// --- AUTHENTICATION ---
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/login', [AuthController::class, 'authenticate'])->name('login.post');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-// --- ADMIN AREA ---
+// --- ADMIN AREA (PROTECTED BY AUTH) ---
 Route::middleware(['auth'])->prefix('admin')->group(function () {
-    // Route::get('/', function () {
-    //     return view('admin.dashboard');
-    // })->name('admin.dashboard');
-
+    
+    // Main Dashboard
     Route::get('/', [HomeController::class, 'dashboard'])->name('admin.dashboard');
 
-    // Fasilitas Sekitar (CRUD Lengkap)
-    Route::resource('fasilitas', \App\Http\Controllers\FasilitasController::class);
+    // 1. Fasilitas Sekitar (CRUD Lengkap via Resource)
+    Route::resource('fasilitas', FasilitasController::class);
 
-    // Tipe rumah
+    // 2. Tipe Rumah (CRUD Lengkap via Resource)
     Route::resource('tiperumah', TipeRumahController::class);
 
-    // Hero Section
+    // 3. Hero Section (Edit & Update saja)
     Route::get('/hero/edit', [HeroSectionController::class, 'edit'])->name('hero.edit');
     Route::put('/hero/update', [HeroSectionController::class, 'update'])->name('hero.update');
 
-    // Tentang Kami (Sistem Edit Tunggal)
+    // 4. Tentang Kami (Sistem Edit Tunggal)
     Route::get('/tentang/edit/', [TentangController::class, 'edit'])->name('tentang.edit');
     Route::put('/tentang/update/{tentang}', [TentangController::class, 'update'])->name('tentang.update');
 
-    // Pesan Masuk
+    // 5. Pesan Masuk (Inbox)
     Route::get('/hubungi-kami', [HubungiKamiController::class, 'index'])->name('admin.hubungi-kami.index');
     Route::delete('/hubungi-kami/{id}', [HubungiKamiController::class, 'destroy'])->name('admin.hubungi-kami.destroy');
 
-    // Fasilitas
-    Route::get('/fasilitas', [FasilitasController::class, 'index'])->name('fasilitas.index');
-    Route::get('/fasilitas/create', [FasilitasController::class, 'create'])->name('fasilitas.create');
-    Route::post('/fasilitas/store', [FasilitasController::class, 'store'])->name('fasilitas.store');
-    Route::get('/fasilitas/edit/{fasilitas}', [FasilitasController::class, 'edit'])->name('fasilitas.edit');
-    Route::put('/fasilitas/update/{fasilitas}', [FasilitasController::class, 'update'])->name('fasilitas.update');
-    Route::delete('/fasilitas/delete/{fasilitas}', [FasilitasController::class, 'destroy'])->name('fasilitas.destroy');
+    // 6. Fasilitas Perumahan (CRUD Manual / Slider)
+    Route::get('/fasilitas-perumahan', [FasilitasController::class, 'index'])->name('fasilitas.index');
+    Route::get('/fasilitas-perumahan/create', [FasilitasController::class, 'create'])->name('fasilitas.create');
+    Route::post('/fasilitas-perumahan/store', [FasilitasController::class, 'store'])->name('fasilitas.store');
+    Route::get('/fasilitas-perumahan/edit/{fasilitas}', [FasilitasController::class, 'edit'])->name('fasilitas.edit');
+    Route::put('/fasilitas-perumahan/update/{fasilitas}', [FasilitasController::class, 'update'])->name('fasilitas.update');
+    Route::delete('/fasilitas-perumahan/delete/{fasilitas}', [FasilitasController::class, 'destroy'])->name('fasilitas.destroy');
 
-    // --- TAMBAHAN: Fasilitas Perumahan (Slider) ---
+    // 7. Galeri / Fasilitas Perumahan (Resource)
     Route::resource('fasilitasperumahan', FasilitasPerumahanController::class);
+
+    // 8. Testimoni (Resource Otomatis: testimoni.index, testimoni.store, dll)
+    Route::resource('testimoni', TestimoniController::class);
 });

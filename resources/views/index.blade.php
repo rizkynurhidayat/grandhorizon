@@ -438,57 +438,37 @@
 
     <!-- Testimoni klien -->
     <section id="testi-klien">
-        <h1>Testimoni Klien</h1>
-        <div class="testi-grid">
+    <h1>Testimoni Klien</h1>
+    <div class="testi-grid">
+        @forelse($testimonis as $t)
             <div class="testi-card">
                 <h5 class="rating">
-                    <span class="score">4.9</span> <!--wadah kecil untuk teks-->
-                    <span class="stars">★★★★★</span>
+                    <span class="score">{{ number_format($t->rating, 1) }}</span>
+                    <span class="stars">
+                        @for($i = 1; $i <= 5; $i++)
+                            <i class="fa-solid fa-star {{ $i <= $t->rating ? '' : 'opacity-25' }}" style="color: #ffc107;"></i>
+                        @endfor
+                    </span>
                 </h5>
-                <p class="testi-text">
-                    “Grand Horizon adalah tempat tinggal yang nyaman dan tenang.
-                    Lingkungannya rapi, aman, dan cocok untuk keluarga.”
-                </p>
-                <p class="testi-name">Saipul jamil</p>
+
+                {{-- Menampilkan Foto Profil dari Admin --}}
+                <div style="margin-bottom: 15px; text-align: center;">
+                    <img src="{{ asset('assets/img/testimoni/' . $t->profile) }}" 
+                         alt="{{ $t->user }}"
+                         style="width: 70px; height: 70px; border-radius: 50%; object-fit: cover; border: 3px solid #f0f0f0;">
+                </div>
+
+                <p class="testi-text">“{{ $t->pesan }}”</p>
+                <p class="testi-name">{{ $t->user }}</p>
             </div>
-
-            <div class="testi-card">
-                <h5 class="rating">
-                    <span class="score">4.9</span>
-                    <span class="stars">★★★★★</span>
-                </h5>
-                <p class="testi-text">
-                    “Lokasinya strategis, akses mudah, dan fasilitasnya lengkap.
-                    Sangat recommended.”
-                </p>
-                <p class="testi-name">Lamine Yamal</p>
+        @empty
+            {{-- Muncul jika tidak ada data di database --}}
+            <div class="testi-card" style="grid-column: 1 / -1; text-align: center;">
+                <p class="testi-text">Belum ada testimoni klien saat ini.</p>
             </div>
-
-            <div class="testi-card">
-                <h5 class="rating">
-                    <span class="score">4.9</span>
-                    <span class="stars">★★★★★</span>
-                </h5>
-                <p class="testi-text">
-                    “Lingkungan bersih dan aman. Anak-anak nyaman bermain.”
-                </p>
-                <p class="testi-name">Cristiano Ronaldo</p>
-            </div>
-
-            <div class="testi-card">
-                <h5 class="rating">
-                    <span class="score">4.9</span>
-                    <span class="stars">★★★★★</span>
-                </h5>
-                <p class="testi-text">
-                    “Pelayanan pengembangnya cepat dan responsif.”
-                </p>
-                <p class="testi-name">Lionel Messi</p>
-            </div>
-
-        </div>
-    </section>
-
+        @endforelse
+    </div>
+</section>
     <!-- Testimoni klien end -->
 
     <section class="contact" id="contact">
