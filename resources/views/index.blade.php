@@ -126,9 +126,7 @@
                          <button class="btn-selengkapnya">
                              {{ $tentang->tekstombol ?? 'Lihat selengkapnya' }}
                          </button>
-                    <button class="btn-selengkapnya" {{ $tentang->tekstombol ? 'data-text="' . $tentang->tekstombol . '"' : '' }}>
-                        Lihat selengkapnya
-                    </button>
+                   
                 </div>
             </div>
 
