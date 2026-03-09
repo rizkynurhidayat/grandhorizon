@@ -61,30 +61,31 @@
 
     <!-- hero section -->
     <style>
-        /* Tambahkan style ini supaya gambar background bisa berubah dari Admin */
-        .hero {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
-                url("{{ asset('assets/img/hero/' . ($hero->gambar ?? 'default-hero.jpg')) }}") !important;
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-        }
-    </style>
+    .hero {
+        /* Kita pakai !important supaya menang lawan file CSS eksternal */
+        background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+            url("{{ asset('assets/img/hero/' . ($hero->gambar ?? 'default.jpg')) }}") !important;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        min-height: 100vh; /* Pastikan section punya tinggi biar background kelihatan */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+</style>
 
-    <section class="hero" id="hero">
-        <div class="hero-content">
-            <h1>{{ $hero->judul ?? 'GRAND HORIZON' }}</h1>
+<section class="hero" id="hero">
+    <div class="hero-content">
+        <h1>{{ $hero->judul ?? 'GRAND HORIZON' }}</h1>
+        <h3>{{ $hero->subjudul ?? 'Perumahan Modern dan Nyaman untuk keluarga' }}</h3>
+        <p>{!! nl2br(e($hero->alamat ?? 'Jl. Raya Cilegon, Drangong, Taktakan Serang, Kota Serang, Banten 42162')) !!}</p>
 
-            <h3>{{ $hero->subjudul ?? 'Perumahan Modern dan Nyaman untuk keluarga' }}</h3>
-
-            <p>{!! nl2br(e($hero->alamat ?? 'Jl. Raya Cilegon, Drangong, Taktakan Serang, Kota Serang, Banten 42162')) !!}
-            </p>
-
-            <a href="#about">
-                <button class="btn-hero">{{ $hero->tekstombol ?? 'Lihat Selengkapnya' }}</button>
-            </a>
-        </div>
-    </section>
+        <a href="#about">
+            <button class="btn-hero">{{ $hero->tekstombol ?? 'Lihat Selengkapnya' }}</button>
+        </a>
+    </div>
+</section>
     <!-- hero section end -->
 
     <!-- Selengkapnya grand horizon -->

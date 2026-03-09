@@ -3,22 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Models\HeroSection;
-use Illuminate\Http\Request; // Import Model HeroSection
-use Illuminate\Support\Facades\File; // Untuk menghapus gambar lama jika ada
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class HeroSectionController extends Controller
 {
     // 1. Menampilkan halaman edit
     public function edit()
     {
+        // Menggunakan firstOrCreate agar jika data ID 1 belum ada, sistem otomatis membuatnya
         $hero = HeroSection::firstOrCreate(
             ['id' => 1],
             [
-                'judul' => 'Judul Default',
+                'judul' => 'Judul Default Grand Horizon',
                 'subjudul' => 'Subjudul Default',
-                'alamat' => '-',
-                'tekstombol' => 'Klik Disini',
-                'gambar' => 'default.jpg', // JANGAN null, kasih string kosong atau nama file
+                'alamat' => 'Lokasi Proyek',
+                'tekstombol' => 'Lihat Detail',
+                'gambar' => 'default.jpg',
             ]
         );
 
@@ -28,44 +29,40 @@ class HeroSectionController extends Controller
     // 2. Menyimpan perubahan data
     public function update(Request $request)
     {
-        // Validasi input sesuai dengan kolom di Model
         $request->validate([
-            'judul' => 'required',
-            'subjudul' => 'required',
-            'alamat' => 'required',
-            'tekstombol' => 'required',
-            'gambar' => 'image|mimes:jpeg,png,jpg|max:2048', // Validasi file gambar
+            'judul'      => 'required|string|max:255',
+            'subjudul'   => 'required|string|max:255',
+            'alamat'     => 'required|string|max:255',
+            'tekstombol' => 'required|string|max:50',
+            'gambar'     => 'nullable|image|mimes:jpeg,png,jpg|max:2048', 
         ]);
 
-        $hero = HeroSection::first();
+        $hero = HeroSection::findOrFail(1);
 
-        // Siapkan data untuk diupdate
         $data = [
-            'judul' => $request->judul,
-            'subjudul' => $request->subjudul,
-            'alamat' => $request->alamat,
+            'judul'      => $request->judul,
+            'subjudul'   => $request->subjudul,
+            'alamat'     => $request->alamat,
             'tekstombol' => $request->tekstombol,
         ];
 
-        // Logika jika user mengunggah gambar baru
         if ($request->hasFile('gambar')) {
-            // Hapus gambar lama dari folder jika bukan gambar default
-            if ($hero->gambar && File::exists(public_path('assets/img/hero/'.$hero->gambar))) {
-                File::delete(public_path('assets/img/hero/'.$hero->gambar));
+            // Hapus gambar lama jika ada dan bukan file default
+            $pathLama = public_path('assets/img/hero/' . $hero->gambar);
+            if ($hero->gambar && $hero->gambar !== 'default.jpg' && File::exists($pathLama)) {
+                File::delete($pathLama);
             }
 
             // Upload gambar baru
             $file = $request->file('gambar');
-            $nama_file = time().'_'.$file->getClientOriginalName();
+            $nama_file = time() . '_' . $file->getClientOriginalName();
             $file->move(public_path('assets/img/hero'), $nama_file);
 
-            // Masukkan nama file baru ke array data
             $data['gambar'] = $nama_file;
         }
 
-        // Eksekusi update ke database
         $hero->update($data);
 
-        return redirect()->back()->with('success', 'Hero Section berhasil diperbarui!');
+        return redirect()->back()->with('success', 'Konten Hero Section berhasil diperbarui!');
     }
 }

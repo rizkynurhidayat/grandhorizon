@@ -21,9 +21,11 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // --- ADMIN AREA ---
 Route::middleware(['auth'])->prefix('admin')->group(function () {
-    Route::get('/', function () {
-        return view('admin.dashboard');
-    })->name('admin.dashboard');
+    // Route::get('/', function () {
+    //     return view('admin.dashboard');
+    // })->name('admin.dashboard');
+
+    Route::get('/', [HomeController::class, 'dashboard'])->name('admin.dashboard');
 
     // Fasilitas Sekitar (CRUD Lengkap)
     Route::resource('fasilitas', \App\Http\Controllers\FasilitasController::class);
