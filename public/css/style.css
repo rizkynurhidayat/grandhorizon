@@ -1326,3 +1326,103 @@ body {
   }
 
 }
+
+/* ============================================================
+   TESTIMONI VERSI LEBAR & RAPAT
+   ============================================================ */
+
+/* Judul Section - Jarak bawah dikurangi */
+.testi-title {
+    text-align: center;
+    font-size: 2.2rem;
+    font-weight: bold;
+    margin-top: 50px;
+    margin-bottom: 30px; /* Dikurangi agar lebih dekat ke kartu */
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-family: sans-serif;
+}
+
+/* Grid Layout - Dibuat lebih lebar ke samping */
+.testi-grid-figma {
+    display: grid;
+    /* minmax 350px membuat kartu lebih lebar secara horizontal */
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); 
+    gap: 20px;
+    padding: 0 5%; /* Padding samping diperkecil agar grid meluas */
+    margin-bottom: 40px; /* Jarak ke 'Hubungi Kami' dipangkas drastis */
+}
+
+/* Kartu Biru Gelap - Dibuat lebih tipis & radius halus */
+.testi-card-figma {
+    background-color: #314a74;
+    color: white;
+    padding: 20px 25px;       /* Atas-bawah 20px, Kiri-kanan 25px */
+    border-radius: 20px;      /* Sudut lebih tumpul/round sesuai request */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 180px;        /* Diperpendek agar tidak terlalu tinggi */
+    position: relative;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.testi-card-figma:hover {
+    transform: translateY(-5px);
+}
+
+/* Angka Rating */
+.testi-rating-figma {
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+}
+
+.testi-rating-figma i {
+    color: #ffc107;
+    margin-left: 6px;
+    font-size: 0.9rem;
+}
+
+/* Teks Pesan Testimoni */
+.testi-desc-figma {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-top: 35px;         /* Memberi ruang untuk rating di atas */
+    margin-bottom: 20px;
+    color: #e0e6ed;
+    font-weight: 300;
+}
+
+/* Footer (Foto & Nama) */
+.testi-footer-figma {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.testi-footer-figma img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.testi-username-figma {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* Section Hubungi Kami - Menghilangkan margin atas jika ada */
+#hubungi-kami {
+    margin-top: 0 !important;
+    padding-top: 20px;
+}

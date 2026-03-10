@@ -9,6 +9,7 @@ use App\Http\Controllers\HubungiKamiController;
 use App\Http\Controllers\TentangController;
 use App\Http\Controllers\TipeRumahController;
 use App\Http\Controllers\TestimoniController;
+use App\Http\Controllers\Admin\FooterController;
 use Illuminate\Support\Facades\Route;
 
 // --- HALAMAN DEPAN (GUEST) ---
@@ -57,4 +58,17 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
 
     // 8. Testimoni (Resource Otomatis: testimoni.index, testimoni.store, dll)
     Route::resource('testimoni', TestimoniController::class);
+
+    // 9. Footer (CRUD)
+    Route::resource('footer', FooterController::class)
+        ->except(['show', 'create'])
+        ->names([
+            'index'   => 'admin.footer.index',
+            'store'   => 'admin.footer.store',
+            'edit'    => 'admin.footer.edit',
+            'update'  => 'admin.footer.update',
+            'destroy' => 'admin.footer.destroy',
+        ]);
+    Route::post('footer/{footer}/activate', [FooterController::class, 'activate'])->name('admin.footer.activate');
+
 });

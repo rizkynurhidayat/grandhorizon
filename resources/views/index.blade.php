@@ -438,33 +438,30 @@
 
     <!-- Testimoni klien -->
     <section id="testi-klien">
-    <h1>Testimoni Klien</h1>
-    <div class="testi-grid">
+    <h1 class="testi-title">TESTIMONI KLIEN</h1>
+    
+    <div class="testi-grid-figma">
         @forelse($testimonis as $t)
-            <div class="testi-card">
-                <h5 class="rating">
-                    <span class="score">{{ number_format($t->rating, 1) }}</span>
-                    <span class="stars">
-                        @for($i = 1; $i <= 5; $i++)
-                            <i class="fa-solid fa-star {{ $i <= $t->rating ? '' : 'opacity-25' }}" style="color: #ffc107;"></i>
-                        @endfor
-                    </span>
-                </h5>
-
-                {{-- Menampilkan Foto Profil dari Admin --}}
-                <div style="margin-bottom: 15px; text-align: center;">
-                    <img src="{{ asset('assets/img/testimoni/' . $t->profile) }}" 
-                         alt="{{ $t->user }}"
-                         style="width: 70px; height: 70px; border-radius: 50%; object-fit: cover; border: 3px solid #f0f0f0;">
+            <div class="testi-card-figma">
+                {{-- Rating Pojok Kanan Atas --}}
+                <div class="testi-rating-figma">
+                    {{ number_format($t->rating, 1) }} <i class="fa-solid fa-star"></i>
                 </div>
-
-                <p class="testi-text">“{{ $t->pesan }}”</p>
-                <p class="testi-name">{{ $t->user }}</p>
+                
+                {{-- Isi Pesan --}}
+                <p class="testi-desc-figma">
+                    “{{ $t->pesan }}”
+                </p>
+                
+                {{-- Footer: Foto & Nama --}}
+                <div class="testi-footer-figma">
+                    <img src="{{ asset('assets/img/testimoni/' . $t->profile) }}" alt="{{ $t->user }}">
+                    <span class="testi-username-figma">{{ strtoupper($t->user) }}</span>
+                </div>
             </div>
         @empty
-            {{-- Muncul jika tidak ada data di database --}}
-            <div class="testi-card" style="grid-column: 1 / -1; text-align: center;">
-                <p class="testi-text">Belum ada testimoni klien saat ini.</p>
+            <div class="testi-empty">
+                <p>Belum ada testimoni klien saat ini.</p>
             </div>
         @endforelse
     </div>
@@ -615,7 +612,82 @@
         © 2025 GRAND HORIZON
     </div>
 
-    <!-- section footer end-->
+    <!-- section footer end--><!-- section footer -->
+@php $f = App\Models\Footer::getActive(); @endphp
+
+@if($f)
+<footer class="footer">
+    <div class="footer-container">
+
+        {{-- Judul Biaya Pemesanan --}}
+        <h1 class="footer-title">{{ $f->biaya_judul ?? 'Biaya Pemesanan Mulai 3 Juta' }}</h1>
+
+        {{-- Item Centang-centang dari database --}}
+        <ul class="footer-benefit">
+            @forelse($f->biaya_items ?? [] as $item)
+            <li>
+                <img src="{{ asset('image/subway_tick (1).png') }}" class="icon-putih">
+                {{ $item }}
+            </li>
+            @empty
+            <li><img src="{{ asset('image/subway_tick (1).png') }}" class="icon-putih"> Cicilan ringan</li>
+            <li><img src="{{ asset('image/subway_tick (1).png') }}" class="icon-putih"> GRATIS 1 unit AC</li>
+            <li><img src="{{ asset('image/subway_tick (1).png') }}" class="icon-putih"> PPN GRATIS</li>
+            @endforelse
+        </ul>
+
+        {{-- Tombol WhatsApp --}}
+        <a href="https://wa.me/6282146273679" class="footer-button" target="_blank">
+            <img src="{{ asset('image/wa.png') }}" alt="">
+            Hubungi kami sekarang juga
+        </a>
+
+        <hr>
+
+        {{-- Kontak & Sosial Media --}}
+        <ul class="footer-contact">
+            <li>
+                <img src="{{ asset('image/maps.png') }}" alt="">
+                <a href="https://www.google.com/maps/search/?api=1&query={{ urlencode($f->address) }}" target="_blank">
+                    {{ $f->address }}
+                </a>
+            </li>
+            <li>
+                <img src="{{ asset('image/mdi_call.png') }}" alt="">
+                <a href="tel:{{ $f->phone }}">{{ $f->phone }}</a>
+            </li>
+            <li>
+                <img src="{{ asset('image/gmail.png') }}" alt="">
+                <a href="mailto:{{ $f->email }}">{{ $f->email }}</a>
+            </li>
+            @if($f->fb_name)
+            <li>
+                <img src="{{ asset('image/fb.png') }}" alt="">
+                <a href="{{ $f->fb_url }}" target="_blank">{{ $f->fb_name }}</a>
+            </li>
+            @endif
+            @if($f->tw_name)
+            <li>
+                <img src="{{ asset('image/twit.png') }}" alt="">
+                <a href="{{ $f->tw_url }}" target="_blank">{{ $f->tw_name }}</a>
+            </li>
+            @endif
+            @if($f->ig_name)
+            <li>
+                <img src="{{ asset('image/ig.png') }}" alt="">
+                <a href="{{ $f->ig_url }}" target="_blank">{{ $f->ig_name }}</a>
+            </li>
+            @endif
+        </ul>
+    </div>
+</footer>
+
+{{-- Copyright --}}
+<div class="footer-copyright">
+    {{ $f->copyright }}
+</div>
+@endif
+<!-- section footer end-->
 </body>
 
 <script src="{{ asset('js/scriprts.js') }}"></script>

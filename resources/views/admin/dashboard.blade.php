@@ -44,11 +44,9 @@
         .content {
             flex: 1;
             margin-left: 250px;
-            /* Agar konten tidak tertutup sidebar fixed */
             padding: 30px;
         }
 
-        /* Fix agar dropdown tidak terpotong table-responsive */
         .table-responsive {
             overflow: visible !important;
         }
@@ -57,48 +55,53 @@
 
 <body>
     <div class="sidebar">
-    <h4>Grand Horizon</h4>
-    <hr>
-    
-    <a href="{{ route('admin.dashboard') }}" class="{{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
-        🏠 Dashboard
-    </a>
-    
-    <a href="{{ route('hero.edit') }}" class="{{ request()->routeIs('hero.*') ? 'active' : '' }}">
-        🖼️ Hero Section
-    </a>
-    
-    <a href="{{ route('tentang.edit') }}" class="{{ request()->routeIs('tentang.*') ? 'active' : '' }}">
-        ℹ️ Tentang
-    </a>
+        <h4>Grand Horizon</h4>
+        <hr>
 
-    <a href="{{ route('tiperumah.index') }}" class="{{ request()->routeIs('tiperumah.*') ? 'active' : '' }}">
-        🏢 Tipe Rumah
-    </a>
+        <a href="{{ route('admin.dashboard') }}" class="{{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
+            🏠 Dashboard
+        </a>
 
-    <a href="{{ route('fasilitas.index') }}" class="{{ request()->routeIs('fasilitas.*') ? 'active' : '' }}">
-        🌟 Fasilitas
-    </a>
+        <a href="{{ route('hero.edit') }}" class="{{ request()->routeIs('hero.*') ? 'active' : '' }}">
+            🖼️ Hero Section
+        </a>
 
-    <a href="{{ route('fasilitasperumahan.index') }}">📸 Galeri Perumahan</a>
-    
-   <a href="{{ route('testimoni.index') }}">💬 Testimoni</a>
-    
-    <a href="{{ route('admin.hubungi-kami.index') }}" class="{{ request()->routeIs('admin.hubungi-kami.*') ? 'active' : '' }}">
-        📧 Pesan Masuk
-    </a>
-    
-    <hr>
-    
-    <form action="{{ route('logout') }}" method="POST">
-        @csrf
-        <button type="submit" class="btn btn-danger w-100">Keluar</button>
-    </form>
-</div>
+        <a href="{{ route('tentang.edit') }}" class="{{ request()->routeIs('tentang.*') ? 'active' : '' }}">
+            ℹ️ Tentang
+        </a>
 
-  
+        <a href="{{ route('tiperumah.index') }}" class="{{ request()->routeIs('tiperumah.*') ? 'active' : '' }}">
+            🏢 Tipe Rumah
+        </a>
 
+        <a href="{{ route('fasilitas.index') }}" class="{{ request()->routeIs('fasilitas.*') ? 'active' : '' }}">
+            🌟 Fasilitas
+        </a>
 
+        <a href="{{ route('fasilitasperumahan.index') }}" class="{{ request()->routeIs('fasilitasperumahan.*') ? 'active' : '' }}">
+            📸 Galeri Perumahan
+        </a>
+
+        <a href="{{ route('testimoni.index') }}" class="{{ request()->routeIs('testimoni.*') ? 'active' : '' }}">
+            💬 Testimoni
+        </a>
+
+        {{-- ← FOOTER DITAMBAHKAN DI SINI --}}
+        <a href="{{ route('admin.footer.index') }}" class="{{ request()->routeIs('admin.footer*') ? 'active' : '' }}">
+            🔗 Footer
+        </a>
+
+        <a href="{{ route('admin.hubungi-kami.index') }}" class="{{ request()->routeIs('admin.hubungi-kami.*') ? 'active' : '' }}">
+            📧 Pesan Masuk
+        </a>
+
+        <hr>
+
+        <form action="{{ route('logout') }}" method="POST">
+            @csrf
+            <button type="submit" class="btn btn-danger w-100">Keluar</button>
+        </form>
+    </div>
 
     <div class="content">
         @if(View::hasSection('content'))
@@ -111,7 +114,6 @@
                 <div class="col-md-4">
                     <div class="card bg-primary text-white p-3 border-0 shadow-sm">
                         <h5>Total Tipe Rumah</h5>
-                        {{-- Data dinamis dari controller --}}
                         <h3>{{ $tipeRumahCount ?? '0' }} Unit</h3>
                     </div>
                 </div>
