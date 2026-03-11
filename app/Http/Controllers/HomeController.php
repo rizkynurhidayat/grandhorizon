@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Testimoni;
 use App\Models\TipeRumah;
+use App\Models\Fasilitas;          
 use App\Models\FasilitasPerumahan;
+use App\Models\HeroSection;
 use App\Models\Tentang;
-use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
@@ -22,7 +23,7 @@ class HomeController extends Controller
         $tiperumah = TipeRumah::all();
 
         // 3. Ambil data Fasilitas (Sekitar)
-        $fasilitas = FasilitasPerumahan::all();
+        $fasilitas = Fasilitas::all();
 
         // 4. Ambil data Fasilitas Perumahan (Slider)
         // Kita buat variabel ganda agar tidak error jika Blade memanggil nama berbeda
@@ -32,13 +33,25 @@ class HomeController extends Controller
         // Jika data di database kosong, buat objek kosong agar tidak error "Attempt to read property on null"
         $tentang = Tentang::first() ?? new Tentang();
 
+        $hero = HeroSection::firstOrCreate(
+            ['id' => 1],
+            [
+                'judul'      => 'GRAND HORIZON',
+                'subjudul'   => 'Perumahan Modern dan Nyaman untuk keluarga',
+                'alamat'     => 'Jl. Raya Cilegon, Drangong, Taktakan Serang',
+                'tekstombol' => 'Lihat Selengkapnya',
+                'gambar'     => 'default.jpg',
+            ]
+        );
+
         // Kirim semua variabel ke view index.blade.php
         return view('index', compact(
             'testimonis', 
             'tiperumah', 
             'fasilitas', 
             'fasilitasperumahan', 
-            'tentang'
+            'tentang',
+            'hero'
         ));
     }
 

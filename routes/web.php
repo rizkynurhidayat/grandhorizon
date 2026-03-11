@@ -9,7 +9,7 @@ use App\Http\Controllers\HubungiKamiController;
 use App\Http\Controllers\TentangController;
 use App\Http\Controllers\TipeRumahController;
 use App\Http\Controllers\TestimoniController;
-use App\Http\Controllers\Admin\FooterController;
+use App\Http\Controllers\FooterController;
 use Illuminate\Support\Facades\Route;
 
 // --- HALAMAN DEPAN (GUEST) ---

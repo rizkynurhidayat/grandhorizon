@@ -1,3 +1,4 @@
+@use('Illuminate\Support\Facades\Storage')
 @extends('admin.dashboard')
 
 @section('content')
@@ -55,7 +56,7 @@
                             <small class="text-muted d-block mb-2">Preview Gambar saat ini:</small>
                             <div class="p-2 border rounded bg-light d-inline-block">
                                 <img id="previewHero"
-                                    src="{{ asset('assets/img/hero/' . ($hero->gambar ?? 'default.jpg')) }}"
+                                    src="{{ $hero->gambar && $hero->gambar !== 'default.jpg' ? Storage::url($hero->gambar) : asset('assets/img/hero/default.jpg') }}"
                                     alt="Hero Preview" class="rounded border shadow-sm"
                                     style="max-width: 300px; height: auto; display: block;">
                             </div>

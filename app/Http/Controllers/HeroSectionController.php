@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\HeroSection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class HeroSectionController extends Controller
 {
@@ -30,35 +32,32 @@ class HeroSectionController extends Controller
     public function update(Request $request)
     {
         $request->validate([
-            'judul'      => 'required|string|max:255',
-            'subjudul'   => 'required|string|max:255',
-            'alamat'     => 'required|string|max:255',
+            'judul' => 'required|string|max:255',
+            'subjudul' => 'required|string|max:255',
+            'alamat' => 'required|string|max:255',
             'tekstombol' => 'required|string|max:50',
-            'gambar'     => 'nullable|image|mimes:jpeg,png,jpg|max:2048', 
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
         $hero = HeroSection::findOrFail(1);
 
         $data = [
-            'judul'      => $request->judul,
-            'subjudul'   => $request->subjudul,
-            'alamat'     => $request->alamat,
+            'judul' => $request->judul,
+            'subjudul' => $request->subjudul,
+            'alamat' => $request->alamat,
             'tekstombol' => $request->tekstombol,
         ];
 
         if ($request->hasFile('gambar')) {
             // Hapus gambar lama jika ada dan bukan file default
-            $pathLama = public_path('assets/img/hero/' . $hero->gambar);
-            if ($hero->gambar && $hero->gambar !== 'default.jpg' && File::exists($pathLama)) {
-                File::delete($pathLama);
+            if ($hero->gambar && $hero->gambar !== 'default.jpg' && Storage::disk('public')->exists($hero->gambar)) {
+                Storage::disk('public')->delete($hero->gambar);
             }
 
-            // Upload gambar baru
+            // Upload gambar baru dengan nama random
             $file = $request->file('gambar');
-            $nama_file = time() . '_' . $file->getClientOriginalName();
-            $file->move(public_path('assets/img/hero'), $nama_file);
-
-            $data['gambar'] = $nama_file;
+            $nama_file = Str::random(40).'.'.$file->getClientOriginalExtension();
+            $data['gambar'] = $file->storeAs('hero', $nama_file, 'public');
         }
 
         $hero->update($data);

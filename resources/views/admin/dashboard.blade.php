@@ -25,6 +25,7 @@
             padding: 20px;
             position: fixed;
             height: 100%;
+            overflow-y: auto;
         }
 
         .sidebar a {
@@ -66,21 +67,9 @@
             🖼️ Hero Section
         </a>
 
-    <a href="{{  route('fasilitasperumahan.index') }}">📸 Galeri Perumahan</a>
-    
-    <a href="#">💬 Testimoni</a>
-    
-    <a href="{{ route('admin.hubungi-kami.index') }}" class="{{ request()->routeIs('admin.hubungi-kami.*') ? 'active' : '' }}">
-        📧 Pesan Masuk
-    </a>
-    
-    <hr>
-    
-    <form action="{{ route('logout') }}" method="POST">
-        @csrf
-        <button type="submit" class="btn btn-danger w-100">Keluar</button>
-    </form>
-</div>
+        <a href="{{ route('tentang.edit') }}" class="{{ request()->routeIs('tentang.*') ? 'active' : '' }}">
+            ℹ️ Tentang
+        </a>
 
         <a href="{{ route('tiperumah.index') }}" class="{{ request()->routeIs('tiperumah.*') ? 'active' : '' }}">
             🏢 Tipe Rumah
@@ -98,7 +87,6 @@
             💬 Testimoni
         </a>
 
-        {{-- ← FOOTER DITAMBAHKAN DI SINI --}}
         <a href="{{ route('admin.footer.index') }}" class="{{ request()->routeIs('admin.footer*') ? 'active' : '' }}">
             🔗 Footer
         </a>

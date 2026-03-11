@@ -3,7 +3,9 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-
+use App\Models\User;
+use App\Models\HeroSection;
+use Illuminate\Support\Facades\Hash;
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -12,15 +14,22 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // 1. Ini akan tetap jalan (Bikin Admin)
-        \App\Models\User::create([
+        User::create([
             'name' => 'Admin Grand Horizon',
             'email' => 'admin@gmail.com',
-            'password' => \Illuminate\Support\Facades\Hash::make('admin123'),
+            'password' => Hash::make('admin123'),
         ]);
 
         // 2. Komentari bagian ini karena filenya belum ada/salah nama
         // $this->call([
         //     GrandHorizonSeeder::class,
         // ]);
+
+        HeroSection::create([
+            'deskripsi' => 'Admin Grand Horizon',
+            'email' => 'admin@gmail.com',
+        ]);
+
+        
     }
 }

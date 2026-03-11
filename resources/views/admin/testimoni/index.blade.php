@@ -85,7 +85,7 @@
                                 <form action="{{ route('testimoni.destroy', $t->id) }}" method="POST">
                                     @csrf 
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-sm btn-outline-danger border-0" onclick="return confirm('Hapus testimoni ini?')">
+                                    <button type="submit" class="btn btn-sm btn-outline-danger border-0">
                                         <i class="fas fa-trash-alt"></i> Hapus
                                     </button>
                                 </form>

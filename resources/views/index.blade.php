@@ -1,3 +1,4 @@
+@use('Illuminate\Support\Facades\Storage')
 <!DOCTYPE html>
 <html lang="en">
 
@@ -64,7 +65,7 @@
     .hero {
         /* Kita pakai !important supaya menang lawan file CSS eksternal */
         background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
-            url("{{ asset('assets/img/hero/' . ($hero->gambar ?? 'default.jpg')) }}") !important;
+            url("{{ $hero->gambar && $hero->gambar !== 'default.jpg' ? Storage::url($hero->gambar) : asset('assets/img/hero/default.jpg') }}") !important;
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
@@ -528,89 +529,7 @@
     <!-- Lokasi grand horizon end-->
 
     <!-- section footer -->
-    <footer class="footer">
-        <div class="footer-container">
 
-            <!-- Judul -->
-            <h1 class="footer-title">Biaya Pemesanan Mulai 3 Juta</h1>
-
-            <!-- Keunggulan -->
-
-            <ul class="footer-benefit">
-                <li>
-                    <img src="{{ asset('image/subway_tick (1).png') }}" class="icon-putih">
-                    Cicilan ringan
-                </li>
-                <li>
-
-                    <img src="{{ asset('image/subway_tick (1).png') }}" class="icon-putih">
-                    GRATIS 1 unit AC
-                </li>
-                <li>
-                    <img src="{{ asset('image/subway_tick (1).png') }}" class="icon-putih">
-                    Hadiah menarik lainnya GRATIS
-                </li>
-                <li>
-                    <img src="{{ asset('image/subway_tick (1).png') }}" class="icon-putih">
-                    PPN GRATIS
-                </li>
-                <li>
-                    <img src="{{ asset('image/subway_tick (1).png') }}" class="icon-putih">
-                    KPR GRATIS
-                </li>
-                <li>
-                    <img src="{{ asset('image/subway_tick (1).png') }}" class="icon-putih">
-                    DP GRATIS
-                </li>
-                <li>
-                    <img src="{{ asset('image/subway_tick (1).png') }}" class="icon-putih">
-                    GRATIS biaya surat-surat
-                </li>
-            </ul>
-
-            <!-- Tombol WhatsApp -->
-            <a href="https://wa.me/6282146273679" class="footer-button" target="_blank">
-                <img src="{{ asset('image/wa.png') }}" alt="">
-                Hubungi kami sekarang juga
-            </a>
-
-            <hr>
-
-            <!-- Kontak & Sosial Media -->
-            <ul class="footer-contact">
-                <li>
-                    <img src="{{ asset('image/maps.png') }}" alt="">
-                    <a href="https://www.google.com/maps/search/?api=1&query=Jl.+Raya+Cilegon,+Serang"
-                        target="_blank">Jl. Raya Cilegon, Serang</a>
-                </li>
-                <li>
-                    <img src="{{ asset('image/mdi_call.png') }}" alt="">
-                    <a href="tel:082146273679">0821-4627-3679</a>
-                </li>
-                <li>
-                    <img src="{{ asset('image/gmail.png') }}" alt="">
-                    <a href="mailto:Horizon123@gmail.com">Horizon123@gmail.com</a>
-                </li>
-                <li>
-                    <img src="{{ asset('image/fb.png') }}" alt="">
-                    <a href="https://www.facebook.com/grandhorizon">Grand Horizon</a>
-                </li>
-                <li>
-                    <img src="{{ asset('image/twit.png') }}" alt="">
-                    <a href="https://twitter.com/grandhorizon">Grand Horizon</a>
-                </li>
-                <li>
-                    <img src="{{ asset('image/ig.png') }} " alt="">
-                    <a href="https://www.instagram.com/grandhorizon">Grand Horizon</a>
-                </li>
-            </ul>
-        </div>
-    </footer>
-
-    <!-- Copyright -->
-    <div class="footer-copyright">
-        © 2025 GRAND HORIZON
-    </div>
 
     <!-- section footer end--><!-- section footer -->
 @php $f = App\Models\Footer::getActive(); @endphp
