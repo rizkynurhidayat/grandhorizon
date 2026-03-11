@@ -439,7 +439,7 @@
 
     <!-- Testimoni klien -->
     <section id="testi-klien">
-    <h1 class="testi-title">TESTIMONI KLIEN</h1>
+    <h1 class="testi-title">Testimoni Klien</h1>
     
     <div class="testi-grid-figma">
         @forelse($testimonis as $t)

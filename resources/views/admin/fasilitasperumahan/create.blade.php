@@ -13,7 +13,14 @@
                     <label class="form-label">Upload Gambar Slider</label>
                     <input type="file" name="gambar" class="form-control" required>
                 </div>
-                <button type="submit" class="btn btn-primary">Simpan</button>
+                <div class="d-flex justify-content-between">
+                    <button type="submit" form="formEditFasilitasPerumahan" class="btn btn-primary px-4 shadow-sm">
+                        <i class="bx bx-save me-1"></i> Simpan Perubahan
+                    </button>
+                    <a href="{{ route('fasilitasperumahan.index') }}" class="btn btn-outline-secondary px-4">
+                        <i class="bx bx-arrow-back me-1"></i> Batal
+                    </a>
+                </div>
             </form>
         </div>
     </div>
