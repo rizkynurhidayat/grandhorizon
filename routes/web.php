@@ -44,6 +44,7 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     // 5. Pesan Masuk (Inbox)
     Route::get('/hubungi-kami', [HubungiKamiController::class, 'index'])->name('admin.hubungi-kami.index');
     Route::delete('/hubungi-kami/{id}', [HubungiKamiController::class, 'destroy'])->name('admin.hubungi-kami.destroy');
+    Route::post('/hubungi-kami/{id}/read', [HubungiKamiController::class, 'markAsRead'])->name('admin.hubungi-kami.read');
 
     // 6. Fasilitas Perumahan (CRUD Manual / Slider)
     Route::get('/fasilitas-perumahan', [FasilitasController::class, 'index'])->name('fasilitas.index');

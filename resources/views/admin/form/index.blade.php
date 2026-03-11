@@ -29,7 +29,7 @@
                         </thead>
                         <tbody>
                             @forelse($messages as $index => $msg)
-                                <tr>
+                                <tr class="{{ $msg->is_read ? '' : 'table-warning fw-bold' }}">
                                     <td>{{ $messages->firstItem() + $index }}</td>
                                     <td>
                                         <strong>{{ $msg->user }}</strong><br>
@@ -43,6 +43,9 @@
                                     </td>
                                     <td>
                                         {{ Str::limit($msg->pesan, 30) }}
+                                        @if(!$msg->is_read)
+                                            <span class="badge bg-danger ms-1">Baru</span>
+                                        @endif
                                     </td>
                                     <td class="text-center">
                                         <div class="dropdown">
@@ -53,7 +56,8 @@
                                             <ul class="dropdown-menu dropdown-menu-end shadow border-0">
                                                 <li>
                                                     <button class="dropdown-item" type="button" data-bs-toggle="modal"
-                                                        data-bs-target="#detailModal{{ $msg->id }}">
+                                                        data-bs-target="#detailModal{{ $msg->id }}"
+                                                        onclick="markAsRead({{ $msg->id }})">
                                                         <i class="fas fa-eye text-primary me-2"></i> Detail
                                                     </button>
                                                 </li>
@@ -101,8 +105,7 @@
                                                 </div>
                                                 <div class="mb-3">
                                                     <label class="small text-muted d-block">Rencana Kunjungan</label>
-                                                    <span
-                                                        class="text-primary fw-bold">{{ \Carbon\Carbon::parse($msg->tanggal)->format('l, d F Y') }}</span>
+                                                    <span class="text-primary fw-bold">{{ \Carbon\Carbon::parse($msg->tanggal)->format('l, d F Y') }}</span>
                                                 </div>
                                                 <div class="mb-0">
                                                     <label class="small text-muted d-block">Isi Pesan</label>
@@ -138,4 +141,33 @@
             </div>
         </div>
     </div>
+
+    <script>
+    function markAsRead(id) {
+        fetch(`/admin/hubungi-kami/${id}/read`, {
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                'Content-Type': 'application/json'
+            }
+        }).then(() => {
+            // Hilangkan highlight baris
+            const row = document.querySelector(`[data-bs-target="#detailModal${id}"]`).closest('tr');
+            row.classList.remove('table-warning', 'fw-bold');
+            const badge = row.querySelector('.badge.bg-danger');
+            if (badge) badge.remove();
+
+            // Update badge sidebar
+            const sidebarBadge = document.querySelector('.sidebar .badge.bg-danger');
+            if (sidebarBadge) {
+                const current = parseInt(sidebarBadge.textContent);
+                if (current <= 1) {
+                    sidebarBadge.remove();
+                } else {
+                    sidebarBadge.textContent = current - 1;
+                }
+            }
+        });
+    }
+    </script>
 @endsection

@@ -91,8 +91,12 @@
             🔗 Footer
         </a>
 
+        @php $unreadCount = \App\Models\HubungiKami::where('is_read', false)->count(); @endphp
         <a href="{{ route('admin.hubungi-kami.index') }}" class="{{ request()->routeIs('admin.hubungi-kami.*') ? 'active' : '' }}">
             📧 Pesan Masuk
+            @if($unreadCount > 0)
+                <span class="badge bg-danger ms-1">{{ $unreadCount }}</span>
+            @endif
         </a>
 
         <hr>

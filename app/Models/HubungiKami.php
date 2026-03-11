@@ -14,6 +14,6 @@ class HubungiKami extends Model
         'pesan',
         'teks_tombol',
         'link_tombol',
+        'is_read',
     ];
-    //
 }
