@@ -99,9 +99,9 @@
                     @endfor
                 </div>
 
-                <div class="mt-4 text-center border-top pt-4">
-                    <button type="submit" class="btn btn-primary btn-lg px-5">
-                        <i class="bx bx-save me-1"></i> Simpan Semua Perubahan
+                <div class="mt-3 text-center border-top pt-3">
+                    <button type="submit" class="btn btn-primary px-4">
+                    <i class="bx bx-save me-1"></i> Simpan Perubahan
                     </button>
                 </div>
             </div>

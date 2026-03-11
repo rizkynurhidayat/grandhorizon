@@ -124,10 +124,21 @@
                         Lihat selengkapnya
                     </button> --}}
                     {{-- Panggil Teks Tombol --}}
-                         <button class="btn-selengkapnya">
-                             {{ $tentang->tekstombol ?? 'Lihat selengkapnya' }}
-                         </button>
+                         <a href="#fasilitas-w" class="btn-selengkapnya text-decoration-none">
+                            {{ $tentang->tekstombol ?? 'Lihat selengkapnya' }}
+                        </a>
                    
+                        <style>
+                            .btn-selengkapnya {
+                            text-decoration: none !important; /* Menghapus garis bawah */
+                            display: inline-block;           /* Supaya padding/margin bekerja dengan baik */
+                            }
+
+                        /* Opsional: Supaya saat kursor nempel (hover) juga nggak muncul garisnya */
+                        .btn-selengkapnya:hover {
+                        text-decoration: none;
+                        }
+                        </style>
                 </div>
             </div>
 
