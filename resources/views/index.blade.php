@@ -60,150 +60,95 @@
     </script>
 
 
-    <!-- hero section -->
     <style>
     .hero {
-        /* Kita pakai !important supaya menang lawan file CSS eksternal */
-        background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
-            url("{{ $hero->gambar && $hero->gambar !== 'default.jpg' ? Storage::url($hero->gambar) : asset('assets/img/hero/default.jpg') }}") !important;
+        /* Gradasi Mewah: Kiri gelap pekat (buat teks), kanan bening transparan (buat pamer rumah) */
+        background-image: linear-gradient(to right, rgba(15, 23, 42, 0.95) 0%, rgba(15, 23, 42, 0.6) 45%, rgba(15, 23, 42, 0) 100%),
+            url("{{ $hero->gambar && $hero->gambar !== 'default.jpg' ? Storage::url($hero->gambar) : 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=2075&auto=format&fit=crop' }}") !important;
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
-        min-height: 100vh; /* Pastikan section punya tinggi biar background kelihatan */
+        min-height: 100vh;
         display: flex;
-        align-items: center;
-        justify-content: center;
+        align-items: center; /* Teks tetap di tengah secara vertikal */
     }
 </style>
 
 <section class="hero" id="hero">
-    <div class="hero-content">
-        <h1>{{ $hero->judul ?? 'GRAND HORIZON' }}</h1>
-        <h3>{{ $hero->subjudul ?? 'Perumahan Modern dan Nyaman untuk keluarga' }}</h3>
-        <p>{!! nl2br(e($hero->alamat ?? 'Jl. Raya Cilegon, Drangong, Taktakan Serang, Kota Serang, Banten 42162')) !!}</p>
+    <div class="hero-container">
+        <div class="hero-content">
+            <span class="hero-badge">Exclusive Residence</span>
+            <h1>{{ $hero->judul ?? 'GRAND HORIZON' }}</h1>
+            <h3>{{ $hero->subjudul ?? 'Perumahan Modern dan Nyaman untuk keluarga' }}</h3>
+            
+            <p class="hero-address">
+                <i class='bx bx-map' style="font-size: 20px; color: #d4af37; margin-top: 3px;"></i> 
+                <span>{!! nl2br(e($hero->alamat ?? 'Jl. Raya Cilegon, Drangong, Taktakan Serang, Kota Serang, Banten 42162')) !!}</span>
+            </p>
 
-        <a href="#about">
-            <button class="btn-hero">{{ $hero->tekstombol ?? 'Lihat Selengkapnya' }}</button>
-        </a>
+            <div class="hero-actions">
+                <a href="#about" style="text-decoration: none;">
+                    <button class="btn-hero">{{ $hero->tekstombol ?? 'Lihat Selengkapnya' }}</button>
+                </a>
+            </div>
+        </div>
     </div>
 </section>
-    <!-- hero section end -->
 
-    <!-- Selengkapnya grand horizon -->
     <section id="about">
+    <div class="container-luxury">
         <h1 class="about-title">{{ $tentang->judul ?? 'Tentang Grand Horizon' }}</h1>
+        <div class="title-line"></div> </div>
 
-        <div class="about-content">
+    <div class="about-content">
+        <div class="about-image" style="background-image: url('{{ asset('storage/' . ($tentang->gambar ?? '')) }}')">
+            <div class="about-overlay">
+                <span class="about-tag">Premium Quality</span>
+                <p class="about-subjudul">
+                    {{ $tentang->subjudul ?? 'Grand Horizon adalah kawasan perumahan modern yang menawarkan hunian nyaman, aman, dan cocok untuk keluarga.' }}
+                </p>
 
-            <!-- KIRI -->
-            <div class="about-image"
-                style="background-image: url('{{ asset('storage/' . ($tentang->gambar ?? '')) }}')">
-                <div class="about-overlay">
-                        {{-- <h2>{{ $tentang->subjudul ?? 'Hunian Nyaman dan Strategis' }}</h2>
-                    <p {{ $tentang->subjudul ? 'class="about-subjudul "' : '' }}>
-                        Grand Horizon adalah kawasan perumahan modern yang menawarkan hunian nyaman,
-                        aman, dan cocok untuk keluarga.
-                    </p> --}}
-                    {{-- Panggil Subjudul --}}
-                         <p class="about-subjudul">
-                               {{ $tentang->subjudul ?? 'Grand Horizon adalah kawasan perumahan modern...' }}
-                         </p>
+                <p class="about-description">
+                    {{ $tentang->deskripsi ?? 'Berlokasi strategis dan mudah diakses, perumahan ini dekat dengan berbagai fasilitas umum seperti sekolah, pusat perbelanjaan, rumah sakit, dan akses transportasi.' }}
+                </p>
 
-                    {{-- <p  {{ $tentang->deskripsi ? 'class="about-description"' : '' }}>
-                    <p {{ $tentang->deskripsi ? 'class="about-description"' : '' }}>
-                        Berlokasi strategis dan mudah diakses, perumahan ini dekat dengan berbagai
-                        fasilitas umum seperti sekolah, pusat perbelanjaan, rumah sakit,
-                        dan akses transportasi.
-                    </p> --}}
-                    {{-- Panggil Deskripsi --}}
-                         <p class="about-description">
-                               {{ $tentang->deskripsi ?? 'Berlokasi strategis dan mudah diakses...' }}
-                        </p>
-
-                    {{-- <button class="btn-selengkapnya" {{ $tentang->tekstombol ? 'data-text="' . $tentang->tekstombol . '"' : '' }}>
-                        Lihat selengkapnya
-                    </button> --}}
-                    {{-- Panggil Teks Tombol --}}
-                         <a href="#fasilitas-w" class="btn-selengkapnya text-decoration-none">
-                            {{ $tentang->tekstombol ?? 'Lihat selengkapnya' }}
-                        </a>
-                   
-                        <style>
-                            .btn-selengkapnya {
-                            text-decoration: none !important; /* Menghapus garis bawah */
-                            display: inline-block;           /* Supaya padding/margin bekerja dengan baik */
-                            }
-
-                        /* Opsional: Supaya saat kursor nempel (hover) juga nggak muncul garisnya */
-                        .btn-selengkapnya:hover {
-                        text-decoration: none;
-                        }
-                        </style>
-                </div>
+                <a href="#fasilitas-w" class="btn-selengkapnya-luxury">
+                    {{ $tentang->tekstombol ?? 'Jelajahi Sekarang' }}
+                </a>
             </div>
-
-            <!-- KANAN -->
-            <div class="about-fitur">
-                <h4>{{ $tentang->keunggulan_judul ?? '4 Keunggulan Grand Horizon' }}</h4>
-                <ul>
-        @for ($i = 1; $i <= 4; $i++)
-            @php 
-                $judul = "judul_unggulan_$i";
-                $desc = "desc_unggulan_$i";
-                $logo = "logo_unggulan_$i";
-            @endphp
-
-            @if($tentang->$judul) {{-- Cek jika judul diisi di admin --}}
-            <li>
-                <div>
-                    {{-- Panggil Logo dari Storage, kalau kosong pakai gambar default --}}
-                    <img src="{{ $tentang->$logo ? asset('storage/' . $tentang->$logo) : asset('image/Vector.png') }}">
-                    
-                    {{-- Panggil Judul --}}
-                    <h3>{{ $tentang->$judul }}</h3>
-                    
-                    {{-- Panggil Deskripsi --}}
-                    <p>{{ $tentang->$desc }}</p>
-                </div>
-            </li>
-            @endif
-        @endfor
-    </ul>
-                {{-- <ul>
-                    <li>
-                        <div>
-                            <img src="{{ asset('image/Vector.png') }}" {{ $tentang->logo }}>
-                            <h3>Legalitas terjamin</h3>
-                            <p>Semua dokumen dan perizinan lengkap serta resmi.</p>
-                        </div>
-                    </li>
-                    <li>
-                        <div>
-                            <img src="{{ asset('image/tabler_credit-card-filled.png') }}" {{ $tentang->logo }}>
-                            <h3>Kredit mudah</h3>
-                            <p>Proses pembiayaan mudah dan cicilan terjangkau.</p>
-                        </div>
-                    </li>
-                    <li>
-                        <div>
-                            <img src="{{ asset('image/Vector (1).png') }}" {{ $tentang->logo }}>
-                            <h3>Bebas banjir</h3>
-                            <p>Lokasi aman dari genangan dan banjir.</p>
-                        </div>
-                    </li>
-                    <li>
-                        <div>
-                            <img src="{{ asset('image/Vector (2).png') }}" {{ $tentang->logo }}>
-                            <h3>Lokasi mudah diakses</h3>
-                            <p>Mudah diakses dan dekat dengan fasilitas umum.</p>
-                        </div>
-                    </li>
-                </ul> --}}
-            </div>
-
         </div>
-    </section>
-    <!-- Selengkapnya end -->
+
+        <div class="about-fitur">
+            <div class="fitur-header">
+                <h4>{{ $tentang->keunggulan_judul ?? '4 Keunggulan Utama' }}</h4>
+            </div>
+            
+            <ul class="fitur-list">
+                @for ($i = 1; $i <= 4; $i++)
+                    @php 
+                        $judul = "judul_unggulan_$i";
+                        $desc = "desc_unggulan_$i";
+                        $logo = "logo_unggulan_$i";
+                    @endphp
+
+                    @if($tentang->$judul)
+                    <li>
+                        <div class="fitur-card">
+                            <div class="fitur-icon-box">
+                                <img src="{{ $tentang->$logo ? asset('storage/' . $tentang->$logo) : asset('image/Vector.png') }}" alt="icon">
+                            </div>
+                            <div class="fitur-text">
+                                <h3>{{ $tentang->$judul }}</h3>
+                                <p>{{ $tentang->$desc }}</p>
+                            </div>
+                        </div>
+                    </li>
+                    @endif
+                @endfor
+            </ul>
+        </div>
+    </div>
+</section>
 
     <!-- Fasilitas Sekitar -->
     @if($fasilitas->count() > 0)
@@ -539,87 +484,105 @@
     </section>
     <!-- Lokasi grand horizon end-->
 
-    <!-- section footer -->
-
-
-    <!-- section footer end--><!-- section footer -->
-@php $f = App\Models\Footer::getActive(); @endphp
+    @php 
+    $f = App\Models\Footer::getActive() ?? App\Models\Footer::latest()->first(); 
+@endphp
 
 @if($f)
-<footer class="footer">
-    <div class="footer-container">
+<footer class="footer-luxury">
+    {{-- BAGIAN ATAS: CTA & BENEFIT --}}
+    <section class="footer-cta-section">
+        <div class="container-luxury">
+            <h1 class="footer-offer-title">{{ $f->biaya_judul ?? 'Biaya Pemesanan Mulai 3 Juta' }}</h1>
+            <div class="footer-gold-line"></div>
 
-        {{-- Judul Biaya Pemesanan --}}
-        <h1 class="footer-title">{{ $f->biaya_judul ?? 'Biaya Pemesanan Mulai 3 Juta' }}</h1>
+            <div class="footer-benefit-grid">
+                @if(is_array($f->biaya_items) || is_object($f->biaya_items))
+                    @foreach($f->biaya_items as $item)
+                    <div class="benefit-item">
+                        <div class="icon-circle">
+                            <img src="{{ asset('image/subway_tick (1).png') }}" class="icon-gold">
+                        </div>
+                        <span>{{ $item }}</span>
+                    </div>
+                    @endforeach
+                @else
+                    {{-- Fallback jika array kosong --}}
+                    <div class="benefit-item">
+                        <div class="icon-circle"><img src="{{ asset('image/subway_tick (1).png') }}" class="icon-gold"></div>
+                        <span>Cicilan Ringan</span>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="icon-circle"><img src="{{ asset('image/subway_tick (1).png') }}" class="icon-gold"></div>
+                        <span>Gratis AC & PPN</span>
+                    </div>
+                @endif
+            </div>
 
-        {{-- Item Centang-centang dari database --}}
-        <ul class="footer-benefit">
-            @forelse($f->biaya_items ?? [] as $item)
-            <li>
-                <img src="{{ asset('image/subway_tick (1).png') }}" class="icon-putih">
-                {{ $item }}
-            </li>
-            @empty
-            <li><img src="{{ asset('image/subway_tick (1).png') }}" class="icon-putih"> Cicilan ringan</li>
-            <li><img src="{{ asset('image/subway_tick (1).png') }}" class="icon-putih"> GRATIS 1 unit AC</li>
-            <li><img src="{{ asset('image/subway_tick (1).png') }}" class="icon-putih"> PPN GRATIS</li>
-            @endforelse
-        </ul>
+            <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $f->phone ?? '6282146273679') }}" class="btn-wa-luxury" target="_blank">
+                <img src="{{ asset('image/wa.png') }}" alt="WA">
+                Hubungi kami sekarang juga
+            </a>
+        </div>
+    </section>
 
-        {{-- Tombol WhatsApp --}}
-        <a href="https://wa.me/6282146273679" class="footer-button" target="_blank">
-            <img src="{{ asset('image/wa.png') }}" alt="">
-            Hubungi kami sekarang juga
-        </a>
+    {{-- BAGIAN BAWAH: INFO KONTAK --}}
+    <section class="footer-info-section">
+        <div class="container-luxury">
+            <div class="footer-main-grid">
+                {{-- Brand --}}
+                <div class="footer-brand">
+                    <div class="brand-name">GRAND <span>HORIZON</span></div>
+                    <p class="brand-tagline">Hunian modern dengan konsep eksklusif untuk kenyamanan keluarga Anda di lokasi strategis.</p>
+                </div>
 
-        <hr>
+                {{-- Contact --}}
+                <div class="footer-contacts">
+                    <div class="contact-card">
+                        <img src="{{ asset('image/maps.png') }}" class="contact-icon">
+                        <div class="contact-text">
+                            <strong>LOKASI</strong>
+                            <a href="https://www.google.com/maps/search/{{ urlencode($f->address) }}" target="_blank">{{ $f->address ?? 'Alamat belum diatur' }}</a>
+                        </div>
+                    </div>
+                    <div class="contact-card">
+                        <img src="{{ asset('image/mdi_call.png') }}" class="contact-icon">
+                        <div class="contact-text">
+                            <strong>TELEPON</strong>
+                            <a href="tel:{{ $f->phone }}">{{ $f->phone ?? '-' }}</a>
+                        </div>
+                    </div>
+                    <div class="contact-card">
+                        <img src="{{ asset('image/gmail.png') }}" class="contact-icon">
+                        <div class="contact-text">
+                            <strong>EMAIL</strong>
+                            <a href="mailto:{{ $f->email }}">{{ $f->email ?? '-' }}</a>
+                        </div>
+                    </div>
+                </div>
 
-        {{-- Kontak & Sosial Media --}}
-        <ul class="footer-contact">
-            <li>
-                <img src="{{ asset('image/maps.png') }}" alt="">
-                <a href="https://www.google.com/maps/search/?api=1&query={{ urlencode($f->address) }}" target="_blank">
-                    {{ $f->address }}
-                </a>
-            </li>
-            <li>
-                <img src="{{ asset('image/mdi_call.png') }}" alt="">
-                <a href="tel:{{ $f->phone }}">{{ $f->phone }}</a>
-            </li>
-            <li>
-                <img src="{{ asset('image/gmail.png') }}" alt="">
-                <a href="mailto:{{ $f->email }}">{{ $f->email }}</a>
-            </li>
-            @if($f->fb_name)
-            <li>
-                <img src="{{ asset('image/fb.png') }}" alt="">
-                <a href="{{ $f->fb_url }}" target="_blank">{{ $f->fb_name }}</a>
-            </li>
-            @endif
-            @if($f->tw_name)
-            <li>
-                <img src="{{ asset('image/twit.png') }}" alt="">
-                <a href="{{ $f->tw_url }}" target="_blank">{{ $f->tw_name }}</a>
-            </li>
-            @endif
-            @if($f->ig_name)
-            <li>
-                <img src="{{ asset('image/ig.png') }}" alt="">
-                <a href="{{ $f->ig_url }}" target="_blank">{{ $f->ig_name }}</a>
-            </li>
-            @endif
-        </ul>
-    </div>
+                {{-- Socials --}}
+                <div class="footer-socials">
+                    <h4>Media Sosial</h4>
+                    <div class="social-icons">
+                        @if($f->ig_url)
+                        <a href="{{ $f->ig_url }}" class="social-link" target="_blank"><img src="{{ asset('image/ig.png') }}" alt="IG"></a>
+                        @endif
+                        @if($f->fb_url)
+                        <a href="{{ $f->fb_url }}" class="social-link" target="_blank"><img src="{{ asset('image/fb.png') }}" alt="FB"></a>
+                        @endif
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-copyright">
+                {{ $f->copyright ?? '© ' . date('Y') . ' Grand Horizon. All Rights Reserved.' }}
+            </div>
+        </div>
+    </section>
 </footer>
-
-{{-- Copyright --}}
-<div class="footer-copyright">
-    {{ $f->copyright }}
-</div>
 @endif
-<!-- section footer end-->
-</body>
 
 <script src="{{ asset('js/scriprts.js') }}"></script>
-
+</body>
 </html>

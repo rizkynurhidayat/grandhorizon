@@ -7,6 +7,7 @@ use App\Models\TipeRumah;
 use App\Models\Fasilitas;          
 use App\Models\FasilitasPerumahan;
 use App\Models\HeroSection;
+use App\Models\Footer;
 use App\Models\Tentang;
 
 class HomeController extends Controller
@@ -44,6 +45,8 @@ class HomeController extends Controller
             ]
         );
 
+        $f = Footer::getActive();
+
         // Kirim semua variabel ke view index.blade.php
         return view('index', compact(
             'testimonis', 
@@ -51,7 +54,8 @@ class HomeController extends Controller
             'fasilitas', 
             'fasilitasperumahan', 
             'tentang',
-            'hero'
+            'hero',
+            'f'
         ));
     }
 
