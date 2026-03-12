@@ -212,9 +212,10 @@ section {
 }
 
 .about-title {
-    font-size: 42px;
-    font-weight: 800;
-    color: #0f172a;
+    font-size: 36px;
+    margin-bottom: 50px;
+    /* font-weight: 800; */
+    color: #1f3b5f;
     margin-bottom: 15px;
     letter-spacing: -1px;
 }
@@ -628,6 +629,10 @@ section {
 }
 
 /* ================= FASILITAS PERUMAHAN ================= */
+
+.judul-perumahan {
+    color: #1f3b5f;
+}
 .fasilitas-perumahan {
     padding: 80px 8%;
     /*biar jaraknya lega/berjarak, responsif*/
@@ -738,6 +743,10 @@ section {
 
 
 /* ================= TESTIMONI ================= */
+
+.testi-title {
+    color: #1f3b5f;
+}
 #testi-klien {
     padding: 80px 8%;
     background: #f4f7fb;
@@ -847,7 +856,7 @@ section {
 /* ---------- JUDUL ---------- */
 .contact-title {
     text-align: center;
-    font-size: 32px;
+    font-size: 36px;
     margin-bottom: 30px;
     font-weight: 600;
     color: #1f3b5f;
@@ -968,6 +977,13 @@ section {
 
 /* ================= LOKASI GRAND HORIZON =============== */
 
+.judul-lokasi{
+    text-align: center;
+    font-size: 32px;
+    margin-bottom: 30px;
+    font-weight: 600;
+    color: #1f3b5f;
+}
 /* section utama */
 .location {
     padding: 80px 8%;
@@ -1034,9 +1050,10 @@ section {
 
 /* Judul footer */
 .footer-title {
-    font-size: 32px;
+    font-size: 36px;
     /* Ukuran besar */
     margin-bottom: 30px;
+    /* color: #1f3b5f; */
     /* Jarak bawah */
 }
 
@@ -1318,6 +1335,7 @@ body {
     }
 
     /* ================= ABOUT (TENTANG) ================= */
+    
     .about-content {
         grid-template-columns: 1fr;
     }
@@ -1335,6 +1353,10 @@ body {
 /* ================= FASILITAS SEKITAR ================= */
 .fasilitas-grid {
     grid-template-columns: 1fr;
+}
+
+.judul-fasilitas {
+    color: #1f3b5f;
 }
 
 /* =================== TIPE RUMAH ==================== */
@@ -1688,7 +1710,7 @@ body {
     margin-bottom: 30px;
     /* Dikurangi agar lebih dekat ke kartu */
     letter-spacing: 2px;
-    text-transform: uppercase;
+    text-transform: none;
     font-family: sans-serif;
 }
 

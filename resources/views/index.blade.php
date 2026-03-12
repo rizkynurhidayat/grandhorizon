@@ -153,7 +153,7 @@
     <!-- Fasilitas Sekitar -->
     @if($fasilitas->count() > 0)
 <section id="fasilitas-w">
-    <h1>Fasilitas Sekitar Grand Horizon</h1>
+    <h1 class="judul-fasilitas">Fasilitas Sekitar Grand Horizon</h1>
 
     <div class="fasilitas-grid">
         @foreach($fasilitas as $item)
@@ -287,7 +287,9 @@
             </div>
 
             {{-- Tombol harus di dalam tipe-body agar rapi --}}
-            <button class="btn-unit">{{ $t->tekstombol ?? 'CEK KETERSEDIAAN UNIT' }}</button>
+            <button class="btn-unit" onclick="window.open('https://wa.me/{{ preg_replace('/[^0-9]/', '', $f->phone ?? '6282146273679') }}', '_blank')">
+    {{ $t->tekstombol ?? 'CEK KETERSEDIAAN UNIT' }}
+</button>
         </div>
     </div>
 @endforeach
@@ -295,14 +297,13 @@
 
 
                 
-
             </div>
         </div>
     </section>
     <!-- Tipe rumah end -->
 
     <section id="fas-perumahan" class="fasilitas-perumahan reveal">
-    <h1>Fasilitas Perumahan</h1>
+    <h1 class="judul-perumahan">Fasilitas Perumahan</h1>
     <div class="slider">
         <button class="nav prev">&#10094;</button>
         <div class="slider-wrapper">
@@ -402,7 +403,7 @@
 
     <!-- Lokasi grand horizon -->
     <section class="location">
-        <h1>Lokasi Grand Horizon</h1>
+        <h1 class="judul-lokasi">Lokasi Grand Horizon</h1>
         <div class="location-g">
             <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.3187046901853!2d106.63016337399!3d-6.221639493766382!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f955a6453ead%3A0x4c7b660d033cf2a2!2sGrand%20Serpong%20Hotel!5e0!3m2!1sid!2sid!4v1767941091642!5m2!1sid!2sid"

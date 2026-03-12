@@ -34,10 +34,10 @@
                             <label class="form-label">Cicilan</label>
                             <input type="text" name="cicilan" class="form-control" value="{{ $t->cicilan }}" required>
                         </div>
-                        <div class="col-md-4 mb-3">
+                        {{-- <div class="col-md-4 mb-3">
                             <label class="form-label">Teks Tombol</label>
                             <input type="text" name="tekstombol" class="form-control" value="{{ $t->tekstombol }}" required>
-                        </div>
+                        </div> --}}
                     </div>
 
                     <div class="row">
@@ -72,18 +72,18 @@
                         <img id="imgPreview" src="{{ asset('storage/' . $t->gambar) }}" width="150"
                             class="rounded border p-1 bg-light">
                     </div>
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn btn-primary px-4 shadow-sm">
+                            <i class="bx bx-save me-1"></i> Simpan Perubahan
+                        </button>
+                        <a href="{{ route('tiperumah.index') }}" class="btn btn-outline-secondary px-4">
+                            <i class="bx bx-arrow-back me-1"></i> Batal
+                        </a>
+                    </div>
                 </form>
             </div>
         </div>
 
-        <div class="d-flex gap-2">
-            <button type="submit" form="formEditTipeRumah" class="btn btn-primary px-4 shadow-sm">
-                <i class="bx bx-save me-1"></i> Simpan Perubahan
-            </button>
-            <a href="{{ route('tiperumah.index') }}" class="btn btn-outline-secondary px-4">
-                <i class="bx bx-arrow-back me-1"></i> Batal
-            </a>
-        </div>
     </div>
 
     <script>

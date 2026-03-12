@@ -68,6 +68,10 @@ class TipeRumahController extends Controller
             'kamar_mandi' => 'required|numeric',
             'garasi' => 'required|numeric',
             'gambar' => 'image|mimes:jpeg,png,jpg|max:2048',
+            'cicilan' => 'required',
+            'harga' => 'required',
+            'luas_bangunan' => 'required'
+            
         ]);
 
         $data = $request->all();

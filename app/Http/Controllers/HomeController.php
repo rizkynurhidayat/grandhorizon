@@ -67,7 +67,8 @@ class HomeController extends Controller
         return view('admin.dashboard', [
             'tipeRumahCount' => TipeRumah::count(),
             'fasilitasPerumahanCount' => FasilitasPerumahan::count(),
-            'testimoniCount' => Testimoni::count()
+            'testimoniCount' => Testimoni::count(),
+            'testimonis' => Testimoni::orderBy('created_at', 'desc')->take(5)->get()
         ]);
     }
 }

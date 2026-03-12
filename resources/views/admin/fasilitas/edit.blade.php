@@ -47,18 +47,18 @@
                                     <div class="form-text">Biarkan kosong jika tidak ingin mengubah gambar lama.</div>
                                 </div>
                             </div>
+                            <div class="d-flex justify-content-start gap-2">
+                                <button type="submit" class="btn btn-primary px-4 shadow-sm">
+                                    <i class="bx bx-save me-1"></i> Simpan Perubahan
+                                </button>
+                                <a href="{{ route('fasilitas.index') }}" class="btn btn-outline-secondary px-4">
+                                    <i class="bx bx-arrow-back me-1"></i> Batal
+                                </a>
+                            </div>
                         </form>
                     </div>
                 </div>
 
-                <div class="d-flex justify-content-start gap-2">
-                    <button type="submit" form="formEditFasilitas" class="btn btn-primary px-4 shadow-sm">
-                        <i class="bx bx-save me-1"></i> Simpan Perubahan
-                    </button>
-                    <a href="{{ route('fasilitas.index') }}" class="btn btn-outline-secondary px-4">
-                        <i class="bx bx-arrow-back me-1"></i> Batal
-                    </a>
-                </div>
             </div>
         </div>
     </div>

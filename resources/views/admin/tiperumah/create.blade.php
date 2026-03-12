@@ -68,16 +68,16 @@
                         <label class="form-label">Foto Tipe Rumah</label>
                         <input type="file" name="gambar" class="form-control" required>
                     </div>
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn btn-primary px-4 shadow-sm">
+                            <i class="bx bx-save me-1"></i> Simpan Perubahan
+                        </button>
+                        <a href="{{ route('tiperumah.index') }}" class="btn btn-outline-secondary px-4">
+                            <i class="bx bx-arrow-back me-1"></i> Batal
+                        </a>
+                    </div>
                 </form>
             </div>
-        </div>
-        <div class="d-flex gap-2">
-            <button type="submit" form="formEditTipeRumah" class="btn btn-primary px-4 shadow-sm">
-                <i class="bx bx-save me-1"></i> Simpan Perubahan
-            </button>
-            <a href="{{ route('tiperumah.index') }}" class="btn btn-outline-secondary px-4">
-                <i class="bx bx-arrow-back me-1"></i> Batal
-            </a>
         </div>
     </div>
 @endsection
