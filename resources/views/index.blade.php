@@ -65,7 +65,7 @@
     .hero {
         /* Kita pakai !important supaya menang lawan file CSS eksternal */
         background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
-            url('{{ $HeroSection && $HeroSection ->gambar ? asset('storage/' . $HeroSection->gambar) : asset('assets/img/hero/bg_hero.png')}}') !important;
+            url('{{ $hero && $hero ->gambar ? asset('storage/' . $hero->gambar) : asset('assets/img/hero/bg_hero.png')}}') !important;
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
@@ -97,7 +97,7 @@
 
             <!-- KIRI -->
             <div class="about-image"
-                style="background-image: url('{{ $Tentang && $Tentang ->gambar ? asset('storage/' . $Tentang->gambar) : asset('public/storage/tentang/bg_tentang.png')}}');">
+                style="background-image: url('{{ $tentang && $tentang ->gambar ? asset('storage/' . $tentang->gambar) : asset('public/storage/tentang/bg_tentang.png')}}');">
                 <div class="about-overlay">
                         {{-- <h2>{{ $tentang->subjudul ?? 'Hunian Nyaman dan Strategis' }}</h2>
                     <p {{ $tentang->subjudul ? 'class="about-subjudul "' : '' }}>
@@ -157,7 +157,7 @@
             <li>
                 <div>
                     {{-- Panggil Logo dari Storage, kalau kosong pakai gambar default --}}
-                    <img src="{{ $Tentang && $Tentang->logo ? asset('storage/' . $Tentang->logo) : asset('image/Vector.png') }}" alt="Logo">
+                    <img src="{{ $tentang->$logo ? asset('storage/' . $tentang->logo) : asset('image/Vector.png') }}" alt="Logo">
                     {{-- Panggil Judul --}}
                     <h3>{{ $tentang->$judul }}</h3>
                     
@@ -213,8 +213,6 @@
         @foreach($fasilitas as $item)
             <div class="fasilitas-item">
                 <img src="{{ asset('storage/' . $item->gambar) }}" alt="{{ $item->judul }}">
-                <img src="{{ $Fasilitas && $Fasilitas->gambar? asset('storage/' . $Fasilitas->gambar) : asset('public/image/Vector(4).png') }}" alt="Logo">
-                <h3>{{ $item->judul }}</h3>
                 <p>{!! nl2br(e($item->deskripsi)) !!}</p>
             </div>
         @endforeach
@@ -322,7 +320,8 @@
                 {{-- --- BAGIAN DINAMIS (DARI DATABASE) --- --}}
                 @foreach($tiperumah as $t)
                     <div class="tipe-card">
-                         <img src="{{ $TipeRumah && $TipeRumah->gambar? asset('storage/' . $TipeRumah->gambar) : asset('public/image/bg_tiperumah.png') }}" alt="Logo">
+                         {{-- Pastikan $t sesuai dengan variabel di @foreach($tiperumah as $t) --}}
+<img src="{{ ($t && $t->gambar) ? asset('storage/' . $t->gambar) : asset('image/bg_tiperumah.png') }}" alt="Logo">
                         
                         <div class="tipe-body">
                             <h2>{{ $t->nama_tipe_rumah }}</h2>
@@ -347,76 +346,7 @@
                 {{-- --- END BAGIAN DINAMIS --- --}}
 
 
-                {{-- --- BAGIAN STATIS (TETAP DI SINI) --- --}}
-                <div class="tipe-card">
-                    <img src="{{ $TipeRumah && $TipeRumah->gambar? asset('storage/' . $TipeRumah->gambar) : asset('public/image/horizon_lite.png') }}" alt="Logo">
-                    <div class="tipe-body">
-                        <h2>Tipe Horizon Lite</h2>
-                        <span class="badge">LT 40m LB 60m</span>
-                        <p class="start">START FROM</p>
-                        <p class="price">Rp900 Juta – Rp1,2 Miliar</p>
-                        <span class="cicilan">Cicilan mulai 3,0 JT-an</span>
-                        <div class="tipe-info">
-                            <div>🛏 2 Bedrooms</div>
-                            <div>🚿 1 Bathroom</div>
-                            <div>🚗 1 Carport</div>
-                        </div>
-                        <button class="btn-unit">CEK KETERSEDIAAN UNIT</button>
-                    </div>
-                </div>
-
-                <div class="tipe-card">
-                    <img src="{{ asset('public/image/horizon_lite.png') }}" alt="Tipe Smart">
-                    <div class="tipe-body">
-                        <h2>Tipe Horizon Smart</h2>
-                        <span class="badge">LT 40m LB 60m</span>
-                        <p class="start">START FROM</p>
-                        <p class="price">Rp1,2 Miliar – 1,8 Miliar</p>
-                        <span class="cicilan">Cicilan mulai 3,0 JT-an</span>
-                        <div class="tipe-info">
-                            <div>🛏 2 Bedrooms</div>
-                            <div>🚿 2 Bathroom</div>
-                            <div>🚗 1 Carport</div>
-                        </div>
-                        <button class="btn-unit">CEK KETERSEDIAAN UNIT</button>
-                    </div>
-                </div>
-
-                <div class="tipe-card">
-                    <img src="{{ asset('image/Rectangle 101 (2).png') }}" alt="Tipe Prime">
-                    <div class="tipe-body">
-                        <h2>Tipe Horizon Prime</h2>
-                        <span class="badge">LT 40m LB 60m</span>
-                        <p class="start">START FROM</p>
-                        <p class="price">Rp1,8 Miliar – Rp2,7 Miliar</p>
-                        <span class="cicilan">Cicilan mulai 3,0 JT-an</span>
-                        <div class="tipe-info">
-                            <div>🛏 3 Bedrooms</div>
-                            <div>🚿 2 Bathroom</div>
-                            <div>🚗 1 Carport</div>
-                        </div>
-                        <button class="btn-unit">CEK KETERSEDIAAN UNIT</button>
-                    </div>
-                </div>
-
-                <div class="tipe-card">
-                    <img src="{{ asset('image/Rectangle 101 (3).png') }}" alt="Tipe Signature">
-                    <div class="tipe-body">
-                        <h2>Tipe Horizon Signature</h2>
-                        <span class="badge">LT 40m LB 60m</span>
-                        <p class="start">START FROM</p>
-                        <p class="price">Rp2,8 Miliar – Rp4 Miliar</p>
-                        <span class="cicilan">Cicilan mulai 3,0 JT-an</span>
-                        <div class="tipe-info">
-                            <div>🛏 4 Bedrooms</div>
-                            <div>🚿 3 Bathroom</div>
-                            <div>🚗 2 Carport</div>
-                        </div>
-                        <button class="btn-unit">CEK KETERSEDIAAN UNIT</button>
-                    </div>
-                </div>
-                {{-- --- END BAGIAN STATIS --- --}}
-
+                
             </div>
         </div>
     </section>
