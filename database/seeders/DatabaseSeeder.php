@@ -39,7 +39,10 @@ class DatabaseSeeder extends Seeder
         HeroSection::updateOrCreate(
             ['email' => 'admin@gmail.com'],
             [
-                'deskripsi' => 'Admin Grand Horizon',
+                'subjudul' => 'Perumahan Modern dan Nyaman untuk keluarga',
+                'alamat' => 'Jl. Raya Cilegon, Drangong, Taktakan Serang, Kota Serang, Banten 42162 REAL ESTATE INDONESIA (REI)',
+                'gambar' => 'null',
+                'tekstombol' => 'cek selengkapnya'
             ]
         );
 
@@ -48,22 +51,22 @@ class DatabaseSeeder extends Seeder
             ['judul' => 'Tentang Grand Horizon'],
             [
                 'subjudul' => 'Grand Horizon adalah kawasan perumahan modern yang menawarkan hunian nyaman, aman, dan cocok untuk keluarga.',
-                'gambar' => '',
+                'gambar' => 'null',
                 'deskripsi' => 'Berlokasi strategis dan mudah diakses, perumahan ini dekat dengan berbagai fasilitas umum seperti sekolah, pusat perbelanjaan, rumah sakit, dan akses transportasi.',
-                'logo' => '',
+                'logo' => 'null',
                 'tekstombol' => 'Lihat Selengkapnya',
                 'judul_unggulan_1' => 'Legalitas Terjamin',
                 'desc_unggulan_1' => 'Semua dokumen dan perizinan lengkap serta resmi.',
-                'logo_unggulan_1' => '',
+                'logo_unggulan_1' => 'null',
                 'judul_unggulan_2' => 'Kredit Mudah',
                 'desc_unggulan_2' => 'Proses pembiayaan mudah dan cicilan terjangkau.', 
-                'logo_unggulan_2' => '',
+                'logo_unggulan_2' => 'null',
                 'judul_unggulan_3' => 'Bebas Banjir',
                 'desc_unggulan_3' => 'Lokasi aman dari genangan dan banjir.', 
-                'logo_unggulan_3' => '',
+                'logo_unggulan_3' => 'null',
                 'judul_unggulan_4' => 'Lokasi Mudah di Akses',
                 'desc_unggulan_4' => 'Mudah diakses dan dekat dengan fasilitas umum.', 
-                'logo_unggulan_4' => '',
+                'logo_unggulan_4' => 'null',
             ]
         );  
         //5.fasilitas
@@ -71,7 +74,7 @@ class DatabaseSeeder extends Seeder
             ['judul' => 'Fasilitas Sekitar Grand Horizon'],
             [
                 'deskripsi' => 'Akses Jalan' . ' ' . 'Kantor Pemerintah' . ' ' . 'Sarana Transportasi' . ' ' . 'Pasar Tradisional' . ' ' . 'Pusat Perbelanjaan' . ' ' . 'Sekolah' . ' ' . 'Rumah Sakit' . ' ' . 'Perguruan Tinggi' . ' ' . 'Lainya',
-                'gambar'=> ''
+                'gambar'=> 'null'
             ] 
         );
          //6.tipe rumah
@@ -85,7 +88,7 @@ class DatabaseSeeder extends Seeder
                 'kamar_tidur'=> '2',
                 'kamar_mandi'=> '2',
                 'garasi'=> '1',
-                'gambar'=> '',
+                'gambar'=> 'null',
                 'tekstombol'=> 'Cek Ketersediaan Unit',
             ]
             
@@ -94,7 +97,7 @@ class DatabaseSeeder extends Seeder
          FasilitasPerumahan::updateOrCreate(
             ['judul' => 'Fasilitas Perumahan Grand Horizon'],
             [
-                'gambar'=> ''
+                'gambar'=> 'null'
             ] 
         );
         //8.Testiimoni
@@ -103,7 +106,7 @@ class DatabaseSeeder extends Seeder
             [
                 'rating'=> '5',
                 'pesan'=> '“Grand Horizon adalah tempat tinggal yang nyaman dan tenang. Lingkungannya rapi, aman, dan cocok untuk keluarga.”',
-                'profile'=> '',
+                'profile'=> 'null',
                 'user'=> 'john doe'
             ] 
         );
