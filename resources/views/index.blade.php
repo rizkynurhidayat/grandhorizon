@@ -159,6 +159,7 @@
         @foreach($fasilitas as $item)
             <div class="fasilitas-item">
                 <img src="{{ asset('storage/' . $item->gambar) }}" alt="{{ $item->judul }}">
+                {{-- <img src="{{ $Fasilitas && $Fasilitas->gambar? asset('storage/' . $Fasilitas->gambar) : asset('public/image/Vector(4).png') }}" alt="Logo"> --}}
                 <h3>{{ $item->judul }}</h3>
                 <p>{!! nl2br(e($item->deskripsi)) !!}</p>
             </div>
@@ -265,101 +266,35 @@
             <div class="tipe-grid">
 
                 {{-- --- BAGIAN DINAMIS (DARI DATABASE) --- --}}
-                @foreach($tiperumah as $t)
-                    <div class="tipe-card">
-                        <img src="{{ asset('storage/' . $t->gambar) }}" alt="{{ $t->nama_tipe_rumah }}">
-                        <div class="tipe-body">
-                            <h2>{{ $t->nama_tipe_rumah }}</h2>
-                            <span class="badge">{{ $t->luas_bangunan }}</span>
+@foreach($tiperumah as $t)
+    <div class="tipe-card">
+        <img src="{{ $t->gambar ? asset('storage/' . $t->gambar) : asset('image/bg_tiperumah.png') }}" alt="{{ $t->nama_tipe_rumah }}">
+        
+        <div class="tipe-body">
+            <h2>{{ $t->nama_tipe_rumah }}</h2>
+            <span class="badge">{{ $t->luas_bangunan }} m²</span>
 
-                            <p class="start">START FROM</p>
-                            <p class="price">{{ $t->harga }}</p>
+            <p class="start">START FROM</p>
+            {{-- Perbaikan Casting di bawah ini --}}
+            <p class="price">Rp {{ number_format((float)$t->harga, 0, ',', '.') }}</p>
 
-                            <span class="cicilan">{{ $t->cicilan }}</span>
+            <span class="cicilan">Cicilan {{ $t->cicilan }}</span>
 
-                            <div class="tipe-info">
-                                {{-- Angka diambil dari DB, teks tetap statis sesuai request --}}
-                                <div>🛏 {{ $t->kamar_tidur }} Bedrooms</div>
-                                <div>🚿 {{ $t->kamar_mandi }} Bathroom</div>
-                                <div>🚗 {{ $t->garasi }} Carport</div>
-                            </div>
+            <div class="tipe-info">
+                <div>🛏 {{ $t->kamar_tidur }} Bedrooms</div>
+                <div>🚿 {{ $t->kamar_mandi }} Bathroom</div>
+                <div>🚗 {{ $t->garasi }} Carport</div>
+            </div>
 
-                            <button class="btn-unit">{{ $t->tekstombol }}</button>
-                        </div>
-                    </div>
-                @endforeach
-                {{-- --- END BAGIAN DINAMIS --- --}}
+            {{-- Tombol harus di dalam tipe-body agar rapi --}}
+            <button class="btn-unit">{{ $t->tekstombol ?? 'CEK KETERSEDIAAN UNIT' }}</button>
+        </div>
+    </div>
+@endforeach
+{{-- --- END BAGIAN DINAMIS --- --}}
 
 
-                {{-- --- BAGIAN STATIS (TETAP DI SINI) --- --}}
-                <div class="tipe-card">
-                    <img src="{{ asset('image/Rectangle 101.png') }}" alt="Tipe Lite">
-                    <div class="tipe-body">
-                        <h2>Tipe Horizon Lite</h2>
-                        <span class="badge">LT 40m LB 60m</span>
-                        <p class="start">START FROM</p>
-                        <p class="price">Rp900 Juta – Rp1,2 Miliar</p>
-                        <span class="cicilan">Cicilan mulai 3,0 JT-an</span>
-                        <div class="tipe-info">
-                            <div>🛏 2 Bedrooms</div>
-                            <div>🚿 1 Bathroom</div>
-                            <div>🚗 1 Carport</div>
-                        </div>
-                        <button class="btn-unit">CEK KETERSEDIAAN UNIT</button>
-                    </div>
-                </div>
-
-                <div class="tipe-card">
-                    <img src="{{ asset('image/Rectangle 101 (1).png') }}" alt="Tipe Smart">
-                    <div class="tipe-body">
-                        <h2>Tipe Horizon Smart</h2>
-                        <span class="badge">LT 40m LB 60m</span>
-                        <p class="start">START FROM</p>
-                        <p class="price">Rp1,2 Miliar – 1,8 Miliar</p>
-                        <span class="cicilan">Cicilan mulai 3,0 JT-an</span>
-                        <div class="tipe-info">
-                            <div>🛏 2 Bedrooms</div>
-                            <div>🚿 2 Bathroom</div>
-                            <div>🚗 1 Carport</div>
-                        </div>
-                        <button class="btn-unit">CEK KETERSEDIAAN UNIT</button>
-                    </div>
-                </div>
-
-                <div class="tipe-card">
-                    <img src="{{ asset('image/Rectangle 101 (2).png') }}" alt="Tipe Prime">
-                    <div class="tipe-body">
-                        <h2>Tipe Horizon Prime</h2>
-                        <span class="badge">LT 40m LB 60m</span>
-                        <p class="start">START FROM</p>
-                        <p class="price">Rp1,8 Miliar – Rp2,7 Miliar</p>
-                        <span class="cicilan">Cicilan mulai 3,0 JT-an</span>
-                        <div class="tipe-info">
-                            <div>🛏 3 Bedrooms</div>
-                            <div>🚿 2 Bathroom</div>
-                            <div>🚗 1 Carport</div>
-                        </div>
-                        <button class="btn-unit">CEK KETERSEDIAAN UNIT</button>
-                    </div>
-                </div>
-
-                <div class="tipe-card">
-                    <img src="{{ asset('image/Rectangle 101 (3).png') }}" alt="Tipe Signature">
-                    <div class="tipe-body">
-                        <h2>Tipe Horizon Signature</h2>
-                        <span class="badge">LT 40m LB 60m</span>
-                        <p class="start">START FROM</p>
-                        <p class="price">Rp2,8 Miliar – Rp4 Miliar</p>
-                        <span class="cicilan">Cicilan mulai 3,0 JT-an</span>
-                        <div class="tipe-info">
-                            <div>🛏 4 Bedrooms</div>
-                            <div>🚿 3 Bathroom</div>
-                            <div>🚗 2 Carport</div>
-                        </div>
-                        <button class="btn-unit">CEK KETERSEDIAAN UNIT</button>
-                    </div>
-                </div>
-                {{-- --- END BAGIAN STATIS --- --}}
+                
 
             </div>
         </div>
