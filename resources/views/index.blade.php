@@ -526,61 +526,62 @@
         </div>
     </section>
 
-    {{-- BAGIAN BAWAH: INFO KONTAK --}}
+    {{-- BAGIAN BAWAH: INFO KONTAK (HORIZONTAL) --}}
     <section class="footer-info-section">
         <div class="container-luxury">
-            <div class="footer-main-grid">
-                {{-- Brand --}}
-                <div class="footer-brand">
-                    <div class="brand-name">GRAND <span>HORIZON</span></div>
-                    <p class="brand-tagline">Hunian modern dengan konsep eksklusif untuk kenyamanan keluarga Anda di lokasi strategis.</p>
-                </div>
-
-                {{-- Contact --}}
-                <div class="footer-contacts">
-                    <div class="contact-card">
-                        <img src="{{ asset('image/maps.png') }}" class="contact-icon">
-                        <div class="contact-text">
-                            <strong>LOKASI</strong>
-                            <a href="https://www.google.com/maps/search/{{ urlencode($f->address) }}" target="_blank">{{ $f->address ?? 'Alamat belum diatur' }}</a>
-                        </div>
-                    </div>
-                    <div class="contact-card">
-                        <img src="{{ asset('image/mdi_call.png') }}" class="contact-icon">
-                        <div class="contact-text">
-                            <strong>TELEPON</strong>
-                            <a href="tel:{{ $f->phone }}">{{ $f->phone ?? '-' }}</a>
-                        </div>
-                    </div>
-                    <div class="contact-card">
-                        <img src="{{ asset('image/gmail.png') }}" class="contact-icon">
-                        <div class="contact-text">
-                            <strong>EMAIL</strong>
-                            <a href="mailto:{{ $f->email }}">{{ $f->email ?? '-' }}</a>
-                        </div>
-                    </div>
-                </div>
-
-                {{-- Socials --}}
-                <div class="footer-socials">
-                    <h4>Media Sosial</h4>
-                    <div class="social-icons">
-                        @if($f->ig_url)
-                        <a href="{{ $f->ig_url }}" class="social-link" target="_blank"><img src="{{ asset('image/ig.png') }}" alt="IG"></a>
-                        @endif
-                        @if($f->fb_url)
-                        <a href="{{ $f->fb_url }}" class="social-link" target="_blank"><img src="{{ asset('image/fb.png') }}" alt="FB"></a>
-                        @endif
-                    </div>
-                </div>
+            
+            {{-- Brand Centered --}}
+            <div class="footer-brand-horizontal">
+                <div class="brand-name">GRAND <span>HORIZON</span></div>
+                <p class="brand-tagline">Hunian modern dengan konsep eksklusif untuk kenyamanan keluarga Anda di lokasi strategis.</p>
             </div>
 
-            <div class="footer-copyright">
-                {{ $f->copyright ?? '© ' . date('Y') . ' Grand Horizon. All Rights Reserved.' }}
+            <hr class="footer-divider">
+
+            {{-- Kontak Horizontal --}}
+            <div class="footer-contact-row">
+                <a href="https://www.google.com/maps/search/{{ urlencode($f->address) }}" target="_blank" class="contact-item">
+                    <img src="{{ asset('image/maps.png') }}" class="contact-icon" alt="Lokasi">
+                    <span>{{ $f->address ?? 'Alamat belum diatur' }}</span>
+                </a>
+                
+                <a href="tel:{{ $f->phone }}" class="contact-item">
+                    <img src="{{ asset('image/mdi_call.png') }}" class="contact-icon" alt="Telepon">
+                    <span>{{ $f->phone ?? '-' }}</span>
+                </a>
+                
+                <a href="mailto:{{ $f->email }}" class="contact-item">
+                    <img src="{{ asset('image/gmail.png') }}" class="contact-icon" alt="Email">
+                    <span>{{ $f->email ?? '-' }}</span>
+                </a>
             </div>
+
+            {{-- Sosmed Horizontal --}}
+            <div class="footer-social-row">
+                @if($f->fb_url)
+                <a href="{{ $f->fb_url }}" class="social-item" target="_blank">
+                    <img src="{{ asset('image/fb.png') }}" alt="FB">
+                    <span>Grand Horizon</span>
+                </a>
+                @endif
+
+                @if($f->ig_url)
+                <a href="{{ $f->ig_url }}" class="social-item" target="_blank">
+                    <img src="{{ asset('image/ig.png') }}" alt="IG">
+                    <span>Grand Horizon</span>
+                </a>
+                @endif
+            </div>
+
         </div>
     </section>
-</footer>
+
+    {{-- BAGIAN COPYRIGHT (Blok Putih Cerah) --}}
+    <div class="footer-copyright-bar">
+        <div class="container-luxury">
+            {{ $f->copyright ?? '© ' . date('Y') . ' GRAND HORIZON' }}
+        </div>
+    </div>
 @endif
 
 <script src="{{ asset('js/scriprts.js') }}"></script>
