@@ -65,7 +65,7 @@
     .hero {
         /* Kita pakai !important supaya menang lawan file CSS eksternal */
         background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
-            url("{{ $hero->gambar && $hero->gambar !== 'default.jpg' ? Storage::url($hero->gambar) : asset('assets/img/hero/default.jpg') }}") !important;
+            url('{{ $HeroSection && $HeroSection ->gambar ? asset('storage/' . $HeroSection->gambar) : asset('assets/img/hero/bg_hero.png')}}') !important;
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
@@ -97,7 +97,7 @@
 
             <!-- KIRI -->
             <div class="about-image"
-                style="background-image: url('{{ asset('storage/' . ($tentang->gambar ?? '')) }}')">
+                style="background-image: url('{{ $Tentang && $Tentang ->gambar ? asset('storage/' . $Tentang->gambar) : asset('public/storage/tentang/bg_tentang.png')}}');">
                 <div class="about-overlay">
                         {{-- <h2>{{ $tentang->subjudul ?? 'Hunian Nyaman dan Strategis' }}</h2>
                     <p {{ $tentang->subjudul ? 'class="about-subjudul "' : '' }}>
@@ -157,8 +157,7 @@
             <li>
                 <div>
                     {{-- Panggil Logo dari Storage, kalau kosong pakai gambar default --}}
-                    <img src="{{ $tentang->$logo ? asset('storage/' . $tentang->$logo) : asset('image/Vector.png') }}">
-                    
+                    <img src="{{ $Tentang && $Tentang->logo ? asset('storage/' . $Tentang->logo) : asset('image/Vector.png') }}" alt="Logo">
                     {{-- Panggil Judul --}}
                     <h3>{{ $tentang->$judul }}</h3>
                     
@@ -214,6 +213,7 @@
         @foreach($fasilitas as $item)
             <div class="fasilitas-item">
                 <img src="{{ asset('storage/' . $item->gambar) }}" alt="{{ $item->judul }}">
+                <img src="{{ $Fasilitas && $Fasilitas->gambar? asset('storage/' . $Fasilitas->gambar) : asset('public/image/Vector(4).png') }}" alt="Logo">
                 <h3>{{ $item->judul }}</h3>
                 <p>{!! nl2br(e($item->deskripsi)) !!}</p>
             </div>
@@ -322,7 +322,8 @@
                 {{-- --- BAGIAN DINAMIS (DARI DATABASE) --- --}}
                 @foreach($tiperumah as $t)
                     <div class="tipe-card">
-                        <img src="{{ asset('storage/' . $t->gambar) }}" alt="{{ $t->nama_tipe_rumah }}">
+                         <img src="{{ $TipeRumah && $TipeRumah->gambar? asset('storage/' . $TipeRumah->gambar) : asset('public/image/bg_tiperumah.png') }}" alt="Logo">
+                        
                         <div class="tipe-body">
                             <h2>{{ $t->nama_tipe_rumah }}</h2>
                             <span class="badge">{{ $t->luas_bangunan }}</span>
@@ -348,7 +349,7 @@
 
                 {{-- --- BAGIAN STATIS (TETAP DI SINI) --- --}}
                 <div class="tipe-card">
-                    <img src="{{ asset('image/Rectangle 101.png') }}" alt="Tipe Lite">
+                    <img src="{{ $TipeRumah && $TipeRumah->gambar? asset('storage/' . $TipeRumah->gambar) : asset('public/image/horizon_lite.png') }}" alt="Logo">
                     <div class="tipe-body">
                         <h2>Tipe Horizon Lite</h2>
                         <span class="badge">LT 40m LB 60m</span>
@@ -365,7 +366,7 @@
                 </div>
 
                 <div class="tipe-card">
-                    <img src="{{ asset('image/Rectangle 101 (1).png') }}" alt="Tipe Smart">
+                    <img src="{{ asset('public/image/horizon_lite.png') }}" alt="Tipe Smart">
                     <div class="tipe-body">
                         <h2>Tipe Horizon Smart</h2>
                         <span class="badge">LT 40m LB 60m</span>
