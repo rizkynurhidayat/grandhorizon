@@ -7,8 +7,9 @@
                 <h5 class="mb-0">Tambah Tipe Rumah Baru</h5>
             </div>
             <div class="card-body">
-                <form id="formTipe" action="{{ route('tiperumah.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('tiperumah.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
+                    
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label class="form-label">Nama Tipe Rumah</label>
@@ -17,8 +18,8 @@
                         </div>
                         <div class="col-md-6 mb-3">
                             <label class="form-label">Luas Bangunan/Tanah</label>
-                            <input type="text" name="luas_bangunan" class="form-control" placeholder="Contoh: LT 40m LB 60m"
-                                required>
+                            <input type="text" name="luas_bangunan" class="form-control" 
+                                placeholder="Contoh: LT 40m LB 60m" required>
                         </div>
                     </div>
 
@@ -35,8 +36,8 @@
                         </div>
                         <div class="col-md-4 mb-3">
                             <label class="form-label">Teks Tombol</label>
-                            <input type="text" name="tekstombol" class="form-control" value="CEK KETERSEDIAAN UNIT"
-                                required>
+                            <input type="text" name="tekstombol" class="form-control" 
+                                value="CEK KETERSEDIAAN UNIT" required>
                         </div>
                     </div>
 
@@ -64,20 +65,21 @@
                         </div>
                     </div>
 
-                    <div class="mb-3">
+                    <div class="mb-4">
                         <label class="form-label">Foto Tipe Rumah</label>
                         <input type="file" name="gambar" class="form-control" required>
                     </div>
-                </form>
+
+                    <div class="d-flex gap-2 border-top pt-4">
+                        <button type="submit" class="btn btn-primary px-4 shadow-sm">
+                            <i class="bx bx-save me-1"></i> Simpan Tipe Rumah
+                        </button>
+                        <a href="{{ route('tiperumah.index') }}" class="btn btn-outline-secondary px-4">
+                            <i class="bx bx-arrow-back me-1"></i> Batal
+                        </a>
+                    </div>
+                </form> 
             </div>
-        </div>
-        <div class="d-flex gap-2">
-            <button type="submit" form="formEditTipeRumah" class="btn btn-primary px-4 shadow-sm">
-                <i class="bx bx-save me-1"></i> Simpan Perubahan
-            </button>
-            <a href="{{ route('tiperumah.index') }}" class="btn btn-outline-secondary px-4">
-                <i class="bx bx-arrow-back me-1"></i> Batal
-            </a>
         </div>
     </div>
 @endsection

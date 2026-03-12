@@ -66,27 +66,35 @@
                         </div>
                     </div>
 
-                    <div class="mb-0">
-                        <label class="form-label">Ganti Foto (Kosongkan jika tidak diubah)</label>
-                        <input type="file" name="gambar" class="form-control mb-2" id="imgInput">
-                        <img id="imgPreview" src="{{ asset('storage/' . $t->gambar) }}" width="150"
-                            class="rounded border p-1 bg-light">
+                    <div class="mb-4">
+                        <label class="form-label d-block">Foto Tipe Rumah</label>
+                        <div class="d-flex align-items-start gap-3">
+                            <img id="imgPreview" src="{{ asset('storage/' . $t->gambar) }}" width="150"
+                                class="rounded border p-1 bg-light">
+                            <div class="flex-grow-1">
+                                <input type="file" name="gambar" class="form-control" id="imgInput">
+                                <small class="text-muted">Kosongkan jika tidak ingin mengubah foto</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex gap-2 border-top pt-4">
+                        <button type="submit" form="formEditTipe" class="btn btn-primary px-4 shadow-sm">
+                            <i class="bx bx-save me-1"></i> Simpan Perubahan
+                        </button>
+                        <a href="{{ route('tiperumah.index') }}" class="btn btn-outline-secondary px-4">
+                            <i class="bx bx-arrow-back me-1"></i> Batal
+                        </a>
                     </div>
                 </form>
             </div>
         </div>
-
-        <div class="d-flex gap-2">
-            <button type="submit" form="formEditTipeRumah" class="btn btn-primary px-4 shadow-sm">
-                <i class="bx bx-save me-1"></i> Simpan Perubahan
-            </button>
-            <a href="{{ route('tiperumah.index') }}" class="btn btn-outline-secondary px-4">
-                <i class="bx bx-arrow-back me-1"></i> Batal
-            </a>
-        </div>
     </div>
 
     <script>
+        const imgInput = document.getElementById('imgInput');
+        const imgPreview = document.getElementById('imgPreview');
+
         imgInput.onchange = evt => {
             const [file] = imgInput.files
             if (file) imgPreview.src = URL.createObjectURL(file)

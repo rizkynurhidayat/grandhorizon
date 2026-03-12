@@ -144,6 +144,9 @@
             <a href="{{ route('hero.edit') }}" class="{{ request()->routeIs('hero.*') ? 'active' : '' }}">
                 <i class='bx bxs-image'></i> Hero Section
             </a>
+             <a href="{{ route('tentang.edit') }}" class="{{ request()->routeIs('tentang.*') ? 'active' : '' }}">
+                <i class='bx bxs-layout'></i> Tentang
+            </a>
             <a href="{{ route('tiperumah.index') }}" class="{{ request()->routeIs('tiperumah.*') ? 'active' : '' }}">
                 <i class='bx bxs-home'></i> Tipe Rumah
             </a>
