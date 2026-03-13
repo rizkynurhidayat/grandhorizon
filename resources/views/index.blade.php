@@ -13,12 +13,12 @@
 
 <body>
     <!-- NAVBAR -->
-    <nav class="navbar-lp">
+    <nav class="navbar">
         <a href="#hero">
-            <img src="{{ asset('image/image 7.svg') }}" alt="Logo" class="logo-lp">
+            <img src="{{ asset('image/image 7.svg') }}" alt="Logo Grand Horizon" class="logo">
         </a>
 
-        <ul class="nav-links-lp">
+        <ul class="nav-links">
             <li><a href="#about">Tentang Kami</a></li>
             <li><a href="#fasilitas-w">Fasilitas Sekitar</a></li>
             <li><a href="#tipe-rmh">Tipe Rumah</a></li>
@@ -26,135 +26,40 @@
             <li><a href="#testi-klien">Testimoni Klien</a></li>
         </ul>
 
-        <a href="#contact" class="btn-wrapper-lp">
-            <button class="btn-nav-lp">Hubungi Kami</button>
+        <a href="#contact">
+            <button class="btn-nav">Hubungi Kami</button>
         </a>
 
-        <div class="menu-icon-lp" onclick="toggleLpMenu()">☰</div>
+        <!-- MENU ICON MOBILE -->
+        <div class="menu-icon" onclick="openMenu()">☰</div>
     </nav>
 
-    <nav id="lp-mobile-overlay" class="lp-mobile-overlay">
-        <div class="close-menu-lp" onclick="toggleLpMenu()">✕</div>
-        <ul class="mobile-links-lp">
-            <li><a href="#about" onclick="toggleLpMenu()">Tentang Kami</a></li>
-            <li><a href="#fasilitas-w" onclick="toggleLpMenu()">Fasilitas Sekitar</a></li>
-            <li><a href="#tipe-rmh" onclick="toggleLpMenu()">Tipe Rumah</a></li>
-            <li><a href="#fas-perumahan" onclick="toggleLpMenu()">Fasilitas Perumahan</a></li>
-            <li><a href="#testi-klien" onclick="toggleLpMenu()">Testimoni Klien</a></li>
+    <!-- NAVBAR MOBILE -->
+    <nav id="mobile-nav" class="mobile-nav">
+        <div class="close-menu" onclick="closeMenu()">✕</div>
+
+        <ul class="mobile-links">
+            <li><a href="#about" onclick="closeMenu()">Tentang Kami</a></li>
+            <li><a href="#fasilitas-w" onclick="closeMenu()">Fasilitas Sekitar</a></li>
+            <li><a href="#tipe-rmh" onclick="closeMenu()">Tipe Rumah</a></li>
+            <li><a href="#fas-perumahan" onclick="closeMenu()">Fasilitas Perumahan</a></li>
+            <li><a href="#testi-klien" onclick="closeMenu()">Testimoni Klien</a></li>
         </ul>
     </nav>
 
     <script>
-        function toggleLpMenu() {
-            const overlay = document.getElementById('lp-mobile-overlay');
-            if (overlay.style.display === 'flex') {
-                overlay.style.display = 'none';
-                document.body.style.overflow = 'auto';
-            } else {
-                overlay.style.display = 'flex';
-                document.body.style.overflow = 'hidden';
-            }
+        const menu = document.getElementById('mobile-nav');
+
+        function openMenu() {
+            menu.style.display = 'block';
+        }
+
+        function closeMenu() {
+            menu.style.display = 'none';
         }
     </script>
 
 
-    <style>
-        /* Styling Default Desktop */
-        .navbar-lp {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 5%;
-            /* TAMBAHKAN INI */
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            background: transparent;
-            /* Biar menyatu sama Hero, kalau mau ada warna ganti white */
-        }
-
-        /* Pastikan logo ukurannya konsisten */
-        .logo-lp {
-            height: 50px;
-            width: auto;
-        }
-
-        .menu-icon-lp {
-            display: none;
-        }
-
-        .lp-mobile-overlay {
-            display: none;
-        }
-
-        /* FIX UNTUK MOBILE */
-        @media (max-width: 768px) {
-            .navbar-lp {
-                display: flex !important;
-                flex-direction: row !important;
-                justify-content: space-between !important;
-                align-items: center !important;
-                padding: 15px 20px !important;
-                /* Perkecil padding di HP */
-            }
-
-            .nav-links-lp,
-            .btn-wrapper-lp {
-                display: none !important;
-            }
-
-            .menu-icon-lp {
-                display: block !important;
-                font-size: 30px;
-                cursor: pointer;
-                color: white;
-                /* Pastikan warna kontras dengan background hero */
-            }
-
-            .logo-lp {
-                height: 35px;
-            }
-
-            .lp-mobile-overlay {
-                position: fixed;
-                inset: 0;
-                background: #0b1d33;
-                z-index: 9999;
-                display: none;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-            }
-
-            /* Tambahan buat teks di dalam overlay mobile */
-            .mobile-links-lp {
-                list-style: none;
-                padding: 0;
-                text-align: center;
-            }
-
-            .mobile-links-lp li {
-                margin: 15px 0;
-            }
-
-            .mobile-links-lp a {
-                color: white;
-                text-decoration: none;
-                font-size: 1.2rem;
-            }
-
-            .close-menu-lp {
-                position: absolute;
-                top: 20px;
-                right: 20px;
-                color: white;
-                font-size: 30px;
-                cursor: pointer;
-            }
-        }
-    </style>
     <style>
         .hero {
             /* Gradasi Mewah: Kiri gelap pekat (buat teks), kanan bening transparan (buat pamer rumah) */
