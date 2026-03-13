@@ -19,18 +19,19 @@
             --bg-body: #f5f8fa;
             --light: #ffffff;
             --text-gray: #7e8299;
+            --sidebar-width: 260px;
         }
 
         body {
             font-family: 'Poppins', sans-serif;
             background: var(--bg-body);
             margin: 0;
-            display: flex;
+            overflow-x: hidden;
         }
 
-        /* Sidebar */
+        /* --- SIDEBAR RESPONSIVE --- */
         .sidebar {
-            width: 260px;
+            width: var(--sidebar-width);
             background: var(--light);
             padding: 25px 15px;
             position: fixed;
@@ -38,9 +39,74 @@
             display: flex;
             flex-direction: column;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.03);
-            z-index: 1000;
+            z-index: 1050;
+            transition: all 0.3s ease;
         }
 
+        /* --- CONTENT AREA RESPONSIVE --- */
+        .content {
+            flex: 1;
+            margin-left: var(--sidebar-width);
+            padding: 30px 40px;
+            min-height: 100vh;
+            transition: all 0.3s ease;
+        }
+
+        /* Navbar Mobile */
+        .mobile-nav {
+            display: none;
+            background: var(--light);
+            padding: 15px 20px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1040;
+        }
+
+        /* --- MEDIA QUERIES UNTUK HP (MAX 991px) --- */
+        @media (max-width: 991px) {
+            .sidebar {
+                left: calc(var(--sidebar-width) * -1);
+                /* Sembunyikan sidebar ke kiri */
+            }
+
+            .sidebar.active {
+                left: 0;
+                /* Munculkan saat tombol di-klik */
+            }
+
+            .content {
+                margin-left: 0;
+                padding: 20px 15px;
+            }
+
+            .mobile-nav {
+                display: flex !important;
+                /* Pastikan muncul sebagai flex */
+                flex-direction: row !important;
+                /* Paksa tetap ke samping */
+                justify-content: space-between !important;
+                align-items: center !important;
+            }
+
+            /* Overlay saat sidebar muncul */
+            .sidebar-overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.4);
+                z-index: 1045;
+            }
+
+            .sidebar-overlay.active {
+                display: block;
+            }
+        }
+
+        /* Styling Tambahan agar rapi */
         .sidebar-logo {
             color: #444;
             font-weight: 700;
@@ -76,14 +142,6 @@
             font-weight: 600;
         }
 
-        /* Content Area */
-        .content {
-            flex: 1;
-            margin-left: 260px;
-            padding: 30px 40px;
-            min-height: 100vh;
-        }
-
         .custom-card {
             background: white;
             border-radius: 20px;
@@ -96,7 +154,7 @@
         .welcome-box {
             background: white;
             border-radius: 20px;
-            padding: 30px;
+            padding: 25px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -109,7 +167,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 20px 10px;
+            padding: 15px 5px;
             border-radius: 15px;
             color: white !important;
             text-decoration: none;
@@ -117,11 +175,11 @@
             text-align: center;
             font-weight: 500;
             height: 100%;
+            font-size: 0.8rem;
         }
 
-        .quick-action-btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        .quick-action-btn i {
+            font-size: 1.5rem !important;
         }
 
         .logout-container {
@@ -130,14 +188,26 @@
             margin-top: auto;
         }
 
+        /* Fix Tabel Meluber di HP */
         .table-responsive {
-            overflow: visible;
+            border: 0;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
         }
     </style>
 </head>
 
 <body>
-    <div class="sidebar">
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <div class="mobile-nav shadow-sm">
+        <span class="fw-bold">GRAND HORIZON</span>
+        <button class="btn btn-primary btn-sm" id="toggleSidebar">
+            <i class='bx bx-menu fs-4'></i>
+        </button>
+    </div>
+
+    <div class="sidebar" id="sidebar">
         <a href="#" class="sidebar-logo">GRAND HORIZON</a>
         <div class="nav-menu">
             <a href="{{ route('admin.dashboard') }}"
@@ -170,10 +240,8 @@
             @php $unreadCount = \App\Models\HubungiKami::where('is_read', false)->count(); @endphp
             <a href="{{ route('admin.hubungi-kami.index') }}"
                 class="{{ request()->routeIs('admin.hubungi-kami.*') ? 'active' : '' }}">
-                📧 Pesan Masuk
-                @if($unreadCount > 0)
-                    <span class="badge bg-danger ms-1">{{ $unreadCount }}</span>
-                @endif
+                <i class='bx bxs-envelope'></i> Pesan @if($unreadCount > 0) <span
+                class="badge bg-danger ms-1">{{ $unreadCount }}</span> @endif
             </a>
         </div>
 
@@ -192,47 +260,47 @@
     <div class="content">
         @if(request()->routeIs('admin.dashboard'))
             <div class="welcome-box shadow-sm">
-                <div>
-                    <h1 class="fw-bold text-dark mb-1">Halo, {{ Auth::user()->name }}! 👋</h1>
-                    <p class="text-muted mb-0">Selamat datang kembali di panel kendali Grand Horizon.</p>
+                <div class="pe-3">
+                    <h1 class="fw-bold text-dark mb-1 fs-4">Halo, {{ Auth::user()->name }}! 👋</h1>
+                    <p class="text-muted mb-0 small">Selamat datang di Grand Horizon.</p>
                 </div>
-                <div class="d-none d-md-block">
-                    <img src="https://cdn-icons-png.flaticon.com/512/609/609803.png" width="80" alt="House Icon"
+                <div class="d-none d-sm-block">
+                    <img src="https://cdn-icons-png.flaticon.com/512/609/609803.png" width="60" alt="House Icon"
                         style="opacity: 0.8;">
                 </div>
             </div>
 
-            <div class="row g-4 mb-4">
-                <div class="col-lg-4 col-md-5">
+            <div class="row g-3 mb-4">
+                <div class="col-lg-4 col-12">
                     <div class="custom-card text-center">
-                        <h6 class="text-muted text-uppercase fw-bold mb-4">Total Tipe Rumah</h6>
-                        <h2 class="display-3 fw-bold text-dark mb-4">{{ $tipeRumahCount ?? '0' }}</h2>
-                        <a href="{{ route('tiperumah.index') }}" class="btn btn-primary w-100 rounded-pill py-2">
+                        <h6 class="text-muted text-uppercase small fw-bold mb-3">Total Tipe Rumah</h6>
+                        <h2 class="fw-bold text-dark mb-3">{{ $tipeRumahCount ?? '0' }}</h2>
+                        <a href="{{ route('tiperumah.index') }}" class="btn btn-primary w-100 rounded-pill py-2 btn-sm">
                             Lihat Unit
                         </a>
                     </div>
                 </div>
 
-                <div class="col-lg-8 col-md-7">
+                <div class="col-lg-8 col-12">
                     <div class="custom-card">
-                        <h6 class="text-muted text-uppercase fw-bold mb-4">Akses Cepat</h6>
-                        <div class="row g-3">
+                        <h6 class="text-muted text-uppercase small fw-bold mb-3">Akses Cepat</h6>
+                        <div class="row g-2">
                             <div class="col-4">
                                 <a href="{{ route('tiperumah.index') }}" class="quick-action-btn bg-primary">
-                                    <i class='bx bx-plus-circle fs-1 mb-2'></i>
-                                    <span>Tambah Unit</span>
+                                    <i class='bx bx-plus-circle mb-1'></i>
+                                    <span>Tipe</span>
                                 </a>
                             </div>
                             <div class="col-4">
                                 <a href="{{ route('fasilitas.index') }}" class="quick-action-btn bg-success">
-                                    <i class='bx bx-spa fs-1 mb-2'></i>
+                                    <i class='bx bx-spa mb-1'></i>
                                     <span>Fasilitas</span>
                                 </a>
                             </div>
                             <div class="col-4">
                                 <a href="{{ route('fasilitasperumahan.index') }}" class="quick-action-btn bg-info">
-                                    <i class='bx bx-images fs-1 mb-2'></i>
-                                    <span>Galeri Foto</span>
+                                    <i class='bx bx-images mb-1'></i>
+                                    <span>Galeri</span>
                                 </a>
                             </div>
                         </div>
@@ -241,32 +309,28 @@
             </div>
 
             <div class="custom-card">
-                <div class="d-flex justify-content-between align-items-center mb-4">
-                    <h5 class="fw-bold mb-0">Testimoni Terbaru</h5>
-                    <a href="{{ route('testimoni.index') }}"
-                        class="btn btn-sm btn-light border px-3 rounded-pill text-primary fw-bold">Lihat Semua</a>
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h6 class="fw-bold mb-0">Testimoni Terbaru</h6>
+                    <a href="{{ route('testimoni.index') }}" class="text-primary small fw-bold text-decoration-none">Lihat
+                        Semua</a>
                 </div>
                 <div class="table-responsive">
-                    <table class="table table-hover align-middle">
+                    <table class="table table-hover align-middle" style="min-width: 400px;">
                         <thead class="table-light">
-                            <tr>
-                                <th style="width: 250px;">Nama Customer</th>
-                                <th>Pesan Testimoni</th>
+                            <tr class="small">
+                                <th>Customer</th>
+                                <th>Pesan</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="small">
                             @forelse($testimonis ?? [] as $t)
                                 <tr>
-                                    {{-- SESUAIKAN: Pakai $t->user bukan $t->name --}}
                                     <td><span class="fw-semibold text-dark">{{ $t->user }}</span></td>
-                                    <td class="text-muted">{{ Str::limit($t->pesan, 100) }}</td>
+                                    <td class="text-muted">{{ Str::limit($t->pesan, 50) }}</td>
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="2" class="text-center text-muted py-5">
-                                        <i class='bx bx-comment-x fs-1 opacity-25 d-block mb-2'></i>
-                                        Belum ada data testimoni masuk.
-                                    </td>
+                                    <td colspan="2" class="text-center text-muted py-4">Belum ada data.</td>
                                 </tr>
                             @endforelse
                         </tbody>
@@ -282,6 +346,15 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Script untuk Toggle Sidebar di Mobile
+        $(document).ready(function () {
+            $('#toggleSidebar, #sidebarOverlay').on('click', function () {
+                $('#sidebar').toggleClass('active');
+                $('#sidebarOverlay').toggleClass('active');
+            });
+        });
+    </script>
 </body>
 
 </html>
