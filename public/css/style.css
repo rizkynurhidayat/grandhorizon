@@ -633,6 +633,7 @@ section {
 .judul-perumahan {
     color: #1f3b5f;
 }
+
 .fasilitas-perumahan {
     padding: 80px 8%;
     /*biar jaraknya lega/berjarak, responsif*/
@@ -747,6 +748,7 @@ section {
 .testi-title {
     color: #1f3b5f;
 }
+
 #testi-klien {
     padding: 80px 8%;
     background: #f4f7fb;
@@ -977,13 +979,14 @@ section {
 
 /* ================= LOKASI GRAND HORIZON =============== */
 
-.judul-lokasi{
+.judul-lokasi {
     text-align: center;
     font-size: 32px;
     margin-bottom: 30px;
     font-weight: 600;
     color: #1f3b5f;
 }
+
 /* section utama */
 .location {
     padding: 80px 8%;
@@ -1234,79 +1237,137 @@ body {
     font-family: Arial, sans-serif;
 }
 
-/* NAVBAR DESKTOP */
+/* --- NAVBAR DESKTOP (Polesan Warna) --- */
 .navbar {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 20px 40px;
+    padding: 15px 60px;
+    /* Padding lebih lebar agar elegan */
     background: white;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+    /* Shadow tipis agar modern */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
 .logo {
-    width: 100px;
+    width: 120px;
+    /* Ukuran logo lebih proporsional */
 }
 
 .nav-links {
     display: flex;
     list-style: none;
-    gap: 30px;
+    gap: 35px;
 }
 
 .nav-links a {
     text-decoration: none;
-    color: #333;
-    font-weight: 500;
+    color: #1f3b5f;
+    /* Pakai Navy sesuai judul kamu */
+    font-weight: 600;
+    font-size: 15px;
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    color: #ffc107;
+    /* Aksen emas */
 }
 
 .btn-nav {
-    padding: 10px 20px;
-    background: #0b5ed7;
+    padding: 12px 25px;
+    background: #1f3b5f;
+    /* Warna Navy yang sama */
     color: white;
     border: none;
-    border-radius: 6px;
+    border-radius: 4px;
+    /* Kotak sedikit tajam lebih mewah */
     cursor: pointer;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.btn-nav:hover {
+    background: #ffc107;
+    color: #1f3b5f;
 }
 
 /* MENU ICON (HIDDEN DI DESKTOP) */
 .menu-icon {
     display: none;
+    /* Ini yang bikin dia hilang di laptop/desktop */
     font-size: 28px;
     cursor: pointer;
+    color: #1f3b5f;
+    /* Warna Navy agar senada */
 }
 
-/* NAVBAR MOBILE */
+/* --- NAVBAR MOBILE (Transformasi Total agar Tidak Kosong) --- */
 .mobile-nav {
     display: none;
     position: fixed;
     inset: 0;
-    background: white;
-    padding: 30px;
-    z-index: 999;
+    background: #0b1d33;
+    /* Background Navy gelap agar exclusive */
+    padding: 40px;
+    z-index: 9999;
+    flex-direction: column;
+    justify-content: center;
+    /* Menu di tengah layar */
+    align-items: center;
+    text-align: center;
 }
 
 .close-menu {
-    font-size: 28px;
+    position: absolute;
+    top: 30px;
+    right: 40px;
+    font-size: 35px;
+    color: white;
     cursor: pointer;
-    text-align: right;
+    transition: 0.3s;
+}
+
+.close-menu:hover {
+    color: #ffc107;
+    transform: rotate(90deg);
 }
 
 .mobile-links {
     list-style: none;
-    margin-top: 40px;
+    margin: 0;
     display: flex;
     flex-direction: column;
-    gap: 25px;
+    gap: 35px;
+    /* Jarak antar menu lebih lega */
 }
 
 .mobile-links a {
     text-decoration: none;
-    font-size: 20px;
-    color: #333;
+    font-size: 26px;
+    /* Font lebih besar */
+    color: white;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    /* Jarak huruf khas desain mewah */
+    transition: 0.3s;
 }
 
-/* RESPONSIVE */
+.mobile-links a:hover {
+    color: #ffc107;
+    padding-left: 10px;
+    /* Efek geser saat disentuh */
+}
+
+/* --- RESPONSIVE --- */
 @media (max-width: 768px) {
+    .navbar {
+        padding: 15px 25px;
+    }
 
     .nav-links,
     .btn-nav {
@@ -1315,6 +1376,12 @@ body {
 
     .menu-icon {
         display: block;
+        color: #1f3b5f;
+    }
+
+    /* Agar mobile-nav muncul sebagai flex saat JS aktif */
+    .mobile-nav[style*="display: block"] {
+        display: flex !important;
     }
 }
 
@@ -1335,7 +1402,7 @@ body {
     }
 
     /* ================= ABOUT (TENTANG) ================= */
-    
+
     .about-content {
         grid-template-columns: 1fr;
     }
@@ -1671,30 +1738,133 @@ body {
     }
 }
 
-/* =============== RESPONSIVE EXTRA KECIL =========== */
-/* Untuk HP kecil (<= 480px) */
-@media (max-width: 480px) {
+/* ============================================================
+   FINAL RESPONSIVE FIX (CLEAN & PROPORTIONAL)
+   ============================================================ */
+
+@media (max-width: 768px) {
+
+    /* 1. GLOBAL SPACING */
+    section {
+        padding: 50px 20px !important;
+    }
+
+    /* 2. HERO SECTION - Anti Gepeng & Anti Mendominasi */
+    .hero {
+        min-height: 90vh;
+        /* Sedikit lebih pendek agar background terlihat */
+        display: flex;
+        align-items: center;
+    }
+
+    .hero-container {
+        padding: 0 15px;
+    }
+
+    .hero-content {
+        max-width: 100%;
+        padding-left: 15px;
+        border-left: 3px solid #d4af37;
+    }
+
+    .hero-badge {
+        font-size: 11px;
+        letter-spacing: 2px;
+        margin-bottom: 15px;
+    }
 
     .hero h1 {
-        font-size: 26px;
-        /* ukuran font */
+        font-size: 32px !important;
+        /* Ukuran pas untuk HP */
+        line-height: 1.2;
+        margin-bottom: 10px;
     }
 
     .hero h3 {
-        font-size: 16px;
-        /* ukuran font */
+        font-size: 16px !important;
+        line-height: 1.5;
+        margin-bottom: 25px;
     }
 
-    .footer-benefit {
-        grid-template-columns: 1fr;
-        /* keunggulan 1 kolom */
+    .hero-address {
+        font-size: 12px;
+        margin-bottom: 30px;
+        gap: 8px;
     }
 
-    .fasilitas {
-        grid-template-columns: 1fr;
-        /* fasilitas jadi 1 kolom */
+    .hero-actions {
+        flex-direction: column;
+        /* Tombol tumpuk ke bawah di HP */
+        gap: 15px;
     }
 
+    .btn-hero {
+        width: 100%;
+        text-align: center;
+        padding: 14px;
+    }
+
+    /* 3. ABOUT SECTION */
+    .about-content {
+        grid-template-columns: 1fr !important;
+        /* Paksa satu kolom */
+    }
+
+    .about-image {
+        min-height: 300px;
+        padding: 30px;
+    }
+
+    .about-subjudul {
+        font-size: 20px;
+    }
+
+    .about-description {
+        font-size: 14px;
+    }
+
+    /* 4. TIPE RUMAH - Horizontal Scroll Fix */
+    .tipe-grid {
+        display: flex;
+        overflow-x: auto;
+        padding: 10px 0 30px 0;
+        gap: 20px;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .tipe-card {
+        flex: 0 0 85%;
+        /* Card tidak terlalu lebar */
+        scroll-snap-align: center;
+    }
+
+    /* 5. FOOTER FIX - Agar tidak tumpang tindih */
+    .footer-benefit-grid,
+    .footer-contact-row,
+    .footer-social-row {
+        grid-template-columns: 1fr !important;
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+
+    .brand-name {
+        font-size: 28px;
+    }
+
+    /* 6. SLIDER IMAGE FIX */
+    .slider-track img {
+        height: 250px;
+        /* Jangan terlalu tinggi di HP agar tidak gepeng */
+    }
+}
+
+/* KHUSUS HP SANGAT KECIL (iPhone SE dkk) */
+@media (max-width: 380px) {
+    .hero h1 {
+        font-size: 28px !important;
+    }
 }
 
 /* ============================================================
@@ -1802,4 +1972,99 @@ body {
 #hubungi-kami {
     margin-top: 0 !important;
     padding-top: 20px;
+}
+
+/* ============================================================
+   ULTRA RESPONSIVE FIX (320px - 480px)
+   ============================================================ */
+@media (max-width: 480px) {
+
+    /* 1. Reset Global Spacing agar tidak sesak */
+    section {
+        padding: 40px 15px !important;
+        /* Perkecil padding samping */
+    }
+
+    /* 2. Hero Section - Perbaikan Proporsi */
+    .hero-container {
+        padding: 0 10px !important;
+    }
+
+    .hero h1 {
+        font-size: 28px !important;
+        /* Turunkan dikit dari 32px */
+        line-height: 1.1 !important;
+    }
+
+    .hero h3 {
+        font-size: 14px !important;
+        margin-bottom: 20px !important;
+    }
+
+    .hero-address {
+        font-size: 11px !important;
+        margin-bottom: 25px !important;
+    }
+
+    /* 3. Perbaikan Testimoni (Kunci agar tidak 'pecah' di 360px) */
+    .testi-grid-figma {
+        /* Ganti 350px jadi 100% agar tidak meluber keluar layar */
+        grid-template-columns: 1fr !important;
+        gap: 15px !important;
+        padding: 0 10px !important;
+    }
+
+    .testi-card-figma {
+        min-height: auto !important;
+        /* Biar tingginya ngikutin teks */
+        padding: 20px !important;
+    }
+
+    .testi-desc-figma {
+        font-size: 0.85rem !important;
+        margin-top: 25px !important;
+    }
+
+    /* 4. Perbaikan Tipe Rumah */
+    .tipe-container {
+        padding: 30px 15px !important;
+        /* Kurangi padding container navy */
+    }
+
+    .tipe-header h1 {
+        font-size: 24px !important;
+    }
+
+    .tipe-card {
+        flex: 0 0 90% !important;
+        /* Card sedikit lebih lebar agar terlihat jelas */
+    }
+
+    /* 5. Perbaikan Footer CTA & WA */
+    .footer-offer-title {
+        font-size: 24px !important;
+    }
+
+    .btn-wa-luxury {
+        padding: 14px 25px !important;
+        font-size: 14px !important;
+        width: 100% !important;
+        justify-content: center;
+    }
+
+    /* 6. Form Kontak */
+    .contact-box {
+        padding: 25px 15px !important;
+    }
+}
+
+/* KHUSUS HP SANGAT KECIL (320px - 360px) */
+@media (max-width: 360px) {
+    .hero h1 {
+        font-size: 26px !important;
+    }
+
+    .testi-username-figma {
+        font-size: 0.7rem !important;
+    }
 }
