@@ -57,7 +57,7 @@
                                                 <i class="bx bx-edit-alt me-2 text-info"></i> Edit
                                             </a>
                                             <form action="{{ route('fasilitas.destroy', $f->id) }}" method="POST"
-                                                onsubmit="return confirm('Yakin ingin menghapus?')">
+                                                onsubmit=>
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="dropdown-item py-2 text-danger">

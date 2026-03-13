@@ -60,273 +60,349 @@ section {
     padding: 80px 8%;
 }
 
-/* ================= HERO ================= */
+/* ================= HERO (LUXURY EDITION) ================= */
 .hero {
-    background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)),
-        url("/image/Rectangle 50.png") center/cover no-repeat;
     color: white;
-    min-height: 90vh;
+    min-height: 100vh;
     display: flex;
     align-items: center;
-    justify-content: center;
-    text-align: center;
+    position: relative;
+    overflow: hidden;
 }
 
-.hero h1 {
-    font-size: 48px;
+/* Container biar teksnya nggak nempel banget di ujung layar */
+.hero-container {
+    width: 100%;
+    max-width: 1200px;
+    /* Lebar standar website profesional */
+    margin: 0 auto;
+    padding: 0 40px;
 }
 
-.hero h3 {
-    font-weight: 400;
+.hero-content {
+    max-width: 650px;
+    /* Teks dibatasi lebarnya biar nggak kepanjangan ke kanan */
+    text-align: left;
+    /* RATA KIRI = LEBIH ELEGAN */
+    padding-left: 25px;
+    border-left: 4px solid #d4af37;
+    /* Aksen garis warna Gold Mewah */
+}
+
+.hero-badge {
+    display: inline-block;
+    color: #d4af37;
+    /* Warna Gold */
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 4px;
+    /* Dikasih jarak antar huruf biar premium */
+    text-transform: uppercase;
     margin-bottom: 20px;
 }
 
-.hero p {
-    color: #eee;
+.hero h1 {
+    font-size: 72px;
+    /* Ukuran dibikin raksasa */
+    font-weight: 800;
+    color: #ffffff;
+    line-height: 1.1;
+    margin-bottom: 15px;
+    letter-spacing: -1px;
+}
+
+.hero h3 {
+    font-size: 24px;
+    font-weight: 300;
+    /* Font tipis biar kontras sama judul */
+    color: #cbd5e1;
     margin-bottom: 30px;
+    line-height: 1.5;
+}
+
+.hero-address {
+    font-size: 16px;
+    color: #94a3b8;
+    margin-bottom: 45px;
+    display: flex;
+    /* Biar icon dan teks sejajar */
+    align-items: flex-start;
+    gap: 12px;
+    line-height: 1.6;
+}
+
+/* --- BUTTON REVISI (Gold Solid & Navy) --- */
+.hero-actions {
+    display: flex;
+    gap: 20px;
 }
 
 .btn-hero {
-    background: rgb(255, 255, 255);
-    color: #000;
-    border-radius: 30px;
-    padding: 10px 20px;
-    font-weight: 600;
+    background: #d4af37;
+    /* Gold Element */
+    color: #0f172a;
+    /* Teks Navy gelap pekat */
+    border-radius: 4px;
+    /* Kesan kaku/tegas = profesional */
+    padding: 16px 36px;
+    font-size: 16px;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    /* Huruf kapital semua */
+    letter-spacing: 1px;
 }
 
+.btn-hero:hover {
+    background: #ffffff;
+    color: #000000;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(212, 175, 55, 0.4);
+}
+
+/* --- ANIMASI ELEGAN --- */
+.hero-badge,
 .hero-content h1,
-.hero-content p,
-.hero-content button {
+.hero-content h3,
+.hero-address,
+.hero-actions {
     opacity: 0;
-    transform: translateY(30px);
-    animation: fadeUp 0.8s ease forwards;
+    transform: translateX(-30px);
+    /* Animasinya geser dari kiri, bukan dari bawah */
+    animation: fadeRight 1s ease forwards;
 }
 
-.hero-content p {
-    animation-delay: 0.3s;
+.hero-content h1 {
+    animation-delay: 0.2s;
 }
 
-.hero-content button {
+.hero-content h3 {
+    animation-delay: 0.4s;
+}
+
+.hero-address {
     animation-delay: 0.6s;
 }
 
-@keyframes fadeUp {
+.hero-actions {
+    animation-delay: 0.8s;
+}
+
+@keyframes fadeRight {
     to {
         opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.hero {
-    animation: zoomBg 6s ease infinite alternate;
-}
-
-@keyframes zoomBg {
-    from {
-        background-size: 100%;
-    }
-
-    to {
-        background-size: 110%;
+        transform: translateX(0);
     }
 }
 
 
-/* ================= SELENGKAPNYA ================ */
-
-section h1 {
-    display: flex;
-    align-items: center;
-    text-align: center;
-    justify-content: center;
-}
-
-/* ================= KIRI ========================*/
+/* ================= ABOUT LUXURY SECTION ================ */
 #about {
-    padding: 80px 0;
-    /* ❗ HANYA ATAS-BAWAH */
+    padding: 100px 0;
+    background: #ffffff;
 }
 
-.about-content {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    min-height: 420px;
-
-    width: 100vw;
-    /* ⬅️ FULL LAYAR */
-    margin-left: calc(-50vw + 50%);
-}
-
-.about-overlay {
-    max-width: 520px;
-    padding: 40px;
-    margin-left: 8%;
-    /* ⬅️ mirip container */
+.container-luxury {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+    padding-bottom: 60px;
 }
 
 .about-title {
-    text-align: center;
     font-size: 36px;
     margin-bottom: 50px;
+    /* font-weight: 800; */
+    color: #1f3b5f;
+    margin-bottom: 15px;
+    letter-spacing: -1px;
 }
 
-/* ini buat GRIDnya  */
+.title-line {
+    width: 80px;
+    height: 4px;
+    background: #d4af37;
+    /* Aksen Gold */
+    margin: 0 auto;
+}
+
+/* LAYOUT GRID */
 .about-content {
     display: grid;
-    grid-template-columns: 2fr 1fr;
-    min-height: 420px;
+    grid-template-columns: 1.4fr 1fr;
+    /* Kiri lebih lebar sedikit */
+    min-height: 600px;
+    width: 100%;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
 }
 
-/* ===== buat yg KIRI (IMAGE) ===== */
+/* KIRI: IMAGE AREA */
 .about-image {
-    background: url("/image/Rectangle 57.png") center / cover no-repeat;
     position: relative;
     display: flex;
     align-items: center;
-    min-height: 420px;
+    padding: 60px;
+    background-size: cover !important;
+    background-position: center !important;
 }
 
-/* overlay gelapnya */
 .about-image::before {
     content: "";
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.45);
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.85) 20%, rgba(0, 0, 0, 0.2));
     z-index: 1;
 }
 
-/* teks di atas overlay */
 .about-overlay {
     position: relative;
     z-index: 2;
     color: white;
-    max-width: 520px;
-    padding: 40px;
+    max-width: 500px;
 }
 
-/* judul */
-.about-overlay h3 {
-    font-size: 22px;
-    margin-bottom: 15px;
-    color: white;
-}
-
-/* buat paragrafnya */
-.about-overlay p {
-    font-size: 14px;
-    line-height: 1.6;
+.about-tag {
+    color: #d4af37;
+    text-transform: uppercase;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 3px;
     margin-bottom: 20px;
-    color: #f1f1f1;
+    display: block;
 }
 
-.btn-selengkapnya {
-    background: rgb(255, 255, 255);
-    color: #000;
-    border-radius: 30px;
-    padding: 10px 20px;
+.about-subjudul {
+    font-size: 24px;
     font-weight: 600;
+    line-height: 1.4;
+    margin-bottom: 25px;
+    color: #ffffff;
 }
 
-/* ================= KANAN ======================== */
+.about-description {
+    font-size: 16px;
+    line-height: 1.8;
+    color: #cbd5e1;
+    margin-bottom: 40px;
+    font-weight: 300;
+}
+
+/* TOMBOL MEWAH */
+.btn-selengkapnya-luxury {
+    display: inline-block;
+    padding: 16px 35px;
+    background: transparent;
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    text-decoration: none !important;
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: all 0.4s ease;
+}
+
+.btn-selengkapnya-luxury:hover {
+    background: #ffffff;
+    color: #0f172a;
+    border-color: #ffffff;
+    transform: translateY(-5px);
+}
+
+/* KANAN: FITUR AREA */
 .about-fitur {
-    background: #1f3b5f;
-    padding: 40px 40px 40px 30px;
+    background: #1F3A5F;
+    /* Navy sangat gelap */
+    padding: 60px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
-.about-fitur {
-    background: #1f3b5f;
-    padding: 40px 30px;
-    color: white;
+.fitur-header h4 {
+    color: #ffffff;
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 40px;
+    position: relative;
+    padding-bottom: 15px;
 }
 
-.about-fitur ul {
+.fitur-header h4::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 3px;
+    background: #d4af37;
+}
+
+.fitur-list {
     list-style: none;
     padding: 0;
-    margin: 0;
 }
 
-.about-fitur li {
-    margin-bottom: 18px;
-}
-
-/* CARD/kartu pemisah */
-.about-fitur li div {
+.fitur-card {
     display: flex;
-    gap: 15px;
-    align-items: flex-start;
-
-    background: rgba(255, 255, 255, 0.08);
-    padding: 18px;
-    border-radius: 12px;
-
-    transition: 0.3s;
-}
-
-/* hover */
-.about-fitur li div:hover {
-    background: rgba(255, 255, 255, 0.15);
-    transform: translateX(4px);
-}
-
-.about-fitur img {
-    width: 26px;
-    height: 26px;
-    flex-shrink: 0;
-    margin-top: 4px;
-}
-
-.about-fitur h3 {
-    font-size: 16px;
-    margin: 0 0 6px;
-    font-weight: 600;
-    color: white;
-}
-
-.about-fitur p {
-    font-size: 13px;
-    color: #dbe4f0;
-    margin: 0;
-    line-height: 1.5;
-}
-
-/* buat animasi */
-.btn-selengkapnya {
-    margin-top: 24px;
-    padding: 14px 28px;
-    font-size: 15px;
-    font-weight: 600;
-
-    background: transparent;
-    color: white;
-    border: 2px solid white;
-    border-radius: 30px;
-    cursor: pointer;
-
-    /* animasi halus */
-    animation: float 2.5s ease-in-out infinite;
+    gap: 20px;
+    padding: 25px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+    /* Sudut tegas lebih profesional */
+    margin-bottom: 20px;
     transition: all 0.3s ease;
 }
 
-@keyframes float {
-    0% {
-        transform: translateY(0);
-    }
-
-    50% {
-        transform: translateY(-6px);
-    }
-
-    100% {
-        transform: translateY(0);
-    }
+.fitur-card:hover {
+    background: rgba(212, 175, 55, 0.05);
+    border-color: rgba(255, 255, 254, 0.3);
+    transform: translateX(10px);
 }
 
-.btn-selengkapnya:hover {
-    background: white;
-    color: #1f3b5f;
-    transform: translateY(-8px);
+.fitur-icon-box {
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
 }
 
+.fitur-icon-box img {
+    width: 24px;
+    filter: brightness(0) invert(1) sepia(1) saturate(5) hue-rotate(10deg);
+    /* Bikin icon jadi gold */
+}
+
+.fitur-text h3 {
+    font-size: 17px;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 8px;
+}
+
+.fitur-text p {
+    font-size: 14px;
+    color: #94a3b8;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* RESPONSIVE */
+@media (max-width: 992px) {
+    .about-content {
+        grid-template-columns: 1fr;
+    }
+
+    .about-image {
+        min-height: 400px;
+    }
+}
 
 /* ================= FASILITAS SEKITAR ================= */
 
@@ -553,6 +629,11 @@ section h1 {
 }
 
 /* ================= FASILITAS PERUMAHAN ================= */
+
+.judul-perumahan {
+    color: #1f3b5f;
+}
+
 .fasilitas-perumahan {
     padding: 80px 8%;
     /*biar jaraknya lega/berjarak, responsif*/
@@ -663,6 +744,11 @@ section h1 {
 
 
 /* ================= TESTIMONI ================= */
+
+.testi-title {
+    color: #1f3b5f;
+}
+
 #testi-klien {
     padding: 80px 8%;
     background: #f4f7fb;
@@ -700,11 +786,9 @@ section h1 {
 .testi-card:hover {
     transform: translateY(-10px) scale(1.015);
     box-shadow: 0 22px 50px rgba(31, 59, 95, 0.22);
-    background: linear-gradient(
-        180deg,
-        #ffffff 0%,
-        #f7fbff 100%
-    );
+    background: linear-gradient(180deg,
+            #ffffff 0%,
+            #f7fbff 100%);
 }
 
 /* RATING */
@@ -774,7 +858,7 @@ section h1 {
 /* ---------- JUDUL ---------- */
 .contact-title {
     text-align: center;
-    font-size: 32px;
+    font-size: 36px;
     margin-bottom: 30px;
     font-weight: 600;
     color: #1f3b5f;
@@ -895,6 +979,14 @@ section h1 {
 
 /* ================= LOKASI GRAND HORIZON =============== */
 
+.judul-lokasi {
+    text-align: center;
+    font-size: 32px;
+    margin-bottom: 30px;
+    font-weight: 600;
+    color: #1f3b5f;
+}
+
 /* section utama */
 .location {
     padding: 80px 8%;
@@ -941,56 +1033,82 @@ section h1 {
 
 /* ================= FOOTER ================= */
 .footer {
-    background-color: #0b2a55; /* Warna biru gelap */
-    color: #ffffff;            /* Warna teks putih */
-    padding: 60px 0;           /* Jarak atas & bawah */
+    background-color: #0b2a55;
+    /* Warna biru gelap */
+    color: #ffffff;
+    /* Warna teks putih */
+    padding: 60px 0;
+    /* Jarak atas & bawah */
 }
 
 /* Container footer */
 .footer-container {
-    max-width: 1100px;         /* Lebar maksimal */
-    margin: auto;              /* Tengah */
-    text-align: center;        /* Rata tengah */
+    max-width: 1100px;
+    /* Lebar maksimal */
+    margin: auto;
+    /* Tengah */
+    text-align: center;
+    /* Rata tengah */
 }
 
 /* Judul footer */
 .footer-title {
-    font-size: 32px;           /* Ukuran besar */
-    margin-bottom: 30px;       /* Jarak bawah */
+    font-size: 36px;
+    /* Ukuran besar */
+    margin-bottom: 30px;
+    /* color: #1f3b5f; */
+    /* Jarak bawah */
 }
 
 /* ================= LIST KEUNGGULAN ================= */
 .footer-benefit {
-    list-style: none;          /* Hilangkan bullet */
-    display: grid;             /* mengaktifkan CSS Grid untuk layout */
-    grid-template-columns: repeat(4, 1fr); /* 4 kolom */
-    gap: 20px;                 /* memberi jarak antar item grid (atas, bawah, kiri, kanan) */
-    margin-bottom: 40px;       /*jarak bawah dari elemen berikutnya */
+    list-style: none;
+    /* Hilangkan bullet */
+    display: grid;
+    /* mengaktifkan CSS Grid untuk layout */
+    grid-template-columns: repeat(4, 1fr);
+    /* 4 kolom */
+    gap: 20px;
+    /* memberi jarak antar item grid (atas, bawah, kiri, kanan) */
+    margin-bottom: 40px;
+    /*jarak bawah dari elemen berikutnya */
 }
 
 /* Item keunggulan */
 .footer-benefit li {
-    display: flex;            /* biar icon dan teks sejajar ke samping */
-    align-items: center;      /* biar rata icon dan teks secara vertikal di tengah */
-    justify-content: center;  /* biar posisi isi li ke tengah secara horizontal */
-    gap: 8px;                 /* jarak antara icon dan teks */
-    font-size: 14px;          /* ukuran teks */
+    display: flex;
+    /* biar icon dan teks sejajar ke samping */
+    align-items: center;
+    /* biar rata icon dan teks secara vertikal di tengah */
+    justify-content: center;
+    /* biar posisi isi li ke tengah secara horizontal */
+    gap: 8px;
+    /* jarak antara icon dan teks */
+    font-size: 14px;
+    /* ukuran teks */
 }
 
 .footer ul li {
-    margin-bottom: 12px;     /* jarak antar item */
-    display: flex;           /* membuat isi li (icon + teks) sejajar ke samping */
-    align-items: center;     /* meratakan icon dan teks secara vertikal di tengah */
-    gap: 10px;               /* jarak antara icon & teks */
+    margin-bottom: 12px;
+    /* jarak antar item */
+    display: flex;
+    /* membuat isi li (icon + teks) sejajar ke samping */
+    align-items: center;
+    /* meratakan icon dan teks secara vertikal di tengah */
+    gap: 10px;
+    /* jarak antara icon & teks */
 }
 
 .footer ul li {
-    font-size: 16px;         /* Ukuran keunggulan spt cicilan*/
+    font-size: 16px;
+    /* Ukuran keunggulan spt cicilan*/
 }
 
 .footer ul li img {
-    width: 22px;             /* icon lebih besar */
-    height: auto;            /* biar menyesuaikan*/
+    width: 22px;
+    /* icon lebih besar */
+    height: auto;
+    /* biar menyesuaikan*/
 }
 
 .icon-putih {
@@ -999,22 +1117,34 @@ section h1 {
 
 /* ================= BUTTON WHATSAPP ================= */
 .footer-button {
-    background-color: #ffffff;   /* memberi warna latar putih pada tombol */
-    color: #0b2a55;              /* mengubah warna teks tombol menjadi biru */
-    border: none;                  /* menghilangkan garis border bawaan tombol */
-    padding: 12px 22px;            /* memberi jarak dalam tombol (atas-bawah 12px, kiri-kanan 22px) */
-    border-radius: 25px;           /* biar sudut tombol menjadi bulat */
-    font-size: 14px;               /* ukuran teks didalem tombol */ 
-    display: inline-flex;          /* biar ukurannya sejjar ke samping */
-    align-items: center;           /* meratakan icon dan teks secara vertikal di tengah */
-    gap: 10px;                     /* jarak antara icon WhatsApp dan teks */
-    cursor: pointer;               /* mengubah cursor menjadi tangan saat diarahkan ke tombol */
-    margin-bottom: 40px;           /* memberi jarak bawah agar tombol tidak mepet elemen lain */
+    background-color: #ffffff;
+    /* memberi warna latar putih pada tombol */
+    color: #0b2a55;
+    /* mengubah warna teks tombol menjadi biru */
+    border: none;
+    /* menghilangkan garis border bawaan tombol */
+    padding: 12px 22px;
+    /* memberi jarak dalam tombol (atas-bawah 12px, kiri-kanan 22px) */
+    border-radius: 25px;
+    /* biar sudut tombol menjadi bulat */
+    font-size: 14px;
+    /* ukuran teks didalem tombol */
+    display: inline-flex;
+    /* biar ukurannya sejjar ke samping */
+    align-items: center;
+    /* meratakan icon dan teks secara vertikal di tengah */
+    gap: 10px;
+    /* jarak antara icon WhatsApp dan teks */
+    cursor: pointer;
+    /* mengubah cursor menjadi tangan saat diarahkan ke tombol */
+    margin-bottom: 40px;
+    /* memberi jarak bawah agar tombol tidak mepet elemen lain */
 }
 
 /* Icon WA ditombol */
 .footer-button img {
-    width: 18px;                 /* mengatur lebar icon WhatsApp agar tidak terlalu besar */
+    width: 18px;
+    /* mengatur lebar icon WhatsApp agar tidak terlalu besar */
 }
 
 .footer-button {
@@ -1026,7 +1156,8 @@ section h1 {
     background-color: #b1bcb5;
     color: #ffffff;
 
-    text-decoration: none;   /* HILANGKAN GARIS BAWAH */
+    text-decoration: none;
+    /* HILANGKAN GARIS BAWAH */
     border-radius: 6px;
     font-weight: 600;
     cursor: pointer;
@@ -1038,17 +1169,22 @@ section h1 {
 
 /* garis */
 .footer hr {
-    margin: 50px 0;              /* memberi jarak atas & bawah garis agar tidak mepet konten */
-    border: none;                /* menghilangkan border bawaan elemen <hr> */
-    height: 2px;                 /* mengatur ketebalan garis */
-    background: white;         /* biar garisnya warna putih */
+    margin: 50px 0;
+    /* memberi jarak atas & bawah garis agar tidak mepet konten */
+    border: none;
+    /* menghilangkan border bawaan elemen <hr> */
+    height: 2px;
+    /* mengatur ketebalan garis */
+    background: white;
+    /* biar garisnya warna putih */
 }
 
 /* ================= KONTAK ================= */
 .footer-contact {
     list-style: none;
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 kolom */
+    grid-template-columns: repeat(3, 1fr);
+    /* 3 kolom */
     gap: 20px;
     margin-bottom: 30px;
 }
@@ -1076,12 +1212,18 @@ section h1 {
 /* ================= COPYRIGHT ================= */
 /* Bagian copyright */
 .footer-copyright {
-    background-color: #ffffff;   /* background putih */
-    color: #000000;              /* teks hitam biar kebaca */
-    text-align: center;          /* teks di tengah */
-    padding: 15px 0;             /* tinggi area */
-    font-size: 14px;             /* ukuran teks */
-    margin-top: 20px;            /* jarak dari footer atas */
+    background-color: #ffffff;
+    /* background putih */
+    color: #000000;
+    /* teks hitam biar kebaca */
+    text-align: center;
+    /* teks di tengah */
+    padding: 15px 0;
+    /* tinggi area */
+    font-size: 14px;
+    /* ukuran teks */
+    margin-top: 20px;
+    /* jarak dari footer atas */
 }
 
 /* ================= RESPONSIVE MOBILE ================= */
@@ -1095,79 +1237,137 @@ body {
     font-family: Arial, sans-serif;
 }
 
-/* NAVBAR DESKTOP */
+/* --- NAVBAR DESKTOP (Polesan Warna) --- */
 .navbar {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 20px 40px;
+    padding: 15px 60px;
+    /* Padding lebih lebar agar elegan */
     background: white;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+    /* Shadow tipis agar modern */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
 .logo {
-    width: 100px;
+    width: 120px;
+    /* Ukuran logo lebih proporsional */
 }
 
 .nav-links {
     display: flex;
     list-style: none;
-    gap: 30px;
+    gap: 35px;
 }
 
 .nav-links a {
     text-decoration: none;
-    color: #333;
-    font-weight: 500;
+    color: #1f3b5f;
+    /* Pakai Navy sesuai judul kamu */
+    font-weight: 600;
+    font-size: 15px;
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    color: #ffc107;
+    /* Aksen emas */
 }
 
 .btn-nav {
-    padding: 10px 20px;
-    background: #0b5ed7;
+    padding: 12px 25px;
+    background: #1f3b5f;
+    /* Warna Navy yang sama */
     color: white;
     border: none;
-    border-radius: 6px;
+    border-radius: 4px;
+    /* Kotak sedikit tajam lebih mewah */
     cursor: pointer;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.btn-nav:hover {
+    background: #ffc107;
+    color: #1f3b5f;
 }
 
 /* MENU ICON (HIDDEN DI DESKTOP) */
 .menu-icon {
     display: none;
+    /* Ini yang bikin dia hilang di laptop/desktop */
     font-size: 28px;
     cursor: pointer;
+    color: #1f3b5f;
+    /* Warna Navy agar senada */
 }
 
-/* NAVBAR MOBILE */
+/* --- NAVBAR MOBILE (Transformasi Total agar Tidak Kosong) --- */
 .mobile-nav {
     display: none;
     position: fixed;
     inset: 0;
-    background: white;
-    padding: 30px;
-    z-index: 999;
+    background: #0b1d33;
+    /* Background Navy gelap agar exclusive */
+    padding: 40px;
+    z-index: 9999;
+    flex-direction: column;
+    justify-content: center;
+    /* Menu di tengah layar */
+    align-items: center;
+    text-align: center;
 }
 
 .close-menu {
-    font-size: 28px;
+    position: absolute;
+    top: 30px;
+    right: 40px;
+    font-size: 35px;
+    color: white;
     cursor: pointer;
-    text-align: right;
+    transition: 0.3s;
+}
+
+.close-menu:hover {
+    color: #ffc107;
+    transform: rotate(90deg);
 }
 
 .mobile-links {
     list-style: none;
-    margin-top: 40px;
+    margin: 0;
     display: flex;
     flex-direction: column;
-    gap: 25px;
+    gap: 35px;
+    /* Jarak antar menu lebih lega */
 }
 
 .mobile-links a {
     text-decoration: none;
-    font-size: 20px;
-    color: #333;
+    font-size: 26px;
+    /* Font lebih besar */
+    color: white;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    /* Jarak huruf khas desain mewah */
+    transition: 0.3s;
 }
 
-/* RESPONSIVE */
+.mobile-links a:hover {
+    color: #ffc107;
+    padding-left: 10px;
+    /* Efek geser saat disentuh */
+}
+
+/* --- RESPONSIVE --- */
 @media (max-width: 768px) {
+    .navbar {
+        padding: 15px 25px;
+    }
 
     .nav-links,
     .btn-nav {
@@ -1176,6 +1376,12 @@ body {
 
     .menu-icon {
         display: block;
+        color: #1f3b5f;
+    }
+
+    /* Agar mobile-nav muncul sebagai flex saat JS aktif */
+    .mobile-nav[style*="display: block"] {
+        display: flex !important;
     }
 }
 
@@ -1196,6 +1402,7 @@ body {
     }
 
     /* ================= ABOUT (TENTANG) ================= */
+
     .about-content {
         grid-template-columns: 1fr;
     }
@@ -1208,123 +1415,456 @@ body {
         padding: 24px;
     }
 
-    /* ================= FASILITAS SEKITAR ================= */
-    .fasilitas-grid {
-        grid-template-columns: 1fr;
-    }
-
-    /* =================== TIPE RUMAH ==================== */
-    @media (max-width: 768px) {
-
-        /* container geser */
-        .tipe-grid {
-            display: flex;
-            gap: 16px;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-
-            padding: 0 16px 16px;
-            /* penting */
-        }
-
-        /* tiap card */
-        .tipe-card {
-            flex: 0 0 calc(100% - 32px);
-            /* FULL layar */
-            scroll-snap-align: center;
-            border-radius: 20px;
-        }
-
-        /* gambar */
-        .tipe-card img {
-            height: 220px;
-            /* lebih pendek biar proporsional */
-            object-fit: cover;
-        }
-    }
-
-    /* ================= TESTIMONI ================= */
-    .testi-grid {
-        grid-template-columns: 1fr;
-    }
-
-    /* ================= LOKASI ===================== */
-    @media (max-width: 768px) {
-
-        .location-g {
-            flex-direction: column;
-            /* ⬅️ KUNCI UTAMA */
-            gap: 24px;
-        }
-
-        .location iframe {
-            width: 100%;
-            height: 300px;
-        }
-
-        .location-p {
-            width: 100%;
-            max-width: 100%;
-        }
-    }
-
-    /* ================= HUBUNGI KAMI ================= */
-    @media (max-width: 600px) {
-        .contact {
-            overflow: visible;
-            position: relative;
-            z-index: 5;
-        }
-
-        .contact-form {
-            grid-template-columns: 1fr;
-        }
-
-        .contact-form textarea,
-        .contact-form button {
-            grid-column: span 1;
-        }
-
-        .contact-form button {
-            position: relative;
-            z-index: 10;
-        }
-    }
-
-   /* ================= FOOTER ================= */
-  .footer-benefit {
-    grid-template-columns: repeat(2, 1fr); /* 4 kolom → 2 kolom */
-  }
-
-  .footer-contact {
-    grid-template-columns: 1fr; /* kontak ke bawah */
-  }
-
-  .footer-title {
-    font-size: 26px;    /* ukuran font */
-  }
 }
 
-/* =============== RESPONSIVE EXTRA KECIL =========== */
-/* Untuk HP kecil (<= 480px) */
-@media (max-width: 480px) {
+/* ================= FASILITAS SEKITAR ================= */
+.fasilitas-grid {
+    grid-template-columns: 1fr;
+}
 
-  .hero h1 {
-    font-size: 26px;  /* ukuran font */
-  }
+.judul-fasilitas {
+    color: #1f3b5f;
+}
 
-  .hero h3 {
-    font-size: 16px;  /* ukuran font */
-  }
+/* =================== TIPE RUMAH ==================== */
+@media (max-width: 768px) {
 
-  .footer-benefit {
-    grid-template-columns: 1fr; /* keunggulan 1 kolom */
-  }
+    /* container geser */
+    .tipe-grid {
+        display: flex;
+        gap: 16px;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
 
-  .fasilitas {
-    grid-template-columns: 1fr; /* fasilitas jadi 1 kolom */
-  }
+        padding: 0 16px 16px;
+        /* penting */
+    }
 
+    /* tiap card */
+    .tipe-card {
+        flex: 0 0 calc(100% - 32px);
+        /* FULL layar */
+        scroll-snap-align: center;
+        border-radius: 20px;
+    }
+
+    /* gambar */
+    .tipe-card img {
+        height: 220px;
+        /* lebih pendek biar proporsional */
+        object-fit: cover;
+    }
+}
+
+/* ================= TESTIMONI ================= */
+.testi-grid {
+    grid-template-columns: 1fr;
+}
+
+/* ================= LOKASI ===================== */
+@media (max-width: 768px) {
+
+    .location-g {
+        flex-direction: column;
+        /* ⬅️ KUNCI UTAMA */
+        gap: 24px;
+    }
+
+    .location iframe {
+        width: 100%;
+        height: 300px;
+    }
+
+    .location-p {
+        width: 100%;
+        max-width: 100%;
+    }
+}
+
+/* ================= HUBUNGI KAMI ================= */
+@media (max-width: 600px) {
+    .contact {
+        overflow: visible;
+        position: relative;
+        z-index: 5;
+    }
+
+    .contact-form {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-form textarea,
+    .contact-form button {
+        grid-column: span 1;
+    }
+
+    .contact-form button {
+        position: relative;
+        z-index: 10;
+    }
+}
+
+/* ================= LUXURY FOOTER ================= */
+.footer-luxury {
+    background: #1F3A5F;
+    /* Navy Gelap */
+    color: #ffffff;
+    font-family: 'Poppins', sans-serif;
+}
+
+.container-luxury {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* --- BAGIAN ATAS (CTA & BENEFIT) --- */
+.footer-cta-section {
+    padding: 80px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    text-align: center;
+}
+
+.footer-offer-title {
+    font-size: 36px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin-bottom: 15px;
+}
+
+.footer-gold-line {
+    width: 60px;
+    height: 3px;
+    background: #d4af37;
+    /* Aksen Gold */
+    margin: 0 auto 50px;
+}
+
+.footer-benefit-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 30px;
+    margin-bottom: 60px;
+}
+
+.benefit-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 20px;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+.benefit-item:hover {
+    background: rgba(212, 175, 55, 0.1);
+    transform: translateY(-5px);
+}
+
+.icon-circle {
+    width: 40px;
+    height: 40px;
+    background: rgba(212, 175, 55, 0.15);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-gold {
+    width: 18px;
+    filter: brightness(0) invert(1) sepia(1) saturate(5) hue-rotate(10deg);
+    /* CSS Gold Filter */
+}
+
+.benefit-item span {
+    font-size: 15px;
+    font-weight: 500;
+    color: #cbd5e1;
+}
+
+/* --- TOMBOL WHATSAPP --- */
+.btn-wa-luxury {
+    display: inline-flex;
+    align-items: center;
+    gap: 15px;
+    background: #25d366;
+    /* Hijau WA Original */
+    color: white;
+    padding: 18px 40px;
+    border-radius: 50px;
+    text-decoration: none !important;
+    font-weight: 700;
+    font-size: 16px;
+    transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 10px 30px rgba(37, 211, 102, 0.3);
+}
+
+.btn-wa-luxury img {
+    width: 24px;
+}
+
+.btn-wa-luxury:hover {
+    transform: scale(1.05);
+    box-shadow: 0 15px 40px rgba(37, 211, 102, 0.4);
+}
+
+/* --- BAGIAN BAWAH (INFO HORIZONTAL) --- */
+.footer-info-section {
+    padding: 60px 0 50px;
+    background: #1F3A5F;
+    /* Biru Navy Utama */
+}
+
+/* Brand di Tengah */
+.footer-brand-horizontal {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.brand-name {
+    font-size: 36px;
+    font-weight: 800;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+    color: #ffffff;
+}
+
+.brand-name span {
+    color: #FFD700;
+    /* Kuning emas */
+}
+
+.brand-tagline {
+    font-size: 15px;
+    color: #cbd5e1;
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Garis Pemisah Elegan */
+.footer-divider {
+    border: 0;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.15);
+    margin: 40px 0;
+}
+
+/* Layout Baris Kontak */
+.footer-contact-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 50px;
+    /* Jarak antar item kontak */
+    margin-bottom: 30px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 15px;
+    transition: 0.3s;
+}
+
+.contact-item:hover {
+    color: #FFD700;
+}
+
+.contact-icon {
+    width: 22px;
+    height: auto;
+}
+
+/* Layout Baris Sosmed */
+.footer-social-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 40px;
+}
+
+.social-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: #cbd5e1;
+    font-size: 14px;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.social-item img {
+    width: 20px;
+    filter: brightness(0) invert(1);
+    /* Bikin icon jadi putih */
+    transition: 0.3s;
+}
+
+.social-item:hover {
+    color: #FFD700;
+}
+
+/* --- BLOK COPYRIGHT BAWAH (CERAH) --- */
+.footer-copyright-bar {
+    background: #ffffff;
+    padding: 25px 0;
+    text-align: center;
+}
+
+.footer-copyright-bar .container-luxury {
+    color: #64748b;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+/* Penyesuaian buat layar HP biar ga berantakan */
+@media (max-width: 768px) {
+
+    .footer-contact-row,
+    .footer-social-row {
+        flex-direction: column;
+        gap: 20px;
+    }
+}
+
+/* ============================================================
+   FINAL RESPONSIVE FIX (CLEAN & PROPORTIONAL)
+   ============================================================ */
+
+@media (max-width: 768px) {
+
+    /* 1. GLOBAL SPACING */
+    section {
+        padding: 50px 20px !important;
+    }
+
+    /* 2. HERO SECTION - Anti Gepeng & Anti Mendominasi */
+    .hero {
+        min-height: 90vh;
+        /* Sedikit lebih pendek agar background terlihat */
+        display: flex;
+        align-items: center;
+    }
+
+    .hero-container {
+        padding: 0 15px;
+    }
+
+    .hero-content {
+        max-width: 100%;
+        padding-left: 15px;
+        border-left: 3px solid #d4af37;
+    }
+
+    .hero-badge {
+        font-size: 11px;
+        letter-spacing: 2px;
+        margin-bottom: 15px;
+    }
+
+    .hero h1 {
+        font-size: 32px !important;
+        /* Ukuran pas untuk HP */
+        line-height: 1.2;
+        margin-bottom: 10px;
+    }
+
+    .hero h3 {
+        font-size: 16px !important;
+        line-height: 1.5;
+        margin-bottom: 25px;
+    }
+
+    .hero-address {
+        font-size: 12px;
+        margin-bottom: 30px;
+        gap: 8px;
+    }
+
+    .hero-actions {
+        flex-direction: column;
+        /* Tombol tumpuk ke bawah di HP */
+        gap: 15px;
+    }
+
+    .btn-hero {
+        width: 100%;
+        text-align: center;
+        padding: 14px;
+    }
+
+    /* 3. ABOUT SECTION */
+    .about-content {
+        grid-template-columns: 1fr !important;
+        /* Paksa satu kolom */
+    }
+
+    .about-image {
+        min-height: 300px;
+        padding: 30px;
+    }
+
+    .about-subjudul {
+        font-size: 20px;
+    }
+
+    .about-description {
+        font-size: 14px;
+    }
+
+    /* 4. TIPE RUMAH - Horizontal Scroll Fix */
+    .tipe-grid {
+        display: flex;
+        overflow-x: auto;
+        padding: 10px 0 30px 0;
+        gap: 20px;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .tipe-card {
+        flex: 0 0 85%;
+        /* Card tidak terlalu lebar */
+        scroll-snap-align: center;
+    }
+
+    /* 5. FOOTER FIX - Agar tidak tumpang tindih */
+    .footer-benefit-grid,
+    .footer-contact-row,
+    .footer-social-row {
+        grid-template-columns: 1fr !important;
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+
+    .brand-name {
+        font-size: 28px;
+    }
+
+    /* 6. SLIDER IMAGE FIX */
+    .slider-track img {
+        height: 250px;
+        /* Jangan terlalu tinggi di HP agar tidak gepeng */
+    }
+}
+
+/* KHUSUS HP SANGAT KECIL (iPhone SE dkk) */
+@media (max-width: 380px) {
+    .hero h1 {
+        font-size: 28px !important;
+    }
 }
 
 /* ============================================================
@@ -1337,9 +1877,10 @@ body {
     font-size: 2.2rem;
     font-weight: bold;
     margin-top: 50px;
-    margin-bottom: 30px; /* Dikurangi agar lebih dekat ke kartu */
+    margin-bottom: 30px;
+    /* Dikurangi agar lebih dekat ke kartu */
     letter-spacing: 2px;
-    text-transform: uppercase;
+    text-transform: none;
     font-family: sans-serif;
 }
 
@@ -1347,24 +1888,29 @@ body {
 .testi-grid-figma {
     display: grid;
     /* minmax 350px membuat kartu lebih lebar secara horizontal */
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); 
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 20px;
-    padding: 0 5%; /* Padding samping diperkecil agar grid meluas */
-    margin-bottom: 40px; /* Jarak ke 'Hubungi Kami' dipangkas drastis */
+    padding: 0 5%;
+    /* Padding samping diperkecil agar grid meluas */
+    margin-bottom: 40px;
+    /* Jarak ke 'Hubungi Kami' dipangkas drastis */
 }
 
 /* Kartu Biru Gelap - Dibuat lebih tipis & radius halus */
 .testi-card-figma {
     background-color: #314a74;
     color: white;
-    padding: 20px 25px;       /* Atas-bawah 20px, Kiri-kanan 25px */
-    border-radius: 20px;      /* Sudut lebih tumpul/round sesuai request */
+    padding: 20px 25px;
+    /* Atas-bawah 20px, Kiri-kanan 25px */
+    border-radius: 20px;
+    /* Sudut lebih tumpul/round sesuai request */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    min-height: 180px;        /* Diperpendek agar tidak terlalu tinggi */
+    min-height: 180px;
+    /* Diperpendek agar tidak terlalu tinggi */
     position: relative;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
 }
 
@@ -1393,7 +1939,8 @@ body {
 .testi-desc-figma {
     font-size: 0.95rem;
     line-height: 1.5;
-    margin-top: 35px;         /* Memberi ruang untuk rating di atas */
+    margin-top: 35px;
+    /* Memberi ruang untuk rating di atas */
     margin-bottom: 20px;
     color: #e0e6ed;
     font-weight: 300;
@@ -1425,4 +1972,99 @@ body {
 #hubungi-kami {
     margin-top: 0 !important;
     padding-top: 20px;
+}
+
+/* ============================================================
+   ULTRA RESPONSIVE FIX (320px - 480px)
+   ============================================================ */
+@media (max-width: 480px) {
+
+    /* 1. Reset Global Spacing agar tidak sesak */
+    section {
+        padding: 40px 15px !important;
+        /* Perkecil padding samping */
+    }
+
+    /* 2. Hero Section - Perbaikan Proporsi */
+    .hero-container {
+        padding: 0 10px !important;
+    }
+
+    .hero h1 {
+        font-size: 28px !important;
+        /* Turunkan dikit dari 32px */
+        line-height: 1.1 !important;
+    }
+
+    .hero h3 {
+        font-size: 14px !important;
+        margin-bottom: 20px !important;
+    }
+
+    .hero-address {
+        font-size: 11px !important;
+        margin-bottom: 25px !important;
+    }
+
+    /* 3. Perbaikan Testimoni (Kunci agar tidak 'pecah' di 360px) */
+    .testi-grid-figma {
+        /* Ganti 350px jadi 100% agar tidak meluber keluar layar */
+        grid-template-columns: 1fr !important;
+        gap: 15px !important;
+        padding: 0 10px !important;
+    }
+
+    .testi-card-figma {
+        min-height: auto !important;
+        /* Biar tingginya ngikutin teks */
+        padding: 20px !important;
+    }
+
+    .testi-desc-figma {
+        font-size: 0.85rem !important;
+        margin-top: 25px !important;
+    }
+
+    /* 4. Perbaikan Tipe Rumah */
+    .tipe-container {
+        padding: 30px 15px !important;
+        /* Kurangi padding container navy */
+    }
+
+    .tipe-header h1 {
+        font-size: 24px !important;
+    }
+
+    .tipe-card {
+        flex: 0 0 90% !important;
+        /* Card sedikit lebih lebar agar terlihat jelas */
+    }
+
+    /* 5. Perbaikan Footer CTA & WA */
+    .footer-offer-title {
+        font-size: 24px !important;
+    }
+
+    .btn-wa-luxury {
+        padding: 14px 25px !important;
+        font-size: 14px !important;
+        width: 100% !important;
+        justify-content: center;
+    }
+
+    /* 6. Form Kontak */
+    .contact-box {
+        padding: 25px 15px !important;
+    }
+}
+
+/* KHUSUS HP SANGAT KECIL (320px - 360px) */
+@media (max-width: 360px) {
+    .hero h1 {
+        font-size: 26px !important;
+    }
+
+    .testi-username-figma {
+        font-size: 0.7rem !important;
+    }
 }

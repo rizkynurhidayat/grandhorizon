@@ -50,7 +50,7 @@
                             {{-- Tombol Simpan --}}
                             <div class="row justify-content-end mt-4">
                                 <div class="col-sm-9">
-                                    <button type="submit" form="formEditFasilitas" class="btn btn-primary px-4 shadow-sm">
+                                    <button type="submit" class="btn btn-primary px-4 shadow-sm">
                                         <i class="bx bx-save me-1"></i> Simpan Perubahan
                                     </button>
                                     <a href="{{ route('fasilitas.index') }}" class="btn btn-outline-secondary px-4">

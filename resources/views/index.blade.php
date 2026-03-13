@@ -60,169 +60,119 @@
     </script>
 
 
-    <!-- hero section -->
     <style>
-    .hero {
-        /* Kita pakai !important supaya menang lawan file CSS eksternal */
-        background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
-            url("{{ $hero->gambar && $hero->gambar !== 'default.jpg' ? Storage::url($hero->gambar) : asset('assets/img/hero/default.jpg') }}") !important;
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        min-height: 100vh; /* Pastikan section punya tinggi biar background kelihatan */
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-</style>
+        .hero {
+            /* Gradasi Mewah: Kiri gelap pekat (buat teks), kanan bening transparan (buat pamer rumah) */
+            background-image: linear-gradient(to right, rgba(15, 23, 42, 0.95) 0%, rgba(15, 23, 42, 0.6) 45%, rgba(15, 23, 42, 0) 100%),
+            url("{{ $hero->gambar && $hero->gambar !== 'default.jpg' ? Storage::url($hero->gambar) : 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=2075&auto=format&fit=crop' }}") !important;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            /* Teks tetap di tengah secara vertikal */
+        }
+    </style>
 
-<section class="hero" id="hero">
-    <div class="hero-content">
-        <h1>{{ $hero->judul ?? 'GRAND HORIZON' }}</h1>
-        <h3>{{ $hero->subjudul ?? 'Perumahan Modern dan Nyaman untuk keluarga' }}</h3>
-        <p>{!! nl2br(e($hero->alamat ?? 'Jl. Raya Cilegon, Drangong, Taktakan Serang, Kota Serang, Banten 42162')) !!}</p>
+    <section class="hero" id="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <span class="hero-badge">Exclusive Residence</span>
+                <h1>{{ $hero->judul ?? 'GRAND HORIZON' }}</h1>
+                <h3>{{ $hero->subjudul ?? 'Perumahan Modern dan Nyaman untuk keluarga' }}</h3>
 
-        <a href="#about">
-            <button class="btn-hero">{{ $hero->tekstombol ?? 'Lihat Selengkapnya' }}</button>
-        </a>
-    </div>
-</section>
-    <!-- hero section end -->
+                <p class="hero-address">
+                    <i class='bx bx-map' style="font-size: 20px; color: #d4af37; margin-top: 3px;"></i>
+                    <span>{!! nl2br(e($hero->alamat ?? 'Jl. Raya Cilegon, Drangong, Taktakan Serang, Kota Serang, Banten
+                        42162')) !!}</span>
+                </p>
 
-    <!-- Selengkapnya grand horizon -->
+                <div class="hero-actions">
+                    <a href="#about" style="text-decoration: none;">
+                        <button class="btn-hero">{{ $hero->tekstombol ?? 'Lihat Selengkapnya' }}</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section id="about">
-        <h1 class="about-title">{{ $tentang->judul ?? 'Tentang Grand Horizon' }}</h1>
+        <div class="container-luxury">
+            <h1 class="about-title">{{ $tentang->judul ?? 'Tentang Grand Horizon' }}</h1>
+            <div class="title-line"></div>
+        </div>
 
         <div class="about-content">
-
-            <!-- KIRI -->
             <div class="about-image"
                 style="background-image: url('{{ asset('storage/' . ($tentang->gambar ?? '')) }}')">
                 <div class="about-overlay">
-                        {{-- <h2>{{ $tentang->subjudul ?? 'Hunian Nyaman dan Strategis' }}</h2>
-                    <p {{ $tentang->subjudul ? 'class="about-subjudul "' : '' }}>
-                        Grand Horizon adalah kawasan perumahan modern yang menawarkan hunian nyaman,
-                        aman, dan cocok untuk keluarga.
-                    </p> --}}
-                    {{-- Panggil Subjudul --}}
-                         <p class="about-subjudul">
-                               {{ $tentang->subjudul ?? 'Grand Horizon adalah kawasan perumahan modern...' }}
-                         </p>
+                    <span class="about-tag">Premium Quality</span>
+                    <p class="about-subjudul">
+                        {{ $tentang->subjudul ?? 'Grand Horizon adalah kawasan perumahan modern yang menawarkan hunian
+                        nyaman, aman, dan cocok untuk keluarga.' }}
+                    </p>
 
-                    {{-- <p  {{ $tentang->deskripsi ? 'class="about-description"' : '' }}>
-                    <p {{ $tentang->deskripsi ? 'class="about-description"' : '' }}>
-                        Berlokasi strategis dan mudah diakses, perumahan ini dekat dengan berbagai
-                        fasilitas umum seperti sekolah, pusat perbelanjaan, rumah sakit,
-                        dan akses transportasi.
-                    </p> --}}
-                    {{-- Panggil Deskripsi --}}
-                         <p class="about-description">
-                               {{ $tentang->deskripsi ?? 'Berlokasi strategis dan mudah diakses...' }}
-                        </p>
+                    <p class="about-description">
+                        {{ $tentang->deskripsi ?? 'Berlokasi strategis dan mudah diakses, perumahan ini dekat dengan
+                        berbagai fasilitas umum seperti sekolah, pusat perbelanjaan, rumah sakit, dan akses
+                        transportasi.' }}
+                    </p>
 
-                    {{-- <button class="btn-selengkapnya" {{ $tentang->tekstombol ? 'data-text="' . $tentang->tekstombol . '"' : '' }}>
-                        Lihat selengkapnya
-                    </button> --}}
-                    {{-- Panggil Teks Tombol --}}
-                         <a href="#fasilitas-w" class="btn-selengkapnya text-decoration-none">
-                            {{ $tentang->tekstombol ?? 'Lihat selengkapnya' }}
-                        </a>
-                   
-                        <style>
-                            .btn-selengkapnya {
-                            text-decoration: none !important; /* Menghapus garis bawah */
-                            display: inline-block;           /* Supaya padding/margin bekerja dengan baik */
-                            }
-
-                        /* Opsional: Supaya saat kursor nempel (hover) juga nggak muncul garisnya */
-                        .btn-selengkapnya:hover {
-                        text-decoration: none;
-                        }
-                        </style>
+                    <a href="#fasilitas-w" class="btn-selengkapnya-luxury">
+                        {{ $tentang->tekstombol ?? 'Jelajahi Sekarang' }}
+                    </a>
                 </div>
             </div>
 
-            <!-- KANAN -->
             <div class="about-fitur">
-                <h4>{{ $tentang->keunggulan_judul ?? '4 Keunggulan Grand Horizon' }}</h4>
-                <ul>
-        @for ($i = 1; $i <= 4; $i++)
-            @php 
-                $judul = "judul_unggulan_$i";
-                $desc = "desc_unggulan_$i";
-                $logo = "logo_unggulan_$i";
-            @endphp
-
-            @if($tentang->$judul) {{-- Cek jika judul diisi di admin --}}
-            <li>
-                <div>
-                    {{-- Panggil Logo dari Storage, kalau kosong pakai gambar default --}}
-                    <img src="{{ $tentang->$logo ? asset('storage/' . $tentang->$logo) : asset('image/Vector.png') }}">
-                    
-                    {{-- Panggil Judul --}}
-                    <h3>{{ $tentang->$judul }}</h3>
-                    
-                    {{-- Panggil Deskripsi --}}
-                    <p>{{ $tentang->$desc }}</p>
+                <div class="fitur-header">
+                    <h4>{{ $tentang->keunggulan_judul ?? '4 Keunggulan Utama' }}</h4>
                 </div>
-            </li>
-            @endif
-        @endfor
-    </ul>
-                {{-- <ul>
-                    <li>
-                        <div>
-                            <img src="{{ asset('image/Vector.png') }}" {{ $tentang->logo }}>
-                            <h3>Legalitas terjamin</h3>
-                            <p>Semua dokumen dan perizinan lengkap serta resmi.</p>
-                        </div>
-                    </li>
-                    <li>
-                        <div>
-                            <img src="{{ asset('image/tabler_credit-card-filled.png') }}" {{ $tentang->logo }}>
-                            <h3>Kredit mudah</h3>
-                            <p>Proses pembiayaan mudah dan cicilan terjangkau.</p>
-                        </div>
-                    </li>
-                    <li>
-                        <div>
-                            <img src="{{ asset('image/Vector (1).png') }}" {{ $tentang->logo }}>
-                            <h3>Bebas banjir</h3>
-                            <p>Lokasi aman dari genangan dan banjir.</p>
-                        </div>
-                    </li>
-                    <li>
-                        <div>
-                            <img src="{{ asset('image/Vector (2).png') }}" {{ $tentang->logo }}>
-                            <h3>Lokasi mudah diakses</h3>
-                            <p>Mudah diakses dan dekat dengan fasilitas umum.</p>
-                        </div>
-                    </li>
-                </ul> --}}
-            </div>
 
+                <ul class="fitur-list">
+                    @for ($i = 1; $i <= 4; $i++) @php $judul="judul_unggulan_$i" ; $desc="desc_unggulan_$i" ;
+                        $logo="logo_unggulan_$i" ; @endphp @if($tentang->$judul)
+                        <li>
+                            <div class="fitur-card">
+                                <div class="fitur-icon-box">
+                                    <img src="{{ $tentang->$logo ? asset('storage/' . $tentang->$logo) : asset('image/Vector.png') }}"
+                                        alt="icon">
+                                </div>
+                                <div class="fitur-text">
+                                    <h3>{{ $tentang->$judul }}</h3>
+                                    <p>{{ $tentang->$desc }}</p>
+                                </div>
+                            </div>
+                        </li>
+                        @endif
+                        @endfor
+                </ul>
+            </div>
         </div>
     </section>
-    <!-- Selengkapnya end -->
 
     <!-- Fasilitas Sekitar -->
     @if($fasilitas->count() > 0)
-<section id="fasilitas-w">
-    <h1>Fasilitas Sekitar Grand Horizon</h1>
+    <section id="fasilitas-w">
+        <h1 class="judul-fasilitas">Fasilitas Sekitar Grand Horizon</h1>
 
-    <div class="fasilitas-grid">
-        @foreach($fasilitas as $item)
+        <div class="fasilitas-grid">
+            @foreach($fasilitas as $item)
             <div class="fasilitas-item">
                 <img src="{{ asset('storage/' . $item->gambar) }}" alt="{{ $item->judul }}">
+                {{-- <img
+                    src="{{ $Fasilitas && $Fasilitas->gambar? asset('storage/' . $Fasilitas->gambar) : asset('public/image/Vector(4).png') }}"
+                    alt="Logo"> --}}
                 <h3>{{ $item->judul }}</h3>
                 <p>{!! nl2br(e($item->deskripsi)) !!}</p>
             </div>
-        @endforeach
-    </div>
-</section>
-@endif
+            @endforeach
+        </div>
+    </section>
+    @endif
 
-        
+
 
     <style>
         /* Section Container */
@@ -238,36 +188,40 @@
         }
 
         /* Grid Container - Hapus Border & Background di sini */
-.fasilitas-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0; /* Gap diubah jadi 0 agar border antar item menyatu */
-    max-width: 1200px;
-    margin: 0 auto;
-    border: none; /* Pastikan tidak ada border di container utama */
-}
+        .fasilitas-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0;
+            /* Gap diubah jadi 0 agar border antar item menyatu */
+            max-width: 1200px;
+            margin: 0 auto;
+            border: none;
+            /* Pastikan tidak ada border di container utama */
+        }
 
-/* Grid Item - Tambahkan Border di sini */
-.fasilitas-item {
-    background-color: #fff;
-    padding: 40px 20px;
-    transition: 0.3s;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    
-    /* Tambahkan border di tiap item */
-    border: 1px solid #ddd; 
-    /* Gunakan margin negatif agar garis tidak double saat bertemu item lain */
-    margin-left: -1px;
-    margin-top: -1px;
-}
+        /* Grid Item - Tambahkan Border di sini */
+        .fasilitas-item {
+            background-color: #fff;
+            padding: 40px 20px;
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
 
-.fasilitas-item:hover {
-    background-color: #f8f9fa;
-    z-index: 1; /* Agar border hover tetap terlihat di atas */
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-}
+            /* Tambahkan border di tiap item */
+            border: 1px solid #ddd;
+            /* Gunakan margin negatif agar garis tidak double saat bertemu item lain */
+            margin-left: -1px;
+            margin-top: -1px;
+        }
+
+        .fasilitas-item:hover {
+            background-color: #f8f9fa;
+            z-index: 1;
+            /* Agar border hover tetap terlihat di atas */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
         .fasilitas-item img {
             height: 60px;
             margin-bottom: 20px;
@@ -321,100 +275,36 @@
 
                 {{-- --- BAGIAN DINAMIS (DARI DATABASE) --- --}}
                 @foreach($tiperumah as $t)
-                    <div class="tipe-card">
-                        <img src="{{ asset('storage/' . $t->gambar) }}" alt="{{ $t->nama_tipe_rumah }}">
-                        <div class="tipe-body">
-                            <h2>{{ $t->nama_tipe_rumah }}</h2>
-                            <span class="badge">{{ $t->luas_bangunan }}</span>
+                <div class="tipe-card">
+                    <img src="{{ $t->gambar ? asset('storage/' . $t->gambar) : asset('image/bg_tiperumah.png') }}"
+                        alt="{{ $t->nama_tipe_rumah }}">
 
-                            <p class="start">START FROM</p>
-                            <p class="price">{{ $t->harga }}</p>
+                    <div class="tipe-body">
+                        <h2>{{ $t->nama_tipe_rumah }}</h2>
+                        <span class="badge">{{ $t->luas_bangunan }} m²</span>
 
-                            <span class="cicilan">{{ $t->cicilan }}</span>
+                        <p class="start">START FROM</p>
+                        <p class="price">{{ $t->harga }}</p>
 
-                            <div class="tipe-info">
-                                {{-- Angka diambil dari DB, teks tetap statis sesuai request --}}
-                                <div>🛏 {{ $t->kamar_tidur }} Bedrooms</div>
-                                <div>🚿 {{ $t->kamar_mandi }} Bathroom</div>
-                                <div>🚗 {{ $t->garasi }} Carport</div>
-                            </div>
+                        <span class="cicilan">Cicilan {{ $t->cicilan }}</span>
 
-                            <button class="btn-unit">{{ $t->tekstombol }}</button>
+                        <div class="tipe-info">
+                            <div>🛏 {{ $t->kamar_tidur }} Bedrooms</div>
+                            <div>🚿 {{ $t->kamar_mandi }} Bathroom</div>
+                            <div>🚗 {{ $t->garasi }} Carport</div>
                         </div>
+
+                        {{-- Tombol harus di dalam tipe-body agar rapi --}}
+                        <button class="btn-unit"
+                            onclick="window.open('https://wa.me/{{ preg_replace('/[^0-9]/', '', $f->phone ?? '6282146273679') }}', '_blank')">
+                            {{ $t->tekstombol ?? 'CEK KETERSEDIAAN UNIT' }}
+                        </button>
                     </div>
+                </div>
                 @endforeach
                 {{-- --- END BAGIAN DINAMIS --- --}}
 
 
-                {{-- --- BAGIAN STATIS (TETAP DI SINI) --- --}}
-                <div class="tipe-card">
-                    <img src="{{ asset('image/Rectangle 101.png') }}" alt="Tipe Lite">
-                    <div class="tipe-body">
-                        <h2>Tipe Horizon Lite</h2>
-                        <span class="badge">LT 40m LB 60m</span>
-                        <p class="start">START FROM</p>
-                        <p class="price">Rp900 Juta – Rp1,2 Miliar</p>
-                        <span class="cicilan">Cicilan mulai 3,0 JT-an</span>
-                        <div class="tipe-info">
-                            <div>🛏 2 Bedrooms</div>
-                            <div>🚿 1 Bathroom</div>
-                            <div>🚗 1 Carport</div>
-                        </div>
-                        <button class="btn-unit">CEK KETERSEDIAAN UNIT</button>
-                    </div>
-                </div>
-
-                <div class="tipe-card">
-                    <img src="{{ asset('image/Rectangle 101 (1).png') }}" alt="Tipe Smart">
-                    <div class="tipe-body">
-                        <h2>Tipe Horizon Smart</h2>
-                        <span class="badge">LT 40m LB 60m</span>
-                        <p class="start">START FROM</p>
-                        <p class="price">Rp1,2 Miliar – 1,8 Miliar</p>
-                        <span class="cicilan">Cicilan mulai 3,0 JT-an</span>
-                        <div class="tipe-info">
-                            <div>🛏 2 Bedrooms</div>
-                            <div>🚿 2 Bathroom</div>
-                            <div>🚗 1 Carport</div>
-                        </div>
-                        <button class="btn-unit">CEK KETERSEDIAAN UNIT</button>
-                    </div>
-                </div>
-
-                <div class="tipe-card">
-                    <img src="{{ asset('image/Rectangle 101 (2).png') }}" alt="Tipe Prime">
-                    <div class="tipe-body">
-                        <h2>Tipe Horizon Prime</h2>
-                        <span class="badge">LT 40m LB 60m</span>
-                        <p class="start">START FROM</p>
-                        <p class="price">Rp1,8 Miliar – Rp2,7 Miliar</p>
-                        <span class="cicilan">Cicilan mulai 3,0 JT-an</span>
-                        <div class="tipe-info">
-                            <div>🛏 3 Bedrooms</div>
-                            <div>🚿 2 Bathroom</div>
-                            <div>🚗 1 Carport</div>
-                        </div>
-                        <button class="btn-unit">CEK KETERSEDIAAN UNIT</button>
-                    </div>
-                </div>
-
-                <div class="tipe-card">
-                    <img src="{{ asset('image/Rectangle 101 (3).png') }}" alt="Tipe Signature">
-                    <div class="tipe-body">
-                        <h2>Tipe Horizon Signature</h2>
-                        <span class="badge">LT 40m LB 60m</span>
-                        <p class="start">START FROM</p>
-                        <p class="price">Rp2,8 Miliar – Rp4 Miliar</p>
-                        <span class="cicilan">Cicilan mulai 3,0 JT-an</span>
-                        <div class="tipe-info">
-                            <div>🛏 4 Bedrooms</div>
-                            <div>🚿 3 Bathroom</div>
-                            <div>🚗 2 Carport</div>
-                        </div>
-                        <button class="btn-unit">CEK KETERSEDIAAN UNIT</button>
-                    </div>
-                </div>
-                {{-- --- END BAGIAN STATIS --- --}}
 
             </div>
         </div>
@@ -422,62 +312,62 @@
     <!-- Tipe rumah end -->
 
     <section id="fas-perumahan" class="fasilitas-perumahan reveal">
-    <h1>Fasilitas Perumahan</h1>
-    <div class="slider">
-        <button class="nav prev">&#10094;</button>
-        <div class="slider-wrapper">
-            <div class="slider-track">
-                <img src="{{ asset('image/Rectangle 73.png') }}" alt="statik 1">
-                <img src="{{ asset('image/Rectangle 73 (1).png') }}" alt="statik 2">
-                <img src="{{ asset('image/Rectangle 73 (2).png') }}" alt="statik 3">
-                @foreach($fasilitasperumahan as $fp)
+        <h1 class="judul-perumahan">Fasilitas Perumahan</h1>
+        <div class="slider">
+            <button class="nav prev">&#10094;</button>
+            <div class="slider-wrapper">
+                <div class="slider-track">
+                    <img src="{{ asset('image/Rectangle 73.png') }}" alt="statik 1">
+                    <img src="{{ asset('image/Rectangle 73 (1).png') }}" alt="statik 2">
+                    <img src="{{ asset('image/Rectangle 73 (2).png') }}" alt="statik 3">
+                    @foreach($fasilitasperumahan as $fp)
                     <img src="{{ asset('storage/' . $fp->gambar) }}" alt="Fasilitas">
-                @endforeach
+                    @endforeach
+                </div>
             </div>
+            <button class="nav next">&#10095;</button>
         </div>
-        <button class="nav next">&#10095;</button>
-    </div>
-    <div class="dots" id="dots-container">
-        <span class="dot active"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
-        @foreach($fasilitasperumahan as $fp)
+        <div class="dots" id="dots-container">
+            <span class="dot active"></span>
             <span class="dot"></span>
-        @endforeach
-    </div>
-</section>
+            <span class="dot"></span>
+            @foreach($fasilitasperumahan as $fp)
+            <span class="dot"></span>
+            @endforeach
+        </div>
+    </section>
 
 
     <!-- Testimoni klien -->
     <section id="testi-klien">
-    <h1 class="testi-title">Testimoni Klien</h1>
-    
-    <div class="testi-grid-figma">
-        @forelse($testimonis as $t)
+        <h1 class="testi-title">Testimoni Klien</h1>
+
+        <div class="testi-grid-figma">
+            @forelse($testimonis as $t)
             <div class="testi-card-figma">
                 {{-- Rating Pojok Kanan Atas --}}
                 <div class="testi-rating-figma">
                     {{ number_format($t->rating, 1) }} <i class="fa-solid fa-star"></i>
                 </div>
-                
+
                 {{-- Isi Pesan --}}
                 <p class="testi-desc-figma">
                     “{{ $t->pesan }}”
                 </p>
-                
+
                 {{-- Footer: Foto & Nama --}}
                 <div class="testi-footer-figma">
                     <img src="{{ asset('assets/img/testimoni/' . $t->profile) }}" alt="{{ $t->user }}">
                     <span class="testi-username-figma">{{ strtoupper($t->user) }}</span>
                 </div>
             </div>
-        @empty
+            @empty
             <div class="testi-empty">
                 <p>Belum ada testimoni klien saat ini.</p>
             </div>
-        @endforelse
-    </div>
-</section>
+            @endforelse
+        </div>
+    </section>
     <!-- Testimoni klien end -->
 
     <section class="contact" id="contact">
@@ -485,23 +375,23 @@
 
         <div class="contact-box">
             @if(session('success_pesan'))
-                <div
-                    style="background-color: #d4edda; color: #155724; padding: 15px; border-radius: 8px; margin-bottom: 20px; text-align: center; border: 1px solid #c3e6cb;">
-                    {{ session('success_pesan') }}
-                </div>
+            <div
+                style="background-color: #d4edda; color: #155724; padding: 15px; border-radius: 8px; margin-bottom: 20px; text-align: center; border: 1px solid #c3e6cb;">
+                {{ session('success_pesan') }}
+            </div>
             @endif
 
             <form class="contact-form" action="{{ route('hubungi-kami.store') }}" method="POST" id="contactForm">
                 @csrf {{-- Wajib ada di dalam form Laravel --}}
                 @if ($errors->any())
-                    <div
-                        style="background: #f8d7da; color: #721c24; padding: 10px; border-radius: 5px; margin-bottom: 10px;">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
+                <div
+                    style="background: #f8d7da; color: #721c24; padding: 10px; border-radius: 5px; margin-bottom: 10px;">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
                 @endif
 
                 {{-- Atribut 'name' disesuaikan dengan database: user, no_hp, email, tanggal, pesan --}}
@@ -522,7 +412,7 @@
 
     <!-- Lokasi grand horizon -->
     <section class="location">
-        <h1>Lokasi Grand Horizon</h1>
+        <h1 class="judul-lokasi">Lokasi Grand Horizon</h1>
         <div class="location-g">
             <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.3187046901853!2d106.63016337399!3d-6.221639493766382!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f955a6453ead%3A0x4c7b660d033cf2a2!2sGrand%20Serpong%20Hotel!5e0!3m2!1sid!2sid!4v1767941091642!5m2!1sid!2sid"
@@ -539,87 +429,112 @@
     </section>
     <!-- Lokasi grand horizon end-->
 
-    <!-- section footer -->
+    @php
+    $f = App\Models\Footer::getActive() ?? App\Models\Footer::latest()->first();
+    @endphp
 
+    @if($f)
+    <footer class="footer-luxury">
+        {{-- BAGIAN ATAS: CTA & BENEFIT --}}
+        <section class="footer-cta-section">
+            <div class="container-luxury">
+                <h1 class="footer-offer-title">{{ $f->biaya_judul ?? 'Biaya Pemesanan Mulai 3 Juta' }}</h1>
+                <div class="footer-gold-line"></div>
 
-    <!-- section footer end--><!-- section footer -->
-@php $f = App\Models\Footer::getActive(); @endphp
+                <div class="footer-benefit-grid">
+                    @if(is_array($f->biaya_items) || is_object($f->biaya_items))
+                    @foreach($f->biaya_items as $item)
+                    <div class="benefit-item">
+                        <div class="icon-circle">
+                            <img src="{{ asset('image/subway_tick (1).png') }}" class="icon-gold">
+                        </div>
+                        <span>{{ $item }}</span>
+                    </div>
+                    @endforeach
+                    @else
+                    {{-- Fallback jika array kosong --}}
+                    <div class="benefit-item">
+                        <div class="icon-circle"><img src="{{ asset('image/subway_tick (1).png') }}" class="icon-gold">
+                        </div>
+                        <span>Cicilan Ringan</span>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="icon-circle"><img src="{{ asset('image/subway_tick (1).png') }}" class="icon-gold">
+                        </div>
+                        <span>Gratis AC & PPN</span>
+                    </div>
+                    @endif
+                </div>
 
-@if($f)
-<footer class="footer">
-    <div class="footer-container">
-
-        {{-- Judul Biaya Pemesanan --}}
-        <h1 class="footer-title">{{ $f->biaya_judul ?? 'Biaya Pemesanan Mulai 3 Juta' }}</h1>
-
-        {{-- Item Centang-centang dari database --}}
-        <ul class="footer-benefit">
-            @forelse($f->biaya_items ?? [] as $item)
-            <li>
-                <img src="{{ asset('image/subway_tick (1).png') }}" class="icon-putih">
-                {{ $item }}
-            </li>
-            @empty
-            <li><img src="{{ asset('image/subway_tick (1).png') }}" class="icon-putih"> Cicilan ringan</li>
-            <li><img src="{{ asset('image/subway_tick (1).png') }}" class="icon-putih"> GRATIS 1 unit AC</li>
-            <li><img src="{{ asset('image/subway_tick (1).png') }}" class="icon-putih"> PPN GRATIS</li>
-            @endforelse
-        </ul>
-
-        {{-- Tombol WhatsApp --}}
-        <a href="https://wa.me/6282146273679" class="footer-button" target="_blank">
-            <img src="{{ asset('image/wa.png') }}" alt="">
-            Hubungi kami sekarang juga
-        </a>
-
-        <hr>
-
-        {{-- Kontak & Sosial Media --}}
-        <ul class="footer-contact">
-            <li>
-                <img src="{{ asset('image/maps.png') }}" alt="">
-                <a href="https://www.google.com/maps/search/?api=1&query={{ urlencode($f->address) }}" target="_blank">
-                    {{ $f->address }}
+                <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $f->phone ?? '6282146273679') }}"
+                    class="btn-wa-luxury" target="_blank">
+                    <img src="{{ asset('image/wa.png') }}" alt="WA">
+                    Hubungi kami sekarang juga
                 </a>
-            </li>
-            <li>
-                <img src="{{ asset('image/mdi_call.png') }}" alt="">
-                <a href="tel:{{ $f->phone }}">{{ $f->phone }}</a>
-            </li>
-            <li>
-                <img src="{{ asset('image/gmail.png') }}" alt="">
-                <a href="mailto:{{ $f->email }}">{{ $f->email }}</a>
-            </li>
-            @if($f->fb_name)
-            <li>
-                <img src="{{ asset('image/fb.png') }}" alt="">
-                <a href="{{ $f->fb_url }}" target="_blank">{{ $f->fb_name }}</a>
-            </li>
-            @endif
-            @if($f->tw_name)
-            <li>
-                <img src="{{ asset('image/twit.png') }}" alt="">
-                <a href="{{ $f->tw_url }}" target="_blank">{{ $f->tw_name }}</a>
-            </li>
-            @endif
-            @if($f->ig_name)
-            <li>
-                <img src="{{ asset('image/ig.png') }}" alt="">
-                <a href="{{ $f->ig_url }}" target="_blank">{{ $f->ig_name }}</a>
-            </li>
-            @endif
-        </ul>
-    </div>
-</footer>
+            </div>
+        </section>
 
-{{-- Copyright --}}
-<div class="footer-copyright">
-    {{ $f->copyright }}
-</div>
-@endif
-<!-- section footer end-->
+        {{-- BAGIAN BAWAH: INFO KONTAK (HORIZONTAL) --}}
+        <section class="footer-info-section">
+            <div class="container-luxury">
+
+                {{-- Brand Centered --}}
+                <div class="footer-brand-horizontal">
+                    <div class="brand-name">GRAND <span>HORIZON</span></div>
+                    <p class="brand-tagline">Hunian modern dengan konsep eksklusif untuk kenyamanan keluarga Anda di
+                        lokasi strategis.</p>
+                </div>
+
+                <hr class="footer-divider">
+
+                {{-- Kontak Horizontal --}}
+                <div class="footer-contact-row">
+                    <a href="https://www.google.com/maps/search/{{ urlencode($f->address) }}" target="_blank"
+                        class="contact-item">
+                        <img src="{{ asset('image/maps.png') }}" class="contact-icon" alt="Lokasi">
+                        <span>{{ $f->address ?? 'Alamat belum diatur' }}</span>
+                    </a>
+
+                    <a href="tel:{{ $f->phone }}" class="contact-item">
+                        <img src="{{ asset('image/mdi_call.png') }}" class="contact-icon" alt="Telepon">
+                        <span>{{ $f->phone ?? '-' }}</span>
+                    </a>
+
+                    <a href="mailto:{{ $f->email }}" class="contact-item">
+                        <img src="{{ asset('image/gmail.png') }}" class="contact-icon" alt="Email">
+                        <span>{{ $f->email ?? '-' }}</span>
+                    </a>
+                </div>
+
+                {{-- Sosmed Horizontal --}}
+                <div class="footer-social-row">
+                    @if($f->fb_url)
+                    <a href="{{ $f->fb_url }}" class="social-item" target="_blank">
+                        <img src="{{ asset('image/fb.png') }}" alt="FB">
+                        <span>Grand Horizon</span>
+                    </a>
+                    @endif
+
+                    @if($f->ig_url)
+                    <a href="{{ $f->ig_url }}" class="social-item" target="_blank">
+                        <img src="{{ asset('image/ig.png') }}" alt="IG">
+                        <span>Grand Horizon</span>
+                    </a>
+                    @endif
+                </div>
+
+            </div>
+        </section>
+
+        {{-- BAGIAN COPYRIGHT (Blok Putih Cerah) --}}
+        <div class="footer-copyright-bar">
+            <div class="container-luxury">
+                {{ $f->copyright ?? '© ' . date('Y') . ' GRAND HORIZON' }}
+            </div>
+        </div>
+        @endif
+
+        <script src="{{ asset('js/scriprts.js') }}"></script>
 </body>
-
-<script src="{{ asset('js/scriprts.js') }}"></script>
 
 </html>
